@@ -1,5 +1,5 @@
 import SignInPage from './components/SignInPage';
-import SquadPage from './components/SquadPage';
+import SquadUnavailable from './components/SquadUnavailable';
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, MotionConfig, useReducedMotion } from "framer-motion";
 import { Sun, Moon } from "lucide-react";
@@ -8,14 +8,14 @@ import BuddyPage from "./components/BuddyPage";
 import AccountPage from "./components/AccountPage";
 const copyByLang = {
   en: { controls: { language: "Language", appearance: "Switch light / dark appearance" }, title: ["Find your", "next move."], body: "Get more out of your games. Search with a screenshot, video or ask about any game.", home: "Home", buddy: "Buddy", teamup: "Squad", preview: "Home screen", pending: "This screen is next.", back: "Back to Home" },
-  zh: { controls: { language: "语言", appearance: "切换浅色 / 深色模式" }, title: ["陪你一起玩"], body: "让游戏多一点收获。用截图搜索，或直接提问，探索任何游戏。", home: "首页", buddy: "Buddy", teamup: "组队", preview: "首页预览", pending: "这个页面即将加入。", back: "返回首页" }
+  zh: { controls: { language: "语言", appearance: "切换浅色 / 深色模式" }, title: ["陪你一起玩"], body: "让游戏体验更上一层。用截图或视频搜索，也可以直接提问，了解任何游戏。", home: "首页", buddy: "Buddy", teamup: "组队", preview: "首页预览", pending: "这个页面即将加入。", back: "返回首页" }
 };
 function App() {
-  const [scenarioHost, setScenarioHost] = useState(null);
   const [homeLayout, setHomeLayout] = useState("v1");
   const [signedIn, setSignedIn] = useState(false);
   const readPreference = (key, fallback) => { try { return localStorage.getItem(key) || fallback; } catch { return fallback; } };
   const [tab, setTab] = useState("home");
+  const [searchDetailOpen, setSearchDetailOpen] = useState(false);
   const [appearance, setTheme] = useState(() => readPreference('gb-appearance', 'dark'));
   const [systemDark, setSystemDark] = useState(() => window.matchMedia('(prefers-color-scheme: dark)').matches);
   const [lang, setLang] = useState(() => readPreference('gb-language', 'en'));
@@ -34,15 +34,14 @@ function App() {
     <Nav theme={theme} setTheme={setTheme} lang={lang} setLang={setLang} copy={copy} />
     <main><section className="variant-section" id="states">
       <div className="variant-copy">
-        <p className="variant-product-label">GameBuddy Demo 1.0</p>
+        <div className="variant-brand" aria-label="GameBuddy"><img src={`${import.meta.env.BASE_URL}assets/brand.svg`} alt=""/><span>GameBUDDY</span></div>
         <h2>{copy.title.map(line => <span className="title-line" key={line}>{line}</span>)}</h2>
         <p>{copy.body}</p>
-        {signedIn && tab === "home" && <div className="home-layout-picker" role="group" aria-label={lang === 'zh' ? '首页布局' : 'Home layout'}>
+        {signedIn && tab === "home" && !searchDetailOpen && <div className="home-layout-picker" role="group" aria-label={lang === 'zh' ? '首页布局' : 'Home layout'}>
           {['v1', 'v2'].map(version => <button key={version} type="button" aria-pressed={homeLayout === version} onClick={() => setHomeLayout(version)}>{version.toUpperCase()}</button>)}
         </div>}
-        <div className="demo-scenario-host" ref={setScenarioHost} />
       </div>
-      <div className="variant-devices"><PhoneMockup tab={tab} setTab={setTab} signedIn={signedIn} setSignedIn={setSignedIn} homeLayout={homeLayout} scenarioHost={scenarioHost} copy={copy} theme={theme} appearance={appearance} setAppearance={setTheme} language={lang} setLanguage={setLang} /></div>
+      <div className="variant-devices"><PhoneMockup searchDetailOpen={searchDetailOpen} setSearchDetailOpen={setSearchDetailOpen} tab={tab} setTab={setTab} signedIn={signedIn} setSignedIn={setSignedIn} homeLayout={homeLayout} copy={copy} theme={theme} appearance={appearance} setAppearance={setTheme} language={lang} setLanguage={setLang} /></div>
     </section></main>
   </div></MotionConfig>;
 }
@@ -103,22 +102,22 @@ function Nav({ theme, setTheme, lang, setLang, copy }) {
 
 
 const asset = name => `${import.meta.env.BASE_URL}assets/${name}.svg`;
-function PhoneMockup({ tab, setTab, signedIn, setSignedIn, homeLayout, scenarioHost, copy, theme, appearance, setAppearance, language, setLanguage }) {
+function PhoneMockup({ searchDetailOpen, setSearchDetailOpen, tab, setTab, signedIn, setSignedIn, homeLayout, copy, theme, appearance, setAppearance, language, setLanguage }) {
   const reducedMotion = useReducedMotion();
   const entryTransition = { duration: reducedMotion ? 0 : 0.6, ease: [0.22, 1, 0.36, 1] };
   const [accountOpen, setAccountOpen] = useState(false);
   const profileTransition = { duration: reducedMotion ? 0 : 0.5, ease: [0.4, 0, 0.2, 1] };
   return <div className="phone phone-normal"><div className="phone-metal"><div className="phone-screen gb-screen">
     <div className="gb-home" data-node-id="169:378" aria-label={copy.home}>
-      {signedIn && <motion.div className="gb-entry-layer" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={entryTransition}><div className="gb-status" aria-label="5:13 PM">
+      {signedIn && <motion.div className={`gb-entry-layer${searchDetailOpen ? " gb-showing-search-detail" : ""}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={entryTransition}><div className="gb-status" aria-label="5:13 PM">
         <img className="gb-time gb-status-asset" src={asset("time")} width="67.882" height="22.627" alt="" />
         <div className="gb-status-right">{["wifi", "signal", "battery"].map(name => <img className="gb-status-asset" key={name} src={asset(name)} width="22.627" height="22.627" alt="" />)}</div>
       </div>
-      <motion.div className="gb-content" inert={accountOpen} animate={{ x: accountOpen && !reducedMotion ? "-20%" : 0 }} transition={profileTransition}>{tab === "home" && <HomeSearch layout={homeLayout} chinese={copy.home === "首页"} theme={theme} onOpenAccount={() => setAccountOpen(true)} />}{tab === "buddy" && <BuddyPage chinese={copy.home === "首页"} theme={theme} />}{tab === "teamup" && <SquadPage scenarioHost={scenarioHost} chinese={copy.home === "首页"} />}</motion.div>
+      <motion.div className={`gb-content${searchDetailOpen ? " gb-search-detail-content" : ""}`} inert={accountOpen} animate={{ x: accountOpen && !reducedMotion ? "-20%" : 0 }} transition={profileTransition}>{tab === "home" && <HomeSearch onSearchDetailChange={setSearchDetailOpen} layout={homeLayout} chinese={copy.home === "首页"} theme={theme} onOpenAccount={() => setAccountOpen(true)} />}{tab === "buddy" && <BuddyPage chinese={copy.home === "首页"} theme={theme} />}{tab === "teamup" && <SquadUnavailable chinese={copy.home === "首页"} />}</motion.div>
       <AnimatePresence initial={false}>{accountOpen && <motion.div key="profile" className="gb-content gb-account-content" initial={{ x: reducedMotion ? 0 : "100%", opacity: reducedMotion ? 1 : 0.8 }} animate={{ x: 0, opacity: 1 }} exit={{ x: reducedMotion ? 0 : "100%", opacity: reducedMotion ? 1 : 0.8 }} transition={profileTransition}><AccountPage appearance={appearance} setAppearance={setAppearance} language={language} setLanguage={setLanguage} onSignOut={() => { setAccountOpen(false); setSignedIn(false); setTab("home"); }} chinese={copy.home === "首页"} onBack={() => setAccountOpen(false)} /></motion.div>}</AnimatePresence>
-      <nav inert={accountOpen} className={`gb-tabs${homeLayout === "v2" && tab === "home" ? " gb-tabs-borderless" : ""}`} aria-label={copy.preview}>{["home", "buddy", "teamup"].map(name => <button key={name} type="button" aria-current={tab === name ? "page" : undefined} className={tab === name ? "selected" : ""} onClick={() => setTab(name)}>
+      {!searchDetailOpen && <nav inert={accountOpen} className={`gb-tabs${homeLayout === "v2" && tab === "home" ? " gb-tabs-borderless" : ""}`} aria-label={copy.preview}>{["home", "buddy", "teamup"].map(name => <button key={name} type="button" aria-current={tab === name ? "page" : undefined} className={tab === name ? "selected" : ""} onClick={() => setTab(name)}>
         <span className="gb-tab-icon">{name === "home" ? <img className="gb-home-icon" src={asset("home")} width="28" height="28" alt="" /> : name === "teamup" ? <span className="gb-buddy-tab-glyph" style={{maskImage:`url(${asset("squad")})`,WebkitMaskImage:`url(${asset("squad")})`}}/> : <span className="gb-buddy-tab-glyph" style={{maskImage:`url(${asset(name)})`,WebkitMaskImage:`url(${asset(name)})`}}/>}</span><span>{copy[name]}</span>
-      </button>)}</nav></motion.div>}
+      </button>)}</nav>}</motion.div>}
       <AnimatePresence initial={false}>
         {!signedIn && <motion.div key="signin" className="gb-signin-layer" exit={{ opacity: 0 }} transition={entryTransition}>
           <SignInPage chinese={copy.home === "首页"} onContinue={() => {setTab("home");setSignedIn(true);}} />
