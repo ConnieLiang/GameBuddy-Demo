@@ -1,0 +1,28 @@
+.mm-page,.mm-editor {font:inherit;}
+.ac-detail .mm-note {font-size:3.1cqw; line-height:1.55; color:var(--ac-muted); margin:0 0 4cqw;}
+.mm-tabs,.mm-spaces {display:flex; gap:2cqw; margin-bottom:3cqw;}
+.mm-tabs button,.mm-spaces button {border:0; background:var(--ac-surface); color:var(--ac-muted); padding:2.5cqw 3cqw; border-radius:3cqw; white-space:nowrap;}
+.mm-tabs button {flex:1;}
+.mm-tabs button[aria-pressed=true],.mm-spaces button[aria-pressed=true] {color:var(--gb-accent); background:color-mix(in srgb,var(--gb-accent) 10%,var(--ac-surface));}
+.mm-spaces {overflow:auto; padding-bottom:1cqw;}
+.mm-spaces button {font-size:2.9cqw;}
+.mm-page h3,.mm-editor h3 {font-size:3.8cqw; font-weight:500; margin:5cqw 0 3cqw;}
+.mm-card {background:var(--ac-surface); border-radius:4cqw; padding:4cqw; margin:3cqw 0;}
+.mm-card-top {display:flex; align-items:center; justify-content:space-between; gap:3cqw;}
+.mm-card-top strong {font-weight:500; font-size:3.5cqw;}
+.mm-card-top span,.mm-card>small {font-size:2.7cqw; color:var(--ac-muted);}
+.mm-card>small {display:block; margin-top:1.5cqw;}
+.ac-detail .mm-card>p {font-size:3.6cqw; color:var(--gb-fg); line-height:1.55; white-space:pre-wrap; overflow-wrap:anywhere;}
+.ac-detail .mm-card .mm-use,.mm-card details {font-size:3cqw; color:var(--ac-muted);}
+.mm-card summary,.mm-inactive>summary {cursor:pointer;}
+.mm-card details p {font-size:3cqw;}
+.mm-actions {display:flex; flex-wrap:wrap; gap:2cqw 4cqw; margin-top:4cqw;}
+.mm-actions button,.mm-undo button {display:flex; align-items:center; gap:1cqw; background:none; border:0; color:var(--gb-accent); padding:1cqw 0; font-size:3cqw;}
+.mm-actions svg,.mm-undo svg {width:3.5cqw; height:3.5cqw;}
+.mm-learning {display:flex; align-items:center; justify-content:space-between; width:100%; background:var(--ac-surface); border:0; border-radius:3cqw; color:var(--gb-fg); padding:4cqw; margin-top:4cqw;}
+.mm-learning svg {width:4cqw; height:4cqw;}
+.mm-empty,.mm-undo {background:var(--ac-surface); padding:4cqw; border-radius:3cqw; color:var(--ac-muted); font-size:3.2cqw;}
+.mm-undo {display:flex; align-items:center; justify-content:space-between; gap:3cqw;}
+.mm-inactive {margin-top:5cqw; color:var(--ac-muted); font-size:3.2cqw;}
+.mm-editor:focus {outline:none;}
+.mm-editor textarea {font:inherit;}

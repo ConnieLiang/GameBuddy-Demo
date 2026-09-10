@@ -1,0 +1,333 @@
+{
+  "$format": "gamebuddy.design-tokens/1.0",
+  "$description": "GameBuddy cross-platform design contract for implementation agents. Token leaves use DTCG-style $type/$value fields; implementation guidance is stored in $extensions.",
+  "$metadata": {
+    "generatedAt": "2026-09-03",
+    "source": {
+      "figmaFile": "https://www.figma.com/design/lKN3l5oG6tsXw11wQ104c3/Library?node-id=9-21",
+      "fileKey": "lKN3l5oG6tsXw11wQ104c3"
+    },
+    "productContext": {
+      "summary": "GameBuddy is a quiet AI gaming companion for coaching, finding people to play with, and game-aware AI search.",
+      "coreExperience": "Quiet companionship that does not interrupt and appears only when help is worth showing.",
+      "gameScope": "The system must support multiple games, including Honor of Kings and Teamfight Tactics; do not encode one game's visual language into shared foundations.",
+      "visualPrinciple": "White veil material at rest; localized signal color only when status must be communicated. The full spectrum is reserved for brand moments."
+    },
+    "implementationStatus": {
+      "tokens": "canonical implementation contract",
+      "androidCode": "migration target",
+      "iosMacos": "planned",
+      "windows": "planned"
+    }
+  },
+  "color": {
+    "neutral": {
+      "$description": "Opaque achromatic white-to-black ramp (equal RGB channels) for canvas, foreground, fallback surfaces, structure, and accessibility-critical UI.",
+      "0": { "$type": "color", "$value": "#FFFFFF", "$description": "Pure highlight and white foreground" },
+      "50": { "$type": "color", "$value": "#F8F8F8", "$description": "App canvas" },
+      "100": { "$type": "color", "$value": "#F3F3F3", "$description": "Quiet secondary surface" },
+      "200": { "$type": "color", "$value": "#BFBFBF", "$description": "Disabled icon and decorative structure" },
+      "300": { "$type": "color", "$value": "#A2A2A2", "$description": "Placeholder and low-emphasis content" },
+      "400": { "$type": "color", "$value": "#7D7D7D", "$description": "Secondary icon or supporting label" },
+      "500": { "$type": "color", "$value": "#5D5D5D", "$description": "Secondary text" },
+      "600": { "$type": "color", "$value": "#3F3F3F", "$description": "Strong icon and dark boundary" },
+      "700": { "$type": "color", "$value": "#272727", "$description": "Primary text and smoke surface" },
+      "800": { "$type": "color", "$value": "#000000", "$description": "Deep ink and high-contrast HUD base" }
+    },
+    "veil": {
+      "$description": "White alpha primitives. Strength describes material opacity, not semantic importance. Always validate final composited contrast.",
+      "50": { "$type": "color", "$value": "#FFFFFF0A", "$description": "Barely visible atmosphere", "$extensions": { "alpha": 0.04 } },
+      "100": { "$type": "color", "$value": "#FFFFFF14", "$description": "Subtle border and divider", "$extensions": { "alpha": 0.08 } },
+      "200": { "$type": "color", "$value": "#FFFFFF1F", "$description": "Resting ring or inner boundary", "$extensions": { "alpha": 0.12 } },
+      "300": { "$type": "color", "$value": "#FFFFFF2E", "$description": "Resting HUD material", "$extensions": { "alpha": 0.18 } },
+      "400": { "$type": "color", "$value": "#FFFFFF3D", "$description": "Strong border and divider", "$extensions": { "alpha": 0.24 } },
+      "500": { "$type": "color", "$value": "#FFFFFF52", "$description": "Layer separation", "$extensions": { "alpha": 0.32 } },
+      "600": { "$type": "color", "$value": "#FFFFFF70", "$description": "Medium translucent control", "$extensions": { "alpha": 0.44 } },
+      "700": { "$type": "color", "$value": "#FFFFFF8F", "$description": "Strong translucent structure", "$extensions": { "alpha": 0.56 } },
+      "800": { "$type": "color", "$value": "#FFFFFFAD", "$description": "Legible light veil", "$extensions": { "alpha": 0.68 } },
+      "900": { "$type": "color", "$value": "#FFFFFFE0", "$description": "Primary light HUD surface", "$extensions": { "alpha": 0.88 } }
+    },
+    "signal": {
+      "$description": "Localized gameplay and system status colors. Never use signal color as a dominant app surface.",
+      "sky": { "$type": "color", "$value": "#56BCE8", "$description": "Coaching or information" },
+      "mint": { "$type": "color", "$value": "#48F1B8", "$description": "Ready, confirmed, positive" },
+      "amber": { "$type": "color", "$value": "#F0B34A", "$description": "Timing window or caution" },
+      "coral": { "$type": "color", "$value": "#F06470", "$description": "Critical danger" },
+      "iris": { "$type": "color", "$value": "#7B78E6", "$description": "Voice and Buddy activity" },
+      "gray": { "$type": "color", "$value": "#8D93A1", "$description": "Inactive or invalid system conditions" }
+    },
+    "semantic": {
+      "surface": {
+        "canvas": { "$type": "color", "$value": "{color.neutral.50}" },
+        "base": { "$type": "color", "$value": "{color.neutral.0}" },
+        "secondary": { "$type": "color", "$value": "{color.neutral.100}" },
+        "hudResting": { "$type": "color", "$value": "{color.veil.300}" },
+        "hudLight": { "$type": "color", "$value": "{color.veil.900}" },
+        "hudHighContrast": { "$type": "color", "$value": "{color.neutral.800}" }
+      },
+      "content": {
+        "primary": { "$type": "color", "$value": "{color.neutral.700}" },
+        "secondary": { "$type": "color", "$value": "{color.neutral.500}" },
+        "placeholder": { "$type": "color", "$value": "{color.neutral.300}" },
+        "disabled": { "$type": "color", "$value": "{color.neutral.200}" },
+        "onDark": { "$type": "color", "$value": "{color.neutral.0}" }
+      },
+      "status": {
+        "info": { "$type": "color", "$value": "{color.signal.sky}" },
+        "positive": { "$type": "color", "$value": "{color.signal.mint}" },
+        "caution": { "$type": "color", "$value": "{color.signal.amber}" },
+        "critical": { "$type": "color", "$value": "{color.signal.coral}" },
+        "buddyActivity": { "$type": "color", "$value": "{color.signal.iris}" },
+        "inactive": { "$type": "color", "$value": "{color.signal.gray}" }
+      },
+      "boundary": {
+        "subtle": { "$type": "color", "$value": "{color.veil.100}" },
+        "resting": { "$type": "color", "$value": "{color.veil.200}" },
+        "strong": { "$type": "color", "$value": "{color.veil.400}" },
+        "dark": { "$type": "color", "$value": "{color.neutral.600}" }
+      }
+    }
+  },
+  "brand": {
+    "spectrumStroke": {
+      "$type": "gradient",
+      "$value": [
+        { "color": "#56BCE84D", "position": 0 },
+        { "color": "#48F1B84D", "position": 0.4278846085 },
+        { "color": "#F0B34A4D", "position": 0.75 },
+        { "color": "#F064704D", "position": 0.875 },
+        { "color": "#7B78E64D", "position": 1 }
+      ],
+      "$description": "Signature app-icon gradient. Reserve the full spectrum for launch, onboarding, and editorial brand moments—not gameplay status."
+    },
+    "assetInventory": {
+      "appIconVariants": ["Release", "Beta", "Alpha"],
+      "logoLockups": ["symbol-over-wordmark", "symbol-left-of-wordmark"],
+      "colorModes": ["full-color-on-light", "full-color-on-dark", "monochrome-on-light", "monochrome-on-dark"],
+      "rule": "Brand assets are managed separately from interface icons. Do not recreate the pixel wordmark with a UI font."
+    }
+  },
+  "spacing": {
+    "$type": "dimension",
+    "$description": "Nominal platform-independent spacing values. Use dp on Android, pt on Apple platforms, and epx on Windows.",
+    "0": { "$value": 0, "$description": "No spacing" },
+    "2": { "$value": 2, "$description": "Optical correction only" },
+    "4": { "$value": 4, "$description": "Tight internal spacing" },
+    "8": { "$value": 8, "$description": "Related elements" },
+    "12": { "$value": 12, "$description": "Compact component padding" },
+    "16": { "$value": 16, "$description": "Default component or mobile page padding" },
+    "20": { "$value": 20, "$description": "Comfortable content padding" },
+    "24": { "$value": 24, "$description": "Section separation" },
+    "32": { "$value": 32, "$description": "Large section separation" },
+    "40": { "$value": 40, "$description": "Page-level grouping" },
+    "48": { "$value": 48, "$description": "Major layout separation" },
+    "64": { "$value": 64, "$description": "Editorial or onboarding layout" }
+  },
+  "radius": {
+    "$type": "dimension",
+    "$description": "Canonical radius scale. Values are nominal dp/pt/epx.",
+    "none": { "$value": 0, "$description": "Dividers and edge-aligned structures" },
+    "xs": { "$value": 4, "$description": "Tiny indicators or compact tags" },
+    "sm": { "$value": 8, "$description": "Tooltips and small controls" },
+    "md": { "$value": 12, "$description": "Buttons, inputs, and menus" },
+    "lg": { "$value": 16, "$description": "Cards and standard panels" },
+    "xl": { "$value": 24, "$description": "Modals, sheets, and prominent HUD panels" },
+    "full": { "$value": 999, "$description": "Pills, avatars, status dots, and floating controls" }
+  },
+  "border": {
+    "width": {
+      "default": { "$type": "dimension", "$value": 0.5, "$description": "Standard borders and dividers. Product standard; preserve as a device-pixel-aware hairline in code." },
+      "emphasis": { "$type": "dimension", "$value": 1, "$description": "Focus, selection, or critical emphasis" }
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "$description": "Select family by platform and script; semantic type metrics remain shared.",
+      "latin": { "$type": "fontFamily", "$value": { "android": "Roboto", "apple": "SF Pro", "windows": "Segoe UI Variable" }, "$description": "English and other supported Latin text" },
+      "zhHans": { "$type": "fontFamily", "$value": { "android": "Noto Sans SC", "apple": "PingFang SC", "windows": "Microsoft YaHei UI" }, "$description": "Simplified Chinese" },
+      "zhHantTw": { "$type": "fontFamily", "$value": { "android": "Noto Sans TC", "apple": "PingFang TC", "windows": "Microsoft JhengHei UI" }, "$description": "Traditional Chinese — Taiwan" },
+      "zhHantHk": { "$type": "fontFamily", "$value": { "android": "Noto Sans HK", "apple": "PingFang HK", "windows": "Microsoft JhengHei UI" }, "$description": "Traditional Chinese — Hong Kong" },
+      "ja": { "$type": "fontFamily", "$value": { "android": "Noto Sans JP", "apple": "Hiragino Sans", "windows": "Yu Gothic UI" }, "$description": "Japanese" },
+      "ko": { "$type": "fontFamily", "$value": { "android": "Noto Sans KR", "apple": "Apple SD Gothic Neo", "windows": "Malgun Gothic" }, "$description": "Korean" },
+      "systemFallback": { "$type": "fontFamily", "$value": { "android": "Roboto", "apple": "SF Pro", "windows": "Segoe UI Variable" }, "$description": "Base UI family; let the OS manage unsupported-glyph fallback" }
+    },
+    "weight": {
+      "regular": { "$type": "fontWeight", "$value": 400 },
+      "medium": { "$type": "fontWeight", "$value": 500 },
+      "semibold": { "$type": "fontWeight", "$value": 600 },
+      "bold": { "$type": "fontWeight", "$value": 700 }
+    },
+    "app": {
+      "$description": "Canonical app type scale. Numeric sizes map to px in design tools, sp on Android, pt on Apple platforms, and epx on Windows.",
+      "display": {
+        "lg": { "$type": "typography", "$value": { "fontSize": 40, "lineHeight": 48, "fontWeight": 600, "letterSpacing": 0 }, "$description": "Hero statement or onboarding moment; use sparingly" },
+        "md": { "$type": "typography", "$value": { "fontSize": 32, "lineHeight": 40, "fontWeight": 600, "letterSpacing": 0 }, "$description": "Large page emphasis" }
+      },
+      "heading": {
+        "lg": { "$type": "typography", "$value": { "fontSize": 28, "lineHeight": 36, "fontWeight": 600, "letterSpacing": 0 }, "$description": "Major page heading" },
+        "md": { "$type": "typography", "$value": { "fontSize": 24, "lineHeight": 32, "fontWeight": 600, "letterSpacing": 0 }, "$description": "Section or modal heading" },
+        "sm": { "$type": "typography", "$value": { "fontSize": 20, "lineHeight": 28, "fontWeight": 600, "letterSpacing": 0 }, "$description": "Compact page heading" }
+      },
+      "title": {
+        "lg": { "$type": "typography", "$value": { "fontSize": 18, "lineHeight": 26, "fontWeight": 600, "letterSpacing": 0 }, "$description": "Card or panel title" },
+        "md": { "$type": "typography", "$value": { "fontSize": 16, "lineHeight": 24, "fontWeight": 600, "letterSpacing": 0 }, "$description": "List and section title" },
+        "sm": { "$type": "typography", "$value": { "fontSize": 14, "lineHeight": 20, "fontWeight": 600, "letterSpacing": 0 }, "$description": "Compact component title" }
+      },
+      "body": {
+        "lg": { "$type": "typography", "$value": { "fontSize": 16, "lineHeight": 26, "fontWeight": 400, "letterSpacing": 0 }, "$description": "Prominent body and reading copy" },
+        "md": { "$type": "typography", "$value": { "fontSize": 14, "lineHeight": 22, "fontWeight": 400, "letterSpacing": 0 }, "$description": "Default app body" },
+        "sm": { "$type": "typography", "$value": { "fontSize": 12, "lineHeight": 18, "fontWeight": 400, "letterSpacing": 0 }, "$description": "Supporting copy" }
+      },
+      "label": {
+        "lg": { "$type": "typography", "$value": { "fontSize": 14, "lineHeight": 20, "fontWeight": 500, "letterSpacing": 0 }, "$description": "Button, tab, or strong label" },
+        "md": { "$type": "typography", "$value": { "fontSize": 12, "lineHeight": 16, "fontWeight": 500, "letterSpacing": 0 }, "$description": "Chip or compact control label" },
+        "sm": { "$type": "typography", "$value": { "fontSize": 11, "lineHeight": 16, "fontWeight": 500, "letterSpacing": 0 }, "$description": "Nonessential metadata only; never essential gameplay information" }
+      }
+    },
+    "special": {
+      "$description": "Special-purpose roles for brand, HUD, and numeric content.",
+      "brandDisplay": { "$type": "typography", "$value": { "fontSize": 36, "lineHeight": 44, "fontWeight": 700, "letterSpacing": -1.5 }, "$description": "Brand/editorial display only; not a normal UI heading" },
+      "hudCritical": { "$type": "typography", "$value": { "fontSize": 16, "lineHeight": 20, "fontWeight": 700, "letterSpacing": 0 }, "$description": "Rare critical HUD alert" },
+      "hudTip": { "$type": "typography", "$value": { "fontSize": 14, "lineHeight": 18, "fontWeight": 500, "letterSpacing": 0 }, "$description": "Short coaching tip" },
+      "hudMetadata": { "$type": "typography", "$value": { "fontSize": 12, "lineHeight": 16, "fontWeight": 400, "letterSpacing": 0.1 }, "$description": "Nonessential HUD metadata" },
+      "numericStat": { "$type": "typography", "$value": { "fontSize": 24, "lineHeight": 28, "fontWeight": 600, "letterSpacing": -0.5, "fontFeatureSettings": "tnum" }, "$description": "Aligned result or profile statistic" },
+      "cooldownTimer": { "$type": "typography", "$value": { "fontSize": 20, "lineHeight": 24, "fontWeight": 700, "letterSpacing": -0.3, "fontFeatureSettings": "tnum" }, "$description": "Live cooldown or timer" }
+    }
+  },
+  "icon": {
+    "style": { "$type": "string", "$value": "rounded", "$description": "System-wide interface icon geometry. Android uses Material Symbols Rounded across app screens, menus, dialogs, and HUD/overlays; custom interface icons use rounded caps, joins, and corners." },
+    "materialSymbols": {
+      "family": { "$type": "string", "$value": "Material Symbols Rounded" },
+      "weight": { "$type": "number", "$value": 400 },
+      "grade": { "$type": "number", "$value": 0 },
+      "opticalSize": { "$type": "number", "$value": 24, "$description": "Default optical size; select a matching optical asset for other supported rendered sizes." },
+      "fill": {
+        "default": { "$type": "number", "$value": 0 },
+        "active": { "$type": "number", "$value": 1, "$description": "Use a filled pair when it improves selected or active-state recognition. Both states remain Rounded." }
+      }
+    },
+    "size": {
+      "xs": { "$type": "dimension", "$value": 16, "$description": "Desktop menu, table, or nonessential metadata" },
+      "sm": { "$type": "dimension", "$value": 20, "$description": "Compact control or inline icon" },
+      "md": { "$type": "dimension", "$value": 24, "$description": "Default app action and navigation" },
+      "lg": { "$type": "dimension", "$value": 32, "$description": "HUD emphasis or large control" },
+      "xl": { "$type": "dimension", "$value": 40, "$description": "Empty state or presentation use only" }
+    },
+    "interactionTarget": {
+      "androidTouch": { "$type": "dimension", "$value": 48, "$description": "48 × 48 dp" },
+      "iosIpadTouch": { "$type": "dimension", "$value": 44, "$description": "44 × 44 pt" },
+      "macosDefault": { "$type": "dimension", "$value": 28, "$description": "28 × 28 pt" },
+      "windowsTouch": { "$type": "dimension", "$value": 40, "$description": "40 × 40 epx minimum" }
+    },
+    "platformStrategy": {
+      "android": { "nativeLibrary": "Material Symbols Rounded", "customOutput": "VectorDrawable XML" },
+      "apple": { "nativeLibrary": "SF Symbols", "customOutput": "Custom SF Symbol or vector asset" },
+      "windows": { "nativeLibrary": "Segoe Fluent Icons", "customOutput": "SVG or WinUI PathIcon" },
+      "sharedSource": { "nativeLibrary": null, "customOutput": "Optimized SVG master" }
+    },
+    "customGeometry": {
+      "masterGrid": 24,
+      "liveArea": 20,
+      "defaultPadding": 2,
+      "defaultStroke": 2,
+      "corners": "rounded",
+      "cap": "round",
+      "join": "round",
+      "perspective": "flat-front-facing",
+      "defaultRendering": "single-color-current-color",
+      "source": "GameBuddy iconography guidance"
+    }
+  },
+  "effect": {
+    "blur": {
+      "backdrop": {
+        "sm": { "$type": "dimension", "$value": 8, "$description": "Compact controls" },
+        "md": { "$type": "dimension", "$value": 16, "$description": "Cards and HUD panels" },
+        "lg": { "$type": "dimension", "$value": 24, "$description": "Dialogs and floating panels" }
+      },
+      "diffusion": { "$type": "dimension", "$value": 32, "$description": "Decorative chroma only" }
+    },
+    "elevation": {
+      "low": { "$type": "shadow", "$value": { "offsetX": 0, "offsetY": 2, "blur": 8, "spread": -2, "color": "#000000", "opacity": 0.08 }, "$description": "Cards and resting HUD surfaces" },
+      "medium": { "$type": "shadow", "$value": { "offsetX": 0, "offsetY": 8, "blur": 24, "spread": -8, "color": "#000000", "opacity": 0.12 }, "$description": "Menus, floating panels, and dialogs" },
+      "high": { "$type": "shadow", "$value": { "offsetX": 0, "offsetY": 16, "blur": 40, "spread": -12, "color": "#000000", "opacity": 0.16 }, "$description": "Modals and prominent temporary overlays" }
+    }
+  },
+  "motion": {
+    "$extensions": { "status": "provisional" },
+    "duration": {
+      "$description": "Values are milliseconds.",
+      "instant": { "$type": "duration", "$value": 0 },
+      "quick": { "$type": "duration", "$value": 100 },
+      "short": { "$type": "duration", "$value": 160 },
+      "medium": { "$type": "duration", "$value": 240 },
+      "long": { "$type": "duration", "$value": 400 }
+    },
+    "distance": {
+      "$description": "Nominal platform-independent travel distances; map to dp, pt, or epx.",
+      "none": { "$type": "dimension", "$value": 0 },
+      "xs": { "$type": "dimension", "$value": 4 },
+      "sm": { "$type": "dimension", "$value": 8 },
+      "md": { "$type": "dimension", "$value": 16 }
+    }
+  },
+  "$extensions": {
+    "gamebuddy": {
+      "platformUnits": {
+        "design": { "layout": "px", "type": "px" },
+        "android": { "layout": "dp", "type": "sp" },
+        "apple": { "layout": "pt", "type": "pt" },
+        "windows": { "layout": "epx", "type": "epx" }
+      },
+      "materialRules": [
+        "Veil opacity describes material strength, not urgency.",
+        "Do not rely on backdrop blur for legibility; provide an opaque or high-contrast fallback.",
+        "Test composited text and icon contrast over actual gameplay captures.",
+        "Transparency alone does not define an edge; use a boundary, tonal underlay, or restrained elevation."
+      ],
+      "signalRules": [
+        "Resting UI is colorless or nearly colorless.",
+        "Use one dominant signal tone for one state.",
+        "Apply signal color to a partial ring, edge, dot, icon, or compact progress segment—not an entire HUD panel.",
+        "Never communicate meaning by color alone.",
+        "Coral is reserved for actual critical danger or destructive action.",
+        "The full spectrum is brand decoration, never a gameplay status display."
+      ],
+      "typographyRules": [
+        "Choose font family by script and platform while preserving one semantic scale.",
+        "Chinese and mixed-language UI use zero tracking by default.",
+        "Use sentence case for English UI copy.",
+        "Use tabular figures for changing or vertically aligned metrics.",
+        "Never use text below 12 platform-scaled units for essential information.",
+        "Do not use the pixel wordmark as a UI typeface."
+      ],
+      "iconRules": [
+        "Rounded is the system-wide interface icon style, not a microphone-only or GameAssist-only choice.",
+        "Use Material Symbols Rounded throughout Android. Fill is independent of style; do not switch to the Outlined or Sharp family for inactive states.",
+        "Figma and Android must use the same glyph, Rounded family, weight, grade, optical size, and fill settings.",
+        "Share semantic IDs and metadata across platforms; use native libraries for familiar OS actions.",
+        "Draw product-specific icons as optimized shared vectors and adapt them optically per platform.",
+        "Keep visual icon size separate from interaction-target size.",
+        "Do not bake shadows, gradients, opacity, or semantic colors into interface icons.",
+        "Brand assets and game-owned assets are not interface icons."
+      ],
+      "motionRules": [
+        "Use one transition to attract attention, then become still.",
+        "Do not use continuous pulsing, glowing, or looping decoration during gameplay.",
+        "Meaning must remain clear with motion disabled.",
+        "Reduced motion removes travel and scale; preserve state changes with opacity or immediate replacement.",
+        "Use platform-native easing unless a component specifies otherwise."
+      ],
+      "implementationDefaults": {
+        "screenTitle": "{typography.app.heading.sm}",
+        "sectionTitle": "{typography.app.title.md}",
+        "body": "{typography.app.body.md}",
+        "buttonLabel": "{typography.app.label.lg}",
+        "icon": "{icon.size.md}",
+        "mobilePagePadding": "{spacing.16}",
+        "cardRadius": "{radius.lg}",
+        "borderWidth": "{border.width.default}"
+      }
+    }
+  }
+}

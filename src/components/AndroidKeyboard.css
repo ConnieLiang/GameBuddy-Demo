@@ -1,0 +1,30 @@
+.android-keyboard {
+  position: absolute; inset: auto 0 0; z-index: 50;
+  padding: 0 1.2cqw; color: #e3e3e3; background: #202124;
+  border-radius: 4cqw 4cqw 0 0;
+  box-shadow: 0 -2cqw 6cqw #0003;
+  animation: keyboard-rise 240ms cubic-bezier(.2,.8,.2,1);
+  font-family: Roboto, Arial, sans-serif;
+}
+.ak-toolbar {height: 10cqw; display: flex; align-items: center; justify-content: space-between; padding: 0 3cqw; font-size: 2.8cqw; color: #aeb0b4;}
+.ak-toolbar > span:first-child {font-size: 6cqw; line-height: 1;}
+.ak-toolbar button {background: none; border: 0; color: inherit; padding: 1cqw; cursor: pointer;}
+.ak-row {display: flex; justify-content: center; gap: 1.2cqw; margin-bottom: 1.5cqw;}
+.ak-row-1 {padding: 0 4.7cqw;}
+.ak-key {flex: 1; min-width: 0; height: 11cqw; padding: 0; border: 0; border-radius: 1.5cqw; background: #3c4043; color: inherit; font: inherit; font-size: 5cqw; cursor: pointer; box-shadow: 0 .4cqw 0 #0005; display: flex; align-items: center; justify-content: center;}
+.ak-key:active {background: #73787e; transform: translateY(.4cqw);}
+.ak-key svg, .ak-toolbar svg {width: 5.5cqw; height: 5.5cqw;}
+.ak-special {flex: 1.45; background: #303236; font-size: 3.4cqw;}
+.ak-selected {background: #d3e3fd; color: #172b4d;}
+.ak-space {flex: 4.8; font-size: 3.5cqw;}
+.ak-search {flex: 1.45; background: #a8c7fa; color: #062e6f; border-radius: 6cqw;}
+.ak-navigation {height: 6cqw; display: flex; align-items: center; justify-content: center;}
+.ak-navigation span {width: 27cqw; height: .9cqw; border-radius: 1cqw; background: #d3d3d3;}
+.theme-light .android-keyboard {background: #e8eaed; color: #252629;}
+.theme-light .ak-key {background: #fff; box-shadow: 0 .4cqw 0 #0002;}
+.theme-light .ak-special {background: #d4d7dc;}
+.theme-light .ak-search, .theme-light .ak-selected {background: #c2d7fa;}
+.theme-light .ak-toolbar {color: #61656b;}
+.theme-light .ak-navigation span {background: #555;}
+@keyframes keyboard-rise {from {transform: translateY(100%); opacity: .4;} to {transform: translateY(0); opacity: 1;}}
+@media (prefers-reduced-motion: reduce) {.android-keyboard {animation: none;}}
