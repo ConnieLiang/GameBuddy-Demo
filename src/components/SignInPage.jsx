@@ -12,7 +12,7 @@ export default function SignInPage({ chinese, onContinue }) {
   continueRef.current = onContinue;
   useEffect(() => {
     if (!loading) return;
-    const timer = window.setTimeout(() => continueRef.current(), 2000);
+    const timer = window.setTimeout(() => continueRef.current(), 1000);
     return () => window.clearTimeout(timer);
   }, [loading]);
   const t = (en, zh) => chinese ? zh : en;

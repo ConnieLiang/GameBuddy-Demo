@@ -1,3 +1,4 @@
+import SplashScreen from './components/SplashScreen';
 import SignInPage from './components/SignInPage';
 import SquadUnavailable from './components/SquadUnavailable';
 import { useEffect, useState } from "react";
@@ -105,11 +106,17 @@ const asset = name => `${import.meta.env.BASE_URL}assets/${name}.svg`;
 function PhoneMockup({ searchDetailOpen, setSearchDetailOpen, tab, setTab, signedIn, setSignedIn, homeLayout, copy, theme, appearance, setAppearance, language, setLanguage }) {
   const reducedMotion = useReducedMotion();
   const entryTransition = { duration: reducedMotion ? 0 : 0.6, ease: [0.22, 1, 0.36, 1] };
+  const homeTransition = { ...entryTransition, duration: reducedMotion ? 0 : 0.35 };
   const [accountOpen, setAccountOpen] = useState(false);
+  const [splashVisible, setSplashVisible] = useState(true);
+  useEffect(() => {
+    const timer = window.setTimeout(() => setSplashVisible(false), 1000);
+    return () => window.clearTimeout(timer);
+  }, []);
   const profileTransition = { duration: reducedMotion ? 0 : 0.5, ease: [0.4, 0, 0.2, 1] };
   return <div className="phone phone-normal"><div className="phone-metal"><div className="phone-screen gb-screen">
     <div className="gb-home" data-node-id="169:378" aria-label={copy.home}>
-      {signedIn && <motion.div className={`gb-entry-layer${searchDetailOpen ? " gb-showing-search-detail" : ""}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={entryTransition}><div className="gb-status" aria-label="5:13 PM">
+      {signedIn && <motion.div className={`gb-entry-layer${searchDetailOpen ? " gb-showing-search-detail" : ""}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={homeTransition}><div className="gb-status" aria-label="5:13 PM">
         <img className="gb-time gb-status-asset" src={asset("time")} width="67.882" height="22.627" alt="" />
         <div className="gb-status-right">{["wifi", "signal", "battery"].map(name => <img className="gb-status-asset" key={name} src={asset(name)} width="22.627" height="22.627" alt="" />)}</div>
       </div>
@@ -119,7 +126,10 @@ function PhoneMockup({ searchDetailOpen, setSearchDetailOpen, tab, setTab, signe
         <span className="gb-tab-icon">{name === "home" ? <img className="gb-home-icon" src={asset("home")} width="28" height="28" alt="" /> : name === "teamup" ? <span className="gb-buddy-tab-glyph" style={{maskImage:`url(${asset("squad")})`,WebkitMaskImage:`url(${asset("squad")})`}}/> : <span className="gb-buddy-tab-glyph" style={{maskImage:`url(${asset(name)})`,WebkitMaskImage:`url(${asset(name)})`}}/>}</span><span>{copy[name]}</span>
       </button>)}</nav>}</motion.div>}
       <AnimatePresence initial={false}>
-        {!signedIn && <motion.div key="signin" className="gb-signin-layer" exit={{ opacity: 0 }} transition={entryTransition}>
+        {splashVisible && <motion.div key="splash" className="gb-splash-layer" exit={{ opacity: 0 }} transition={entryTransition}><SplashScreen /></motion.div>}
+      </AnimatePresence>
+      <AnimatePresence initial={false}>
+        {!signedIn && !splashVisible && <motion.div key="signin" className="gb-signin-layer" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={signedIn ? homeTransition : entryTransition}>
           <SignInPage chinese={copy.home === "首页"} onContinue={() => {setTab("home");setSignedIn(true);}} />
         </motion.div>}
       </AnimatePresence>

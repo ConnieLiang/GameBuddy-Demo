@@ -2682,3 +2682,12 @@ button:focus-visible { outline: 2px solid #48f1b8; outline-offset: 4px; }
 .hs-game-feed > .hs-feed-messages {overflow-anchor:none;}
 @media (prefers-reduced-motion:reduce) {.hs-game-feed {transition:none;}}
 
+
+/* Figma 169:367 — initial one-second splash, always dark. */
+.gb-splash {position:absolute;inset:0;z-index:10;overflow:hidden;background:#000;color:#fff;color-scheme:dark;}
+.gb-splash-brand {position:absolute;top:39.913%;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7.282cqw;}
+.gb-splash-mark {position:relative;width:38.529cqw;height:27.427cqw;}
+.gb-splash-mark img {position:absolute;inset:-39.25% -27.94%;width:155.88%;height:178.5%;max-width:none;}
+.gb-splash-brand > span {font:400 5.34cqw/normal Silkscreen,monospace;letter-spacing:.214cqw;white-space:nowrap;}
+
+.gb-splash-layer {position:absolute;inset:0;z-index:10;}
