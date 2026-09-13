@@ -3,7 +3,7 @@ import SignInPage from './components/SignInPage';
 import SquadUnavailable from './components/SquadUnavailable';
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, MotionConfig, useReducedMotion } from "framer-motion";
-import { Sun, Moon, Maximize2, Minimize2 } from "lucide-react";
+import { Sun, Moon, PanelLeft } from "lucide-react";
 import HomeSearch from "./components/HomeSearch";
 import BuddyPage from "./components/BuddyPage";
 import AccountPage from "./components/AccountPage";
@@ -71,7 +71,7 @@ function Nav({ theme, setTheme, lang, setLang, copy, focusDemo, setFocusDemo }) 
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
       <button className="icon-button demo-focus-toggle" type="button" aria-controls="demo-tagline" aria-expanded={!focusDemo} aria-label={focusDemo ? (lang === 'zh' ? '显示介绍' : 'Show tagline') : (lang === 'zh' ? '专注演示' : 'Focus on demo')} title={focusDemo ? (lang === 'zh' ? '显示介绍' : 'Show tagline') : (lang === 'zh' ? '专注演示' : 'Focus on demo')} onClick={() => setFocusDemo(value => !value)}>
-        {focusDemo ? <Minimize2 size={17} /> : <Maximize2 size={17} />}
+        <PanelLeft size={19} strokeWidth={1.5} />
       </button>
       <div className="language-switch" role="tablist" aria-label={copy.controls.language}>
         {[
