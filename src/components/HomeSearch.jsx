@@ -56,17 +56,36 @@ function HistoryStrip({ children, label }) {
   return <div ref={strip} className="hs-v2-games" aria-label={label}>{children}</div>;
 }
 
-function RotatingTrending({ items, renderItem }) {
-  const reducedMotion = useReducedMotion();
-  if (reducedMotion) return <ol className="hs-v2-trending-list">{items.map((game, position) => <li key={game.id || game.short}>{renderItem(game, position)}</li>)}</ol>;
-  return <div className="hs-trending-rotation">
-    <div className="hs-rotation-track" style={{ animationDuration: `${items.length * 4}s` }}>
-      {[0, 1].map(copy => <ol key={copy} className="hs-rotation-group" aria-hidden={copy === 1 ? true : undefined}>
+function TrendingRow({ items, renderItem, row, reducedMotion }) {
+  const sequence = useRef(null);
+  const track = useRef(null);
+  useLayoutEffect(() => {
+    const measure = () => {
+      // Match the sign-in loop's gentle pixel speed and alternating directions.
+      const speed = (13 + row * 2) * 0.3;
+      track.current.style.animationDuration = `${sequence.current.offsetWidth / speed}s`;
+    };
+    const observer = new ResizeObserver(measure);
+    observer.observe(sequence.current);
+    measure();
+    return () => observer.disconnect();
+  }, [row]);
+  return <div className="hs-trending-lane">
+    <div ref={track} className="hs-rotation-track" style={{ animationDirection: row % 2 ? 'reverse' : 'normal' }}>
+      {(reducedMotion ? [0] : [0, 1]).map(copy => <ul ref={copy === 0 ? sequence : undefined} key={copy} className="hs-rotation-group" aria-hidden={copy === 1 ? true : undefined}>
         {items.map((game, position) => <li key={game.id || game.short}>
           {copy === 1 ? cloneElement(renderItem(game, position), { tabIndex: -1 }) : renderItem(game, position)}
         </li>)}
-      </ol>)}
+      </ul>)}
     </div>
+  </div>;
+}
+
+function RotatingTrending({ items, renderItem, expanded }) {
+  const reducedMotion = useReducedMotion();
+  if (expanded) return <ul className="hs-trending-expanded">{items.map((game, index) => <li key={game.id || `${game.short}-${index}`}>{renderItem(game, index)}</li>)}</ul>;
+  return <div className={`hs-trending-rotation${reducedMotion ? ' hs-trending-static' : ''}`}>
+    {Array.from({ length: 2 }, (_, row) => <TrendingRow key={row} row={row} items={items.filter((_, index) => index % 2 === row)} renderItem={renderItem} reducedMotion={reducedMotion} />)}
   </div>;
 }
 
@@ -250,6 +269,7 @@ export default function HomeSearch({ chinese, theme, nickname = 'Frankie', onOpe
   const searchHint = name ? (chinese ? `${name}，${c.placeholder}` : `${name}, ${c.placeholder.charAt(0).toLowerCase()}${c.placeholder.slice(1)}`) : c.placeholder;
   const [query, setQuery] = useState(''), [result, setResult] = useState(null), [notice, setNotice] = useState(false), [listening, setListening] = useState(false), [photo, setPhoto] = useState(null);
   const file = useRef(null), speech = useRef(null), searchInput = useRef(null);
+  const [showAllTrending, setShowAllTrending] = useState(false);
   const [keyboardOpen, setKeyboardOpen] = useState(false);
   const [keyboardHost, setKeyboardHost] = useState(null);
   useEffect(() => {
@@ -333,7 +353,7 @@ export default function HomeSearch({ chinese, theme, nickname = 'Frankie', onOpe
   const art = (name, extension = 'svg') => `${import.meta.env.BASE_URL}assets/${name}.${extension}`;
   return <><motion.section inert={!!activeHistory} animate={{ x: activeHistory && !reducedMotion ? "-20%" : 0 }} transition={detailTransition} className={`hs-home${v2 ? ' hs-home-v2' : ''}${keyboardOpen || attachmentActive ? ' hs-search-active' : ''}${keyboardOpen || (attachmentActive && attachmentExpanded) ? ' hs-is-typing' : ''}`}>
     {!composerOnly && <div className="hs-top"><div className="hs-brand"><img src={art(v2 ? 'home-v2-mark' : 'brand')} alt=""/><span>{v2 ? 'GameBUDDY' : 'GameBuddy'}</span></div><button className="hs-profile" aria-label={chinese ? '个人资料' : 'Your profile'} onClick={() => { dismissKeyboard(); onOpenAccount(); }}><img src={art('profile-dog', 'png')} alt=""/></button></div>}
-    {v2 && <h1 className="hs-v2-greeting">{chinese ? '接下来玩什么？' : 'What shall we play?'}</h1>}
+    {v2 && <h1 className="hs-v2-greeting">{chinese ? <>Frankie，准备好发现<br />下一款游戏了吗？</> : <>Frankie, ready to find<br />your next game?</>}</h1>}
     <SearchFrame className="hs-search-beam" {...beamProps}>
     <form ref={composer} className="hs-search" onSubmit={submit}>
       {showRotatingHint && (v2 ? <FadingHint key={l} language={l} /> : <SplitTextHint key={l} language={l} />)}
@@ -362,20 +382,23 @@ export default function HomeSearch({ chinese, theme, nickname = 'Frankie', onOpe
         setActiveHistory(history);
       }}><img src={`${import.meta.env.BASE_URL}assets/${history.image || `home-v2-game-${gameHistory.indexOf(history) + 1}.png`}`} alt="" /></button>)}
     </HistoryStrip>}
-    {v2 && <section className="hs-v2-trending" aria-label={chinese ? '大家都在搜什么？' : 'What’s everyone searching?'}>
-      <RotatingTrending items={rotatingTrendingGames} renderItem={(game, index) => (
+    {v2 && <section className="hs-v2-trending" aria-label={chinese ? '大家都在搜什么？' : 'Trending Search'}>
+      <RotatingTrending expanded={showAllTrending} items={rotatingTrendingGames} renderItem={(game, index) => (
           <button type="button" className="hs-v2-trending-row" onClick={() => {
             dismissKeyboard();
             speech.current?.abort();
             setResult({ game });
           }}>
-            <span className="hs-v2-trending-index" aria-hidden="true">{index + 1}</span>
-            <span className="hs-v2-trending-game">
-              <img src={art(game.short === 'TFT' ? 'trending-tft' : game.image, game.imageExtension || 'png')} alt="" />
-              <span className="hs-v2-trending-copy"><strong>{game.question[l]}</strong><span>{game.name[l]}</span></span>
+            <span className="hs-v2-trending-copy">
+              <strong>{game.question[l]}</strong>
+              <span className="hs-v2-trending-game">
+                <img src={art(game.short === 'TFT' ? 'trending-tft' : game.image, game.imageExtension || 'png')} alt="" />
+                <span>{game.name[l]}</span>
+              </span>
             </span>
           </button>
       )} />
+      <button type="button" className="hs-more-trending" aria-expanded={showAllTrending} onClick={() => setShowAllTrending(value => !value)}>{showAllTrending ? (chinese ? '收起' : 'Show less') : (chinese ? '更多热门搜索' : 'More Trending')}</button>
     </section>}
     {!composerOnly && !v2 && <>
     <section className="hs-history" aria-labelledby="my-searches-heading">

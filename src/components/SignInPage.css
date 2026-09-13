@@ -1,4 +1,4 @@
-.signin-page {color-scheme:dark;--gb-fg:#fff;--gb-border:#272727;--gb-accent:#48f1b8;position:absolute;inset:0;overflow:hidden;background:#000;color:#fff;font-family:Roboto,Arial,sans-serif;}
+.signin-page {color-scheme:dark;--gb-fg:#fff;--gb-border:#272727;--gb-accent:var(--demo-primary);position:absolute;inset:0;overflow:hidden;background:#000;color:#fff;font-family:Roboto,Arial,sans-serif;}
 .signin-background {position:absolute;inset:0;overflow:hidden;isolation:isolate;pointer-events:none;}
 .signin-shade {position:absolute;inset:-1px;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.8) 13%,rgba(0,0,0,0) 35%),linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.45) 32%,rgba(0,0,0,.82) 60%,rgba(0,0,0,.96));}
 .signin-brand {position:absolute;top:10.905%;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:1.416cqw;white-space:nowrap;}
@@ -7,7 +7,7 @@
 .signin-main {position:absolute;bottom:25.082%;left:9.709%;width:80.582%;display:flex;flex-direction:column;gap:9.709cqw;}
 .signin-main h1 {margin:0;font-size:7.767cqw;line-height:9.709cqw;font-weight:600;letter-spacing:.078cqw;text-align:center;}
 .signin-continue {width:100%;height:13.592cqw;border:0;border-radius:9999px;background:#fff;color:#000;font:600 4.369cqw/6.311cqw Roboto,Arial,sans-serif;cursor:pointer;}
-.signin-continue:focus-visible,.signin-legal button:focus-visible {outline:2px solid #48f1b8;outline-offset:4px;}
+.signin-continue:focus-visible,.signin-legal button:focus-visible {outline:2px solid var(--demo-primary);outline-offset:4px;}
 .signin-legal {position:absolute;top:85.823%;left:9.709%;width:80.582%;color:#7d7d7d;text-align:center;font-size:3.398cqw;line-height:4.854cqw;letter-spacing:.068cqw;}
 .signin-legal p {margin:0;}
 .signin-legal button {padding:0;border:0;background:transparent;color:inherit;font:inherit;text-decoration:underline;cursor:pointer;}

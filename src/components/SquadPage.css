@@ -64,7 +64,7 @@
 .sq-workspace>p {color:var(--bp-muted);}
 .sq-card-links {margin-top:3cqw;border-top:1px solid var(--gb-border);}
 
-.demo-scenario-host {--gb-accent:#48f1b8;--bp-muted:#929797;margin-top:28px;font-family:Roboto,Arial,sans-serif;}
+.demo-scenario-host {--gb-accent:var(--demo-primary);--bp-muted:#929797;margin-top:28px;font-family:Roboto,Arial,sans-serif;}
 .theme-light .demo-scenario-host {--gb-accent:#087b59;--bp-muted:#64706b;}
 .demo-scenario-host .sq-scenarios {margin:0;font-size:14px;line-height:1.6;}
 .demo-scenario-host summary {cursor:pointer;margin-bottom:12px;}

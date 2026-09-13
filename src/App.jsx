@@ -3,7 +3,7 @@ import SignInPage from './components/SignInPage';
 import SquadUnavailable from './components/SquadUnavailable';
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, MotionConfig, useReducedMotion } from "framer-motion";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, Maximize2, Minimize2 } from "lucide-react";
 import HomeSearch from "./components/HomeSearch";
 import BuddyPage from "./components/BuddyPage";
 import AccountPage from "./components/AccountPage";
@@ -12,6 +12,9 @@ const copyByLang = {
   zh: { controls: { language: "语言", appearance: "切换浅色 / 深色模式" }, title: ["陪你一起玩"], body: "让游戏体验更上一层。用截图或视频搜索，也可以直接提问，了解任何游戏。", home: "首页", buddy: "Buddy", teamup: "组队", preview: "首页预览", pending: "这个页面即将加入。", back: "返回首页" }
 };
 function App() {
+  const [focusDemo, setFocusDemo] = useState(false);
+  const reduceLayoutMotion = useReducedMotion();
+  const focusTransition = { duration: reduceLayoutMotion ? 0 : 0.55, ease: [0.22, 1, 0.36, 1] };
   const [homeLayout, setHomeLayout] = useState("v1");
   const [signedIn, setSignedIn] = useState(false);
   const readPreference = (key, fallback) => { try { return localStorage.getItem(key) || fallback; } catch { return fallback; } };
@@ -32,28 +35,23 @@ function App() {
   useEffect(() => { document.documentElement.lang = lang === "zh" ? "zh-CN" : "en"; }, [lang]);
   return <MotionConfig reducedMotion="user"><div className={`app-shell theme-${theme}`}>
     <AmbientField />
-    <Nav theme={theme} setTheme={setTheme} lang={lang} setLang={setLang} copy={copy} />
-    <main><section className="variant-section" id="states">
-      <div className="variant-copy">
+    <Nav focusDemo={focusDemo} setFocusDemo={setFocusDemo} theme={theme} setTheme={setTheme} lang={lang} setLang={setLang} copy={copy} />
+    <main><section className={`variant-section${focusDemo ? " variant-focused" : ""}`} id="states">
+      <AnimatePresence initial={false} mode="popLayout">{!focusDemo && <motion.div key="tagline" className="variant-copy" id="demo-tagline" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: reduceLayoutMotion ? 0 : 0.25 }}>
         <div className="variant-brand" aria-label="GameBuddy"><img src={`${import.meta.env.BASE_URL}assets/brand.svg`} alt=""/><span>GameBUDDY</span></div>
         <h2>{copy.title.map(line => <span className="title-line" key={line}>{line}</span>)}</h2>
         <p>{copy.body}</p>
         {signedIn && tab === "home" && !searchDetailOpen && <div className="home-layout-picker" role="group" aria-label={lang === 'zh' ? '首页布局' : 'Home layout'}>
           {['v1', 'v2'].map(version => <button key={version} type="button" aria-pressed={homeLayout === version} onClick={() => setHomeLayout(version)}>{version.toUpperCase()}</button>)}
         </div>}
-      </div>
-      <div className="variant-devices"><PhoneMockup searchDetailOpen={searchDetailOpen} setSearchDetailOpen={setSearchDetailOpen} tab={tab} setTab={setTab} signedIn={signedIn} setSignedIn={setSignedIn} homeLayout={homeLayout} copy={copy} theme={theme} appearance={appearance} setAppearance={setTheme} language={lang} setLanguage={setLang} /></div>
+      </motion.div>}</AnimatePresence>
+      <motion.div layout="position" transition={{ layout: focusTransition }} className="variant-device-position"><div className="variant-devices"><PhoneMockup searchDetailOpen={searchDetailOpen} setSearchDetailOpen={setSearchDetailOpen} tab={tab} setTab={setTab} signedIn={signedIn} setSignedIn={setSignedIn} homeLayout={homeLayout} copy={copy} theme={theme} appearance={appearance} setAppearance={setTheme} language={lang} setLanguage={setLang} /></div></motion.div>
     </section></main>
   </div></MotionConfig>;
 }
 function AmbientField() {
   return (
     <div className="ambient-field" aria-hidden="true">
-      <motion.div
-        className="ambient-beam beam-a"
-        animate={{ y: [0, -18, 0], opacity: [0.42, 0.66, 0.42] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-      />
       <motion.div
         className="ambient-beam beam-b"
         animate={{ x: [0, 24, 0], opacity: [0.2, 0.36, 0.2] }}
@@ -64,7 +62,7 @@ function AmbientField() {
   );
 }
 
-function Nav({ theme, setTheme, lang, setLang, copy }) {
+function Nav({ theme, setTheme, lang, setLang, copy, focusDemo, setFocusDemo }) {
   return (
     <motion.nav
       className="nav"
@@ -72,6 +70,9 @@ function Nav({ theme, setTheme, lang, setLang, copy }) {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
+      <button className="icon-button demo-focus-toggle" type="button" aria-controls="demo-tagline" aria-expanded={!focusDemo} aria-label={focusDemo ? (lang === 'zh' ? '显示介绍' : 'Show tagline') : (lang === 'zh' ? '专注演示' : 'Focus on demo')} title={focusDemo ? (lang === 'zh' ? '显示介绍' : 'Show tagline') : (lang === 'zh' ? '专注演示' : 'Focus on demo')} onClick={() => setFocusDemo(value => !value)}>
+        {focusDemo ? <Minimize2 size={17} /> : <Maximize2 size={17} />}
+      </button>
       <div className="language-switch" role="tablist" aria-label={copy.controls.language}>
         {[
           ["en", "En"],
