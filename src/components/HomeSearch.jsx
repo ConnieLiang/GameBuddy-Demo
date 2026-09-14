@@ -128,7 +128,7 @@ const gameHistory = [
 ];
 
 const gameIntroductions = {
-  tft: ['Draft champions, build a team, and outlast your opponents in this strategy auto-battler.', '招募英雄、搭配阵容，在策略自走棋对战中击败对手。', 'https://teamfighttactics.leagueoflegends.com/en-us/'],
+  tft: ['Draft champions, build a team, and outlast your opponents in this strategy auto-battler.', '招募英雄、搭配阵容，在策略自走棋对战中击败对手。', 'https://www.taptap.io/app/176942'],
   cookies: ['Build a cookie-making empire by clicking, buying buildings, and unlocking production upgrades.', '从点击制作饼干开始，购买建筑并解锁升级，逐步打造你的饼干帝国。'],
   'auto-pirates': ['Assemble a pirate crew and experiment with team combinations in a strategic auto-battler.', '组建海盗船员阵容，在策略自动战斗中尝试不同搭配。'],
   underlords: ['Hire a crew of Dota heroes, combine their strengths, and battle for control of White Spire.', '招募 Dota 英雄、搭配队伍，在自动战斗中争夺白色尖塔的控制权。', 'https://www.underlords.com/'],
@@ -178,6 +178,7 @@ function BuddyAnswer({ children, chinese }) {
 
 function SearchDetailPage({ history, chinese, theme, onBack, onDelete }) {
   const [sent, setSent] = useState([]);
+  const [assistChoice, setAssistChoice] = useState(null);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const feed = useRef(null);
   useEffect(() => { if (sent.length) feed.current?.scrollTo({ top: feed.current.scrollHeight, behavior: "smooth" }); }, [sent]);
@@ -220,9 +221,17 @@ function SearchDetailPage({ history, chinese, theme, onBack, onDelete }) {
     </header>
     <div ref={feed} className="hs-feed-messages" role="log" aria-label={title}>
       {message('user', <p>{chinese ? `帮我找一下《${title}》的游戏介绍。` : `Find an introduction to ${title}.`}</p>, 'request')}
-      {message('buddy', <><p>{intro ? intro[l] : chinese ? '这个游戏图标的名称待确认，确认后会补充对应的介绍和下载入口。' : 'This game icon still needs a confirmed name before its introduction and download page can be added.'} {intro && <>{chinese ? '你可以' : 'You can '}<a className="hs-feed-download" href={download} target="_blank" rel="noreferrer">{chinese ? (intro[2] ? '在官网获取游戏' : '在 TapTap 查找下载') : (intro[2] ? 'get the game on its official site' : 'find it on TapTap')}</a>{chinese ? '。' : '.'}</>}</p></>, 'intro')}
-      {message('buddy', <p>{chinese ? `想试试《${title}》，并开启 GameAssist 吗？开启后，我可以结合游戏画面和声音提供帮助。` : `Would you like to play ${title} with GameAssist? I can use your game screen and audio to help as you play.`}</p>, 'invite')}
-      {message('user', <p>{chinese ? '好，开启 GameAssist。我同意在游戏辅助期间共享屏幕、录制游戏画面、访问游戏音频，并使用麦克风进行语音交流。' : 'Yes, enable GameAssist. I agree to share my screen, record gameplay, share game audio, and use my microphone for voice chat during the session.'}</p>, 'consent')}
+      {message('buddy', <><p>{intro ? intro[l] : chinese ? '这个游戏图标的名称待确认，确认后会补充对应的介绍和下载入口。' : 'This game icon still needs a confirmed name before its introduction and download page can be added.'} {intro && <>{chinese ? '你可以' : 'You can '}<a className="hs-feed-download" href={download} target="_blank" rel="noreferrer">{chinese ? (download.includes('taptap.io') ? '在 TapTap 获取游戏' : '在官网获取游戏') : (download.includes('taptap.io') ? 'get the game on TapTap' : 'get the game on its official site')}</a>{chinese ? '。' : '.'}</>}</p></>, 'intro')}
+      {message('buddy', <><p>{chinese ? `想试试《${title}》，并开启 GameAssist 吗？` : `Would you like to play ${title} with GameAssist?`}</p>
+        <div className="hs-assist-choices" role="group" aria-label={chinese ? '选择游戏辅助方式' : 'Choose how to play'}>
+          {[
+            ['assist', chinese ? '开启 GameAssist' : 'Play with GameAssist', chinese ? '同意共享屏幕、录制游戏画面、访问游戏音频及麦克风，以获得实时辅助。' : 'Allow screen sharing, gameplay recording, game audio, and microphone access for live assistance.'],
+            ['solo', chinese ? '只玩游戏' : 'Play without GameAssist', chinese ? '不开启辅助或共享权限。' : 'Continue without assistance or sharing permissions.'],
+            ['later', chinese ? '暂时不用' : 'Not now', chinese ? '继续了解这款游戏。' : 'Keep exploring this game.'],
+          ].map(([id, label, description]) => <button key={id} type="button" aria-pressed={assistChoice === id} onClick={() => setAssistChoice(id)}><span className="hs-choice-indicator" aria-hidden="true"/><span><strong>{label}</strong><small>{description}</small></span></button>)}
+        </div>
+        {assistChoice && <p className="hs-choice-status" role="status">{assistChoice === 'assist' ? (chinese ? '已选择 GameAssist。此演示不会访问你的设备权限。' : 'GameAssist selected. This demo does not access device permissions.') : assistChoice === 'solo' ? (chinese ? '已选择独自游玩。点击下方「玩游戏」获取游戏。' : 'Playing without GameAssist. Use Play below to get the game.') : (chinese ? '没问题，我们可以继续聊这款游戏。' : 'No problem. We can keep exploring the game.')}</p>}
+      </>, 'invite')}
       {sent.map((item, index) => message('user', <>{item.image && <img className="hs-sent-image" src={item.image} alt={chinese ? '发送的截图' : 'Sent screenshot'}/>}<p>{item.text}</p></>, `sent-${index}`))}
     </div>
     <div className="hs-detail-composer"><HomeSearch composerOnly beam={false} chinese={chinese} theme={theme} gameDownloaded={history.downloaded === true} gameDownloadUrl={download} onSendMessage={sendMessage} onKeyboardHeight={setKeyboardHeight}/></div>
