@@ -8,8 +8,8 @@ import HomeSearch from "./components/HomeSearch";
 import BuddyPage from "./components/BuddyPage";
 import AccountPage from "./components/AccountPage";
 const copyByLang = {
-  en: { controls: { language: "Language", appearance: "Switch light / dark appearance" }, title: ["Find your", "next move."], body: "Get more out of your games. Search with a screenshot, video or ask about any game.", home: "Home", buddy: "Buddy", teamup: "Squad", preview: "Home screen", pending: "This screen is next.", back: "Back to Home" },
-  zh: { controls: { language: "语言", appearance: "切换浅色 / 深色模式" }, title: ["陪你一起玩"], body: "让游戏体验更上一层。用截图或视频搜索，也可以直接提问，了解任何游戏。", home: "首页", buddy: "Buddy", teamup: "组队", preview: "首页预览", pending: "这个页面即将加入。", back: "返回首页" }
+  en: { controls: { language: "Language", appearance: "Switch light / dark appearance" }, title: ["Find your next move."], body: "Get more out of your games. Search with a screenshot, video or ask about any game.", home: "Home", buddy: "Buddy", teamup: "Squad", preview: "Home screen", pending: "This screen is next.", back: "Back to Home" },
+  zh: { controls: { language: "语言", appearance: "切换浅色 / 深色模式" }, title: ["找游戏，找攻略，找队友"], body: "让游戏体验更上一层。用截图或视频搜索，也可以直接提问，了解任何游戏。", home: "首页", buddy: "Buddy", teamup: "组队", preview: "首页预览", pending: "这个页面即将加入。", back: "返回首页" }
 };
 function App() {
   const [focusDemo, setFocusDemo] = useState(false);
@@ -123,9 +123,9 @@ function PhoneMockup({ searchDetailOpen, setSearchDetailOpen, tab, setTab, signe
       </div>
       <motion.div className={`gb-content${searchDetailOpen ? " gb-search-detail-content" : ""}`} inert={accountOpen} animate={{ x: accountOpen && !reducedMotion ? "-20%" : 0 }} transition={profileTransition}>{tab === "home" && <HomeSearch onSearchDetailChange={setSearchDetailOpen} layout={homeLayout} chinese={copy.home === "首页"} theme={theme} onOpenAccount={() => setAccountOpen(true)} />}{tab === "buddy" && <BuddyPage chinese={copy.home === "首页"} theme={theme} />}{tab === "teamup" && <SquadUnavailable chinese={copy.home === "首页"} />}</motion.div>
       <AnimatePresence initial={false}>{accountOpen && <motion.div key="profile" className="gb-content gb-account-content" initial={{ x: reducedMotion ? 0 : "100%", opacity: reducedMotion ? 1 : 0.8 }} animate={{ x: 0, opacity: 1 }} exit={{ x: reducedMotion ? 0 : "100%", opacity: reducedMotion ? 1 : 0.8 }} transition={profileTransition}><AccountPage appearance={appearance} setAppearance={setAppearance} language={language} setLanguage={setLanguage} onSignOut={() => { setAccountOpen(false); setSignedIn(false); setTab("home"); }} chinese={copy.home === "首页"} onBack={() => setAccountOpen(false)} /></motion.div>}</AnimatePresence>
-      {!searchDetailOpen && <nav inert={accountOpen} className={`gb-tabs${homeLayout === "v2" && tab === "home" ? " gb-tabs-borderless" : ""}`} aria-label={copy.preview}>{["home", "buddy", "teamup"].map(name => <button key={name} type="button" aria-current={tab === name ? "page" : undefined} className={tab === name ? "selected" : ""} onClick={() => setTab(name)}>
+      <nav inert={accountOpen || searchDetailOpen} aria-hidden={searchDetailOpen || undefined} className={`gb-tabs${searchDetailOpen ? " gb-tabs-hidden" : ""}${homeLayout === "v2" && tab === "home" ? " gb-tabs-borderless" : ""}`} aria-label={copy.preview}>{["home", "buddy", "teamup"].map(name => <button key={name} type="button" aria-current={tab === name ? "page" : undefined} className={tab === name ? "selected" : ""} onClick={() => setTab(name)}>
         <span className="gb-tab-icon">{name === "home" ? <img className="gb-home-icon" src={asset("home")} width="28" height="28" alt="" /> : name === "teamup" ? <span className="gb-buddy-tab-glyph" style={{maskImage:`url(${asset("squad")})`,WebkitMaskImage:`url(${asset("squad")})`}}/> : <span className="gb-buddy-tab-glyph" style={{maskImage:`url(${asset(name)})`,WebkitMaskImage:`url(${asset(name)})`}}/>}</span><span>{copy[name]}</span>
-      </button>)}</nav>}</motion.div>}
+      </button>)}</nav></motion.div>}
       <AnimatePresence initial={false}>
         {splashVisible && <motion.div key="splash" className="gb-splash-layer" exit={{ opacity: 0 }} transition={entryTransition}><SplashScreen /></motion.div>}
       </AnimatePresence>
