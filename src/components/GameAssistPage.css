@@ -25,3 +25,5 @@
 .ga-preview + .ga-settings,.ga-settings + .ga-settings {margin-top:4cqw;}
 
 .ga-transparency .ac-slider {width:100%;margin:3cqw 0 1cqw;}
+.ga-floating {background:var(--demo-primary);color:#000;}
+.ga-floating .gb-icon {position:static;width:65%;height:65%;}

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ChevronLeft, X } from 'lucide-react';
+import { ChevronLeft, X } from './GBIcon';
 
 export default function TrendingSearches({ items, chinese, art, onBack, sideNavigation = false }) {
   const l = chinese ? 1 : 0;

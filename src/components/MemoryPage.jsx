@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ChevronDown, Check, Pencil, Trash2, MessageSquareOff, RotateCcw } from 'lucide-react';
+import { ChevronDown, Check, Pencil, Trash2, MessageSquareOff, RotateCcw } from './GBIcon';
 import './MemoryPage.css';
 
 // Port of PersonaEditorScreen's memory center and BuddyMemoryCenter lifecycle/actions.

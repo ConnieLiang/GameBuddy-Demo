@@ -5,11 +5,11 @@ import AppUtilities from './AppUtilities';
 import { appLanguages } from './appLanguages';
 import { voiceOptions } from './voiceOptions';
 import { useEffect, useRef, useState } from 'react';
-import { ChevronLeft, ChevronRight, Check, CreditCard, Bell, Settings, Bot, Captions, SlidersHorizontal, MessageSquare, RefreshCw, FileText, ShieldCheck, Mic, Play, Square, Brain, SunMoon, Languages, Search, HardDrive, KeyRound, Gamepad2, Activity } from 'lucide-react';
+import { Support, Guide, ChevronLeft, ChevronRight, Check, Settings, Bot, Captions, SlidersHorizontal, MessageSquare, RefreshCw, FileText, ShieldCheck, Mic, Play, Square, Brain, Search, HardDrive, KeyRound, Gamepad2, Activity } from './GBIcon';
 import './AccountPage.css';
 
 const defaults = { gameAssist: true, backgroundActivity: false, notifications: true, messages: true, mode: 'Medium', volume: 60, hud: true, audioChat: true, hudSize: 16, hudOpacity: 80, voice: voiceOptions[0][0] };
-export default function AccountPage({ chinese, onBack, onSignOut, appearance, setAppearance, language, setLanguage }) {
+export default function AccountPage({ chinese, onBack, onSignOut, onShowGuide, appearance, setAppearance, language, setLanguage }) {
   const t = (en, zh) => chinese ? zh : en;
   const [settings, setSettings] = useState(() => {
     try {
@@ -78,24 +78,25 @@ export default function AccountPage({ chinese, onBack, onSignOut, appearance, se
     terms: t('Terms of Services', '服务条款'),
     privacy: t('Privacy Policy', '隐私政策')
   };
-  const rowIcons = { gameAssist: Gamepad2, permissions: KeyRound, storage: HardDrive, memory: Brain, subscription: CreditCard, notifications: Bell, app: Settings, hud: SlidersHorizontal, feedback: MessageSquare, terms: FileText, privacy: ShieldCheck };
-  const icon = Icon => <Icon className="ac-leading-icon" aria-hidden="true" strokeWidth={1.7} />;
+  const rowIcons = { gameAssist: Gamepad2, permissions: KeyRound, storage: HardDrive, memory: Brain, app: Settings, hud: SlidersHorizontal, feedback: Support, terms: FileText, privacy: ShieldCheck };
+  const icon = Icon => Icon ? <Icon className="ac-leading-icon" aria-hidden="true" strokeWidth={1.7} /> : null;
   const row = (key, disabled = false) => <button className="ac-row" disabled={disabled} onClick={() => setDetail(key)} key={key}><span className="ac-row-label">{icon(rowIcons[key])}{links[key]}</span>{key === 'subscription' && <small className="ac-mode-status">Pro</small>}{key === 'gameAssist' && <small className="ac-mode-status">{settings.gameAssist ? t('On', '已开启') : t('Off', '已关闭')}</small>}<ChevronRight /></button>;
   return <section className="ac-page" aria-label={t('Account', '账号')}>
-    <div className="ac-navigation"><button aria-label={t('Back', '返回')} onClick={() => { if (detail) { setDetail(['notifications', 'appearance', 'language', 'permissions', 'storage', 'background'].includes(detail) ? 'app' : null); setNotice(''); } else onBack(); }}><ChevronLeft /></button></div>
+    {(detail || onBack) && <div className="ac-navigation"><button aria-label={t('Back', '返回')} onClick={() => { if (detail) { setDetail(['notifications', 'appearance', 'language', 'permissions', 'storage', 'background'].includes(detail) ? 'app' : null); setNotice(''); } else onBack?.(); }}><ChevronLeft /></button></div>}
     {signedOut ? <div className="ac-detail"><h1>{t('Signed out', '已退出登录')}</h1><p>{t('You’re signed out of this demo account.', '你已退出此演示账号。')}</p><button className="ac-primary" onClick={() => { setSignedOut(false); setDetail(null); }}>{t('Continue as Frankie', '以 Frankie 身份继续')}</button></div>
     : detail ? <div className="ac-detail"><h1>{detail === 'signout' ? t('Sign out?', '退出登录？') : links[detail]}</h1>
       {detail === 'signout' ? <><p>{t('Sign out of this demo account?', '是否退出此演示账号？')}</p><button className="ac-primary" onClick={() => onSignOut ? onSignOut() : setSignedOut(true)}>{t('Sign out', '退出登录')}</button><button className="ac-cancel" onClick={() => setDetail(null)}>{t('Cancel', '取消')}</button></>
       : detail === 'app' ? <div className="ac-group ac-settings-group">
-        <div className="ac-row"><span className="ac-row-label">{icon(SunMoon)}{links.appearance}</span><SettingsMenu label={links.appearance} value={appearance} options={[[ 'system',t('System','跟随系统') ],['light',t('Light','浅色')],['dark',t('Dark','深色')]]} onChange={setAppearance} /></div>
-        <div className="ac-row"><span className="ac-row-label">{icon(Languages)}{links.language}</span><SettingsMenu label={links.language} value={language} options={appLanguages} onChange={setLanguage} note={t('Demo translations: English and Simplified Chinese. Other selections preview in English.', '演示翻译支持英文和简体中文，其他选项暂以英文预览。')} /></div>
+        <div className="ac-row"><span className="ac-row-label">{links.appearance}</span><SettingsMenu label={links.appearance} value={appearance} options={[[ 'system',t('System','跟随系统') ],['light',t('Light','浅色')],['dark',t('Dark','深色')]]} onChange={setAppearance} /></div>
+        <div className="ac-row"><span className="ac-row-label">{links.language}</span><SettingsMenu label={links.language} value={language} options={appLanguages} onChange={setLanguage} note={t('Demo translations: English and Simplified Chinese. Other selections preview in English.', '演示翻译支持英文和简体中文，其他选项暂以英文预览。')} /></div>
+        {onShowGuide && <button className="ac-row" onClick={onShowGuide}><span className="ac-row-label">{icon(Guide)}{t('Welcome guide', '使用引导')}</span><ChevronRight/></button>}
         {row('notifications')}
         {row('permissions')}
         {row('storage')}
         <div className="ac-row"><span className="ac-row-label" id="ac-background-label">{icon(Activity)}{t('Allow background activity', '允许后台运行')}</span><button className="ac-switch" role="switch" aria-checked={settings.backgroundActivity} aria-labelledby="ac-background-label" onClick={() => update('backgroundActivity', !settings.backgroundActivity)}><span /></button></div>
       </div>
       : detail === 'notifications' ? <div className="ac-group">
-        <div className="ac-row"><span className="ac-row-label" id="ac-push-label">{icon(Bell)}{t('Push notifications', '推送通知')}</span><button className="ac-switch" role="switch" aria-checked={settings.notifications} aria-labelledby="ac-push-label" onClick={() => update('notifications', !settings.notifications)}><span /></button></div>
+        <div className="ac-row"><span className="ac-row-label" id="ac-push-label">{t('Push notifications', '推送通知')}</span><button className="ac-switch" role="switch" aria-checked={settings.notifications} aria-labelledby="ac-push-label" onClick={() => update('notifications', !settings.notifications)}><span /></button></div>
         <div className="ac-row"><span className="ac-row-label" id="ac-messages-label">{icon(MessageSquare)}{t('Messages', '消息')}</span><button className="ac-switch" role="switch" aria-checked={settings.messages} aria-labelledby="ac-messages-label" onClick={() => update('messages', !settings.messages)}><span /></button></div>
       </div>
       : ['permissions', 'storage'].includes(detail) ? <AppUtilities key={detail} page={detail} chinese={chinese} />

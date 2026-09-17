@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mic, Images, Layers, Check, Trash2 } from 'lucide-react';
+import { Mic, Images, Layers, Check, Trash2 } from './GBIcon';
 
 export default function AppUtilities({ page, chinese }) {
   const t = (en, zh) => chinese ? zh : en;

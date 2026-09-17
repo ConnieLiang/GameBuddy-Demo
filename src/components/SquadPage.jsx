@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom';
 import { useState } from 'react';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from './GBIcon';
 import SquadDiscovery, { players } from './SquadDiscovery';
 import SquadEditor, { emptyIntent } from './SquadEditor';
 import SettingsMenu from './SettingsMenu';

@@ -1,27 +1,27 @@
+@font-face {font-family:GBSignInRoboto;src:url('../../public/assets/roboto-light.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap;}
 .signin-page {color-scheme:dark;--gb-fg:#fff;--gb-border:#272727;--gb-accent:var(--demo-primary);position:absolute;inset:0;overflow:hidden;background:#000;color:#fff;font-family:Roboto,Arial,sans-serif;}
-.signin-background {position:absolute;inset:0;overflow:hidden;isolation:isolate;pointer-events:none;}
-.signin-shade {position:absolute;inset:-1px;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.8) 13%,rgba(0,0,0,0) 35%),linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.45) 32%,rgba(0,0,0,.82) 60%,rgba(0,0,0,.96));}
-.signin-brand {position:absolute;top:10.905%;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:1.416cqw;white-space:nowrap;}
-.signin-brand img {width:5.309cqw;height:4.877cqw;}
-.signin-brand span {font:400 4.779cqw/1.27 Silkscreen,monospace;letter-spacing:.191cqw;}
-.signin-main {position:absolute;bottom:25.082%;left:9.709%;width:80.582%;display:flex;flex-direction:column;gap:9.709cqw;}
-.signin-main h1 {margin:0;font-size:7.767cqw;line-height:9.709cqw;font-weight:600;letter-spacing:.078cqw;text-align:center;}
-.signin-continue {width:100%;height:13.592cqw;border:0;border-radius:9999px;background:#fff;color:#000;font:600 4.369cqw/6.311cqw Roboto,Arial,sans-serif;cursor:pointer;}
-.signin-continue:focus-visible,.signin-legal button:focus-visible {outline:2px solid var(--demo-primary);outline-offset:4px;}
-.signin-legal {position:absolute;top:85.823%;left:9.709%;width:80.582%;color:#7d7d7d;text-align:center;font-size:3.398cqw;line-height:4.854cqw;letter-spacing:.068cqw;}
+
+/* Figma 1102:5588 — light welcome scene in both app themes. */
+.signin-page.signin-odyssey {color-scheme:light;background:#fff;color:#272727;}
+.signin-grainient {position:absolute;inset:10% 0 0;opacity:.6;pointer-events:none;overflow:hidden;background:linear-gradient(165deg,#fff 35%,#d4c4ff 55%,#a7b5fe 72%,#7e8fff 100%);}
+.signin-grainient canvas {display:block;width:100%;height:100%;}
+.signin-logo {position:absolute;left:9.709%;top:9.706%;width:33.981cqw;height:6.554cqw;object-fit:contain;}
+.signin-headline {position:absolute;left:9.709%;right:7.524%;top:26.063%;margin:0;font:300 10.194cqw/11.65cqw GBSignInRoboto,Roboto,Arial,sans-serif;letter-spacing:0;color:#272727;}
+.signin-headline span {display:block;color:#7e8fff;}
+/* Figma 1198:6360: 350px stack, 230px legal copy, 40px gaps at 412px screen width. */
+.signin-main {position:absolute;top:71.101%;left:7.524%;width:84.952%;display:flex;flex-direction:column;align-items:center;gap:9.709cqw;}
+.signin-continue {display:flex;align-items:center;justify-content:center;gap:.971cqw;flex-shrink:0;width:100%;height:13.592cqw;border:0;border-radius:9999px;background:#fff;color:#000;font:600 3.883cqw/5.825cqw Roboto,Arial,sans-serif;letter-spacing:.0194cqw;cursor:pointer;transition:transform 180ms ease;}
+.signin-main .signin-continue {box-shadow:0 4px 16px rgba(94,103,209,.08);}
+.signin-continue img {width:15.049cqw;height:4.369cqw;object-fit:contain;}
+.signin-continue:active {transform:scale(.98);}
+.signin-continue:focus-visible,.signin-legal button:focus-visible {outline:2px solid #5e67d1;outline-offset:4px;}
+.signin-legal {width:55.825cqw;max-width:100%;color:#272727;text-align:center;font:400 2.913cqw/3.883cqw Roboto,Arial,sans-serif;letter-spacing:.058cqw;}
 .signin-legal p {margin:0;}
-.signin-legal button {padding:0;border:0;background:transparent;color:inherit;font:inherit;text-decoration:underline;cursor:pointer;}
-.signin-legal-panel {position:absolute;inset:0;z-index:2;padding:24cqw 9.709cqw;background:#000;display:flex;flex-direction:column;gap:6cqw;}
+.signin-legal button {padding:0;border:0;background:transparent;color:inherit;font:inherit;text-decoration:underline;text-underline-offset:2px;cursor:pointer;}
+.signin-version {padding:.971cqw 2.913cqw;border-radius:9999px;background:rgba(0,0,0,.04);color:#5e67d1;font:400 2.913cqw/3.883cqw Roboto,Arial,sans-serif;letter-spacing:.058cqw;}
+.signin-legal-panel {position:absolute;inset:0;z-index:2;padding:24cqw 9.709cqw;background:#000;color:#fff;display:flex;flex-direction:column;gap:6cqw;}
 .signin-legal-panel h2 {font-size:6cqw;}
 .signin-legal-panel p {font-size:3.5cqw;color:#858585;}
-
-.signin-logo-loop {position:absolute;inset:-12% -40%;transform:rotate(-20deg);transform-origin:center;display:grid;grid-auto-flow:column;grid-auto-columns:100px;grid-template-rows:minmax(0,1fr);justify-content:center;gap:12px;overflow:hidden;pointer-events:none;}
-.signin-loop-column {min-width:0;overflow:hidden;}
-.signin-loop-column:nth-child(even) {margin-top:-50px;}
-.signin-loop-track {display:flex;flex-direction:column;will-change:transform;}
-.signin-loop-sequence {display:flex;flex-direction:column;flex-shrink:0;gap:12px;padding-bottom:12px;}
-.signin-loop-sequence img {display:block;width:100px;height:100px;flex-shrink:0;object-fit:cover;border-radius:18px;}
-@media (prefers-reduced-motion:reduce) {.signin-loop-track {will-change:auto;}}
 
 .signin-loading {display:grid;place-items:center;animation:signin-loader-reveal .2s ease-out;}
 .signin-loader-group {width:160px;max-width:70%;display:flex;flex-direction:column;align-items:center;gap:24px;}
@@ -34,7 +34,14 @@
 @keyframes signin-loader-reveal {from {opacity:0;}to {opacity:1;}}
 @media (prefers-reduced-motion:reduce) {.signin-loading,.signin-loader-fill,.signin-loader-signal {animation:none;}}
 
-/* Sign-in and its loader always retain dark appearance. */
-.theme-light .signin-page {background:#000;color:#fff;}
+/* Loading retains its dark appearance. */
+.theme-light .signin-page.signin-loading {background:#000;color:#fff;}
 .theme-light .signin-page .signin-brand,.theme-light .signin-page .signin-main h1 {color:#fff;}
 .theme-light .signin-page img {filter:none;}
+
+@media(prefers-reduced-motion:reduce) {.signin-continue {transition:none;}}
+
+.signin-word-slot {height:11.65cqw;margin-top:1.942cqw;overflow:hidden;}
+.signin-discovery-word {white-space:nowrap;animation:signin-word-cycle 3.6s ease-in-out both;}
+@keyframes signin-word-cycle {0% {opacity:0;transform:translateY(.14em);} 9%,88% {opacity:1;transform:translateY(0);} 100% {opacity:0;transform:translateY(-.12em);}}
+@media(prefers-reduced-motion:reduce) {.signin-discovery-word {animation:none;}}

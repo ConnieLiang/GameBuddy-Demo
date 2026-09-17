@@ -1,5 +1,6 @@
+import GBIcon from './GBIcon';
 import { cloneElement, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { ArrowUpRight, X, ChevronLeft, Copy, ThumbsUp, ThumbsDown, Share2, MoreHorizontal, Trash2 } from 'lucide-react';
+import { X, ChevronLeft, Copy, Share2, Trash2 } from './GBIcon';
 import { BorderBeam } from 'border-beam';
 import GameBuddyMark from './GameBuddyMark';
 import TrendingSearches from './TrendingSearches';
@@ -86,7 +87,7 @@ function RotatingTrending({ items, renderItem, expanded }) {
   const reducedMotion = useReducedMotion();
   if (expanded) return <ul className="hs-trending-expanded">{items.map((game, index) => <li key={game.id || `${game.short}-${index}`}>{renderItem(game, index)}</li>)}</ul>;
   return <div className={`hs-trending-rotation${reducedMotion ? ' hs-trending-static' : ''}`}>
-    {Array.from({ length: 2 }, (_, row) => <TrendingRow key={row} row={row} items={items.filter((_, index) => index % 2 === row)} renderItem={renderItem} reducedMotion={reducedMotion} />)}
+    {Array.from({ length: 3 }, (_, row) => <TrendingRow key={row} row={row} items={items.filter((_, index) => index % 3 === row)} renderItem={renderItem} reducedMotion={reducedMotion} />)}
   </div>;
 }
 
@@ -164,8 +165,8 @@ function AnswerActions({ answerRef, chinese }) {
   }
   return <div className="hs-answer-actions">
     <button type="button" aria-label={chinese ? '复制回答' : 'Copy answer'} onClick={copy}><Copy/></button>
-    <button type="button" aria-label={chinese ? '赞' : 'Like answer'} aria-pressed={vote === 'like'} onClick={() => setVote(value => value === 'like' ? null : 'like')}><ThumbsUp/></button>
-    <button type="button" aria-label={chinese ? '踩' : 'Dislike answer'} aria-pressed={vote === 'dislike'} onClick={() => setVote(value => value === 'dislike' ? null : 'dislike')}><ThumbsDown/></button>
+    <button type="button" aria-label={chinese ? '赞' : 'Like answer'} aria-pressed={vote === 'like'} onClick={() => setVote(value => value === 'like' ? null : 'like')}><span>{chinese ? '赞' : 'Like'}</span></button>
+    <button type="button" aria-label={chinese ? '踩' : 'Dislike answer'} aria-pressed={vote === 'dislike'} onClick={() => setVote(value => value === 'dislike' ? null : 'dislike')}><span>{chinese ? '踩' : 'Dislike'}</span></button>
     <button type="button" aria-label={chinese ? '分享回答' : 'Share answer'} onClick={share}><Share2/></button>
     <span role="status">{notice}</span>
   </div>;
@@ -215,7 +216,7 @@ function SearchDetailPage({ history, chinese, theme, onBack, onDelete }) {
       <img src={`${import.meta.env.BASE_URL}assets/${history.image || `home-v2-game-${gameHistory.indexOf(history) + 1}.png`}`} alt=""/>
       <div><h1>{title}</h1></div>
       <details className="hs-history-menu" onKeyDown={event => { if (event.key === 'Escape') { event.currentTarget.open = false; event.currentTarget.querySelector('summary').focus(); } }} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) event.currentTarget.open = false; }}>
-        <summary aria-label={chinese ? '更多选项' : 'More options'}><MoreHorizontal aria-hidden="true"/></summary>
+        <summary aria-label={chinese ? '更多选项' : 'More options'}><span>{chinese ? '更多' : 'More'}</span></summary>
         <div className="hs-history-menu-panel"><button type="button" onClick={onDelete}><Trash2 aria-hidden="true"/>{chinese ? '删除搜索记录' : 'Delete search history'}</button></div>
       </details>
     </header>
@@ -228,7 +229,7 @@ function SearchDetailPage({ history, chinese, theme, onBack, onDelete }) {
             ['assist', chinese ? '开启 GameAssist' : 'Play with GameAssist', chinese ? '同意共享屏幕、录制游戏画面、访问游戏音频及麦克风，以获得实时辅助。' : 'Allow screen sharing, gameplay recording, game audio, and microphone access for live assistance.'],
             ['solo', chinese ? '只玩游戏' : 'Play without GameAssist', chinese ? '不开启辅助或共享权限。' : 'Continue without assistance or sharing permissions.'],
             ['later', chinese ? '暂时不用' : 'Not now', chinese ? '继续了解这款游戏。' : 'Keep exploring this game.'],
-          ].map(([id, label, description]) => <button key={id} type="button" aria-pressed={assistChoice === id} onClick={() => setAssistChoice(id)}><span className="hs-choice-indicator" aria-hidden="true"/><span><strong>{label}</strong><small>{description}</small></span></button>)}
+          ].map(([id, label, description]) => <button key={id} type="button" aria-pressed={assistChoice === id} onClick={() => setAssistChoice(id)}><GBIcon className="hs-choice-indicator" name={assistChoice === id ? "select-after" : "select-before"}/><span><strong>{label}</strong><small>{description}</small></span></button>)}
         </div>
         {assistChoice && <p className="hs-choice-status" role="status">{assistChoice === 'assist' ? (chinese ? '已选择 GameAssist。此演示不会访问你的设备权限。' : 'GameAssist selected. This demo does not access device permissions.') : assistChoice === 'solo' ? (chinese ? '已选择独自游玩。点击下方「玩游戏」获取游戏。' : 'Playing without GameAssist. Use Play below to get the game.') : (chinese ? '没问题，我们可以继续聊这款游戏。' : 'No problem. We can keep exploring the game.')}</p>}
       </>, 'invite')}
@@ -358,12 +359,12 @@ export default function HomeSearch({ chinese, theme, nickname = 'Frankie', onOpe
     rec.onresult = e => setQuery(e.results[0][0].transcript);
     try { rec.start(); } catch { setNotice(true); }
   }
-  if (result) return <section className="hs-result"><button className="hs-back" onClick={() => setResult(null)}><ChevronLeft size={18}/>{c.back}</button><span className="hs-kicker">{c.result}</span><h2>{result.game ? result.game.question[l] : result.question || c.screenshot}</h2>{photo && <img className="hs-result-photo" src={photo} alt={c.screenshot}/>}<div className="hs-answer"><GameBuddyMark/><span>{c.demo}</span><p>{result.game?.answer ? result.game.answer[l] : c.generic}</p>{result.game?.url && <a href={result.game.url} target="_blank" rel="noreferrer">{c.source}<ArrowUpRight size={14}/></a>}</div></section>;
+  if (result) return <section className="hs-result"><button className="hs-back" onClick={() => setResult(null)}><ChevronLeft size={18}/>{c.back}</button><span className="hs-kicker">{c.result}</span><h2>{result.game ? result.game.question[l] : result.question || c.screenshot}</h2>{photo && <img className="hs-result-photo" src={photo} alt={c.screenshot}/>}<div className="hs-answer"><GameBuddyMark/><span>{c.demo}</span><p>{result.game?.answer ? result.game.answer[l] : c.generic}</p>{result.game?.url && <a href={result.game.url} target="_blank" rel="noreferrer">{c.source}</a>}</div></section>;
   const SearchFrame = beam && !v2 && composerOnly ? BorderBeam : 'div';
   const beamProps = beam && !v2 && composerOnly ? {size:'line',colorVariant:'mono',theme,duration:2.4,strength:0.4} : {};
   const art = (name, extension = 'svg') => `${import.meta.env.BASE_URL}assets/${name}.${extension}`;
   return <><motion.section inert={!!activeHistory || showAllTrending || showSearches} animate={{ x: (activeHistory || showSearches || (!v2 && showAllTrending)) && !reducedMotion ? "-20%" : 0 }} transition={detailTransition} className={`hs-home${v2 ? ' hs-home-v2' : !composerOnly ? ' hs-home-v1' : ''}${keyboardOpen || attachmentActive ? ' hs-search-active' : ''}${keyboardOpen || (attachmentActive && attachmentExpanded) ? ' hs-is-typing' : ''}`}>
-    {!composerOnly && <div className="hs-top"><div className="hs-brand"><img src={art(v2 ? 'home-v2-mark' : 'brand')} alt=""/><span>{v2 ? 'GameBUDDY' : 'GameBuddy'}</span></div><button className="hs-profile" aria-label={chinese ? '个人资料' : 'Your profile'} onClick={() => { dismissKeyboard(); onOpenAccount(); }}><img src={art('profile-dog', 'png')} alt=""/></button></div>}
+    {!composerOnly && !v2 && <div className="hs-top"><div className="hs-brand"><img className="gb-logo-lockup" src={art(`gb-logo-${theme || 'dark'}`)} alt="TapTap GameBuddy"/></div><button className="hs-profile" aria-label={chinese ? '个人资料' : 'Your profile'} onClick={() => { dismissKeyboard(); onOpenAccount(); }}><img src={art('profile-dog', 'png')} alt=""/></button></div>}
     {v2 && <h1 className="hs-v2-greeting">{chinese ? <>Frankie，准备好发现<br />下一款游戏了吗？</> : <>Frankie, ready to find<br />your next game?</>}</h1>}
     <SearchFrame className="hs-search-beam" {...beamProps}>
     <form ref={composer} className="hs-search" onSubmit={submit}>
@@ -379,7 +380,7 @@ export default function HomeSearch({ chinese, theme, nickname = 'Frankie', onOpe
       <div className="hs-search-actions"><button type="button" className="hs-add" title={c.screenshot} aria-label={c.screenshot} onPointerDown={() => {
         setAttachmentExpanded(keyboardOpen || attachmentExpanded || !!query.trim());
         setAttachmentActive(true);
-      }} onClick={() => { setAttachmentActive(true); file.current.click(); }}><img src={art('add-circle')} alt=""/></button>{composerOnly && onSendMessage && (gameDownloaded ? <button type="button" className="hs-play" onPointerDown={event => event.preventDefault()} onClick={() => onSendMessage({ text: chinese ? '我想开始玩这款游戏。' : 'I’d like to play this game.', photo: null })}>{chinese ? '玩游戏' : 'Play'}</button> : <a className="hs-play hs-get-game" href={gameDownloadUrl} target="_blank" rel="noreferrer" onPointerDown={event => event.preventDefault()}>{chinese ? '玩游戏' : 'Play'}</a>)}<div className="hs-right-actions"><button type="button" className="hs-mic" aria-label={listening ? c.listening : c.voice} aria-pressed={listening} onClick={voice}><img src={art('mic')} alt=""/></button>{query.trim() || photo ? <button className="hs-submit" aria-label={c.result} onPointerDown={e => e.preventDefault()}><img className="hs-send-circle" src={art('send-circle')} alt=""/><img className="hs-send-arrow" src={art('send-arrow')} alt=""/></button> : <button type="button" className="hs-voice" aria-label={listening ? c.listening : c.voice} aria-pressed={listening} onClick={voice}><img src={art('voice')} alt=""/></button>}</div></div>
+      }} onClick={() => { setAttachmentActive(true); file.current.click(); }}><GBIcon name="add"/></button>{composerOnly && onSendMessage && (gameDownloaded ? <button type="button" className="hs-play" onPointerDown={event => event.preventDefault()} onClick={() => onSendMessage({ text: chinese ? '我想开始玩这款游戏。' : 'I’d like to play this game.', photo: null })}>{chinese ? '玩游戏' : 'Play'}</button> : <a className="hs-play hs-get-game" href={gameDownloadUrl} target="_blank" rel="noreferrer" onPointerDown={event => event.preventDefault()}>{chinese ? '玩游戏' : 'Play'}</a>)}<div className="hs-right-actions"><button type="button" className="hs-mic" aria-label={listening ? c.listening : c.voice} aria-pressed={listening} onClick={voice}><GBIcon name="microphone"/></button>{query.trim() || photo ? <button className="hs-submit" aria-label={c.result} onPointerDown={e => e.preventDefault()}><GBIcon name="send"/></button> : null}</div></div>
       <input className="hs-file" type="file" accept="image/*" ref={file} onCancel={() => {
         if (!attachmentExpanded) setAttachmentActive(false);
       }} onChange={e => { const f=e.target.files?.[0]; if(f?.type.startsWith('image/')) setPhoto(URL.createObjectURL(f)); e.target.value=''; }}/>
@@ -402,14 +403,9 @@ export default function HomeSearch({ chinese, theme, nickname = 'Frankie', onOpe
           }}>
             <span className="hs-v2-trending-copy">
               <strong>{game.question[l]}</strong>
-              <span className="hs-v2-trending-game">
-                <img src={art(game.short === 'TFT' ? 'trending-tft' : game.image, game.imageExtension || 'png')} alt="" />
-                <span>{game.name[l]}</span>
-              </span>
             </span>
           </button>
       )} />
-      <button type="button" className="hs-more-trending" onClick={() => { dismissKeyboard(); setShowAllTrending(true); }}>{chinese ? '更多热门搜索' : 'More Trending'}</button>
     </section>}
     {!composerOnly && !v2 && <>
     <section className="hs-history" aria-labelledby="my-searches-heading">
@@ -417,7 +413,7 @@ export default function HomeSearch({ chinese, theme, nickname = 'Frankie', onOpe
       <div className="hs-history-strip">{visibleHistories.map((history, index) => <button className="hs-history-card" key={history.id} title={history.title[l]} aria-label={chinese ? `打开${history.title[l]}的聊天记录` : `Open chat history: ${history.title[l]}`} onClick={() => { dismissKeyboard(); speech.current?.abort(); setActiveHistory(history); }}><img src={`${import.meta.env.BASE_URL}assets/${history.image || `home-v2-game-${gameHistory.indexOf(history) + 1}.png`}`} alt=""/></button>)}</div>
     </section>
     <h2 className="hs-section-heading hs-trending-heading"><button type="button" onClick={() => { dismissKeyboard(); setShowAllTrending(true); }}>{chinese ? '热搜' : 'Trending'}<span className="hs-section-chevron" aria-hidden="true"/></button></h2>
-    <div className="hs-questions" aria-label={chinese ? '游戏问题推荐' : 'Suggested game questions'}>{suggestions.map((g, slot)=><button key={slot} className={`hs-question${g.layout ? ` hs-question-${g.layout}` : ''}`} data-game={g.short} onClick={()=>{speech.current?.abort();setResult({game:g});}}><img className="hs-game-icon" src={art(g.image,g.imageExtension || 'png')} alt=""/>{g.layout !== 'compact' && <span className="hs-heat" title={chinese ? `演示数据：${g.heat.toLocaleString('zh-CN')} 人在问` : `Demo count: ${g.heat.toLocaleString('en-US')} people asking`} aria-label={chinese ? `演示热度：${g.heat} 人在问` : `Sample popularity: ${g.heat} people asking`}><img src={art('heat')} alt=""/><span>{formatHeat(g.heat, chinese)}</span></span>}<span className="hs-question-copy"><span className="hs-game-name">{g.name[l]}</span><strong>{g.question[l]}</strong></span></button>)}</div>
+    <div className="hs-questions" aria-label={chinese ? '游戏问题推荐' : 'Suggested game questions'}>{suggestions.map((g, slot)=><button key={slot} className={`hs-question${g.layout ? ` hs-question-${g.layout}` : ''}`} data-game={g.short} onClick={()=>{speech.current?.abort();setResult({game:g});}}><img className="hs-game-icon" src={art(g.image,g.imageExtension || 'png')} alt=""/>{g.layout !== 'compact' && <span className="hs-heat" title={chinese ? `演示数据：${g.heat.toLocaleString('zh-CN')} 人在问` : `Demo count: ${g.heat.toLocaleString('en-US')} people asking`} aria-label={chinese ? `演示热度：${g.heat} 人在问` : `Sample popularity: ${g.heat} people asking`}><span>{formatHeat(g.heat, chinese)}</span></span>}<span className="hs-question-copy"><span className="hs-game-name">{g.name[l]}</span><strong>{g.question[l]}</strong></span></button>)}</div>
     </>}
     {keyboardOpen && keyboardHost && createPortal(<AndroidKeyboard chinese={chinese} onKey={typeKey} onDismiss={dismissKeyboard} onSearch={() => submit({ preventDefault() {} })}/>, keyboardHost)}
   </motion.section>
@@ -426,7 +422,7 @@ export default function HomeSearch({ chinese, theme, nickname = 'Frankie', onOpe
       <section className="ts-page"><header className="ts-nav"><button type="button" aria-label={chinese ? '返回首页' : 'Back to Home'} onClick={() => setShowSearches(false)}><ChevronLeft size={20}/></button><h1>{chinese ? '我的搜索' : 'My searches'}</h1></header><div className="ts-scroll"><div className="ts-list">{visibleHistories.map(history => <button type="button" className="ts-card ts-compact" key={history.id} onClick={() => setActiveHistory(history)}><img src={`${import.meta.env.BASE_URL}assets/${history.image || `home-v2-game-${gameHistory.indexOf(history) + 1}.png`}`} alt=""/><span className="ts-card-copy"><strong>{history.title[l]}</strong><span className="ts-game-name">{history.messages?.[0]?.[l]}</span></span></button>)}</div>{!visibleHistories.length && <p>{chinese ? '暂无搜索记录' : 'No searches yet'}</p>}</div></section>
     </motion.div>}
     {showAllTrending && <motion.div key="trending-page" className="hs-detail-layer hs-trending-layer" initial={v2 ? { y: reducedMotion ? 0 : '100%', opacity: reducedMotion ? 0 : 1 } : { x: reducedMotion ? 0 : '100%', opacity: reducedMotion ? 1 : .8 }} animate={{ x: 0, y: 0, opacity: 1 }} exit={v2 ? { y: reducedMotion ? 0 : '100%', opacity: reducedMotion ? 0 : 1, transition: { duration: reducedMotion ? 0 : .24, ease: [.4, 0, 1, 1] } } : { x: reducedMotion ? 0 : '100%', opacity: reducedMotion ? 1 : .8 }} transition={v2 ? { duration: reducedMotion ? 0 : .32, ease: [.16, 1, .3, 1] } : detailTransition}>
-      <TrendingSearches sideNavigation={!v2} items={rotatingTrendingGames} chinese={chinese} art={art} onBack={() => { setShowAllTrending(false); requestAnimationFrame(() => document.querySelector('.hs-more-trending')?.focus({ preventScroll: true })); }} />
+      <TrendingSearches sideNavigation={!v2} items={rotatingTrendingGames} chinese={chinese} art={art} onBack={() => { setShowAllTrending(false); requestAnimationFrame(() => document.querySelector('.hs-trending-heading button')?.focus({ preventScroll: true })); }} />
     </motion.div>}
     {activeHistory && <motion.div key="search-detail" className="hs-detail-layer" initial={{ x: reducedMotion ? 0 : '100%', opacity: reducedMotion ? 1 : .8 }} animate={{ x: 0, opacity: 1 }} exit={{ x: reducedMotion ? 0 : '100%', opacity: reducedMotion ? 1 : .8 }} transition={detailTransition}>
       <SearchDetailPage history={activeHistory} chinese={chinese} theme={theme} onDelete={deleteHistory} onBack={() => setActiveHistory(null)} />

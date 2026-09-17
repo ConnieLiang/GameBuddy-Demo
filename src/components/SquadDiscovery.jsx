@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowLeft, Heart, RotateCw, UsersRound, X } from 'lucide-react';
+import { ArrowLeft, RotateCw, UsersRound, X } from './GBIcon';
 import './SquadPage.css';
 
 export const players = [
@@ -55,7 +55,7 @@ export default function SquadDiscovery({chinese, game, filters, onProfile, onRul
     </button>
     <div className="sq-card-links" data-no-swipe><button className="bp-text-button" onClick={()=>onProfile(player)}>{t('Full profile','完整画像')} ›</button>{player.id==='che-v1'&&<button className="bp-text-button" onClick={onRules}>V10 ›</button>}</div>
    </article></div>
-   <div className="sq-actions"><button className="sq-skip" disabled={leaving} aria-label={t('Skip','跳过')} title={t('Skip','跳过')} onClick={()=>swipe('skip')}><X/></button><button className="bp-primary" disabled={leaving} aria-label={t('Want to play','想一起玩')} title={t('Want to play','想一起玩')} onClick={()=>swipe('interest')}><Heart/></button></div>
+   <div className="sq-actions"><button className="sq-skip" disabled={leaving} aria-label={t('Skip','跳过')} title={t('Skip','跳过')} onClick={()=>swipe('skip')}><X/></button><button className="bp-primary" disabled={leaving} aria-label={t('Want to play','想一起玩')} title={t('Want to play','想一起玩')} onClick={()=>swipe('interest')}><span>{t('Play', '一起玩')}</span></button></div>
   </>:<div className="sq-empty"><UsersRound/><h2>{eligible.length?t('You’ve seen this round','这轮队友已经看完了'):t('No players for these filters','当前条件下暂无玩家')}</h2><p>{t('Check back for new players. Your choices are saved.','之后再来看看新队友，你的选择已保存。')}</p><button className="bp-text-button" onClick={()=>{setDecisions(load());setNotice(t('No new demo players yet.','暂时没有新的演示玩家。'));}}>{t('Refresh','刷新')}</button></div>:<div className="sq-interests">{players.filter(p=>decisions[p.id]==='interest').length===0?<p className="sq-empty">{t('Players you want to play with will appear here.','想一起玩的玩家会显示在这里。')}</p>:players.filter(p=>decisions[p.id]==='interest').map(p=><article className="sq-card" key={p.id}><h2>{p.name[l]}</h2><p>{p.role[l]} · {p.style[l]}</p><small>{t('Interest recorded · awaiting a response','已记录兴趣 · 等待回应')}</small></article>)}</div>}
   {view==='discover'&&!leaving&&undo&&<button className="bp-text-button" onClick={()=>{const next={...decisions};delete next[undo];if(save(next)){setUndo(null);setBack(false);}}}>{t('Undo last skip','撤销上次跳过')}</button>}
   {notice&&<p className="sq-notice" role="status">{notice}</p>}

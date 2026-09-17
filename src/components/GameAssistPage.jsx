@@ -1,3 +1,4 @@
+import GBIcon from './GBIcon';
 import { useEffect, useState } from 'react';
 import SettingsMenu from './SettingsMenu';
 import './GameAssistPage.css';
@@ -46,7 +47,7 @@ export default function GameAssistPage({chinese, enabled, onEnabledChange}) {
     <div className="ga-preview">
       <span className="ga-preview-label">{t('Preview','预览')}</span>
       <div className="ga-preview-scene" aria-hidden="true">{mosaicCells.map((opacity, i) => <i key={i} style={{opacity}} />)}</div>
-      <button className="ga-floating" style={{'--ga-size':({small:40,medium:48,large:56})[settings.size]+'px',opacity:faded?1-settings.transparency/100:1}} onClick={wake} onFocus={wake} aria-label={t('Activate GameAssist preview','激活游戏助手预览')}><img className="ga-floating-art" src={`${import.meta.env.BASE_URL}assets/gameassist-floating.svg`} alt="" draggable="false"/></button>
+      <button className="ga-floating" style={{'--ga-size':({small:40,medium:48,large:56})[settings.size]+'px',opacity:faded?1-settings.transparency/100:1}} onClick={wake} onFocus={wake} aria-label={t('Activate GameAssist preview','激活游戏助手预览')}><GBIcon name="buddy-after" className="ga-floating-art"/></button>
     </div>
     <div className="ac-group ga-settings">
       <div className="ac-row"><span className="ac-row-label">{t('Size','大小')}</span><SettingsMenu label={t('Size','大小')} value={settings.size} options={ [['small',t('Small','小')],['medium',t('Medium','中')],['large',t('Large','大')]] } onChange={value=>update('size',value)}/></div>

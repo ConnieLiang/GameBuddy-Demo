@@ -1,11 +1,11 @@
 import { voiceOptions } from './voiceOptions';
 import { useEffect, useRef, useState } from 'react';
-import { ArrowLeft, ArrowUp, Check, ChevronRight, Plus, Play, Square, X, Pencil, Trash2, UsersRound, Sparkles, AudioLines, Brain } from 'lucide-react';
+import { ArrowLeft, ArrowUp, Check, ChevronRight, Plus, Play, Square, X, Pencil, Trash2, UsersRound, Sparkles, AudioLines, Brain } from './GBIcon';
 import './BuddyPage.css';
 
 // Adapted from PersonaEditorScreen, BuddyCenterViewModel, and VoiceTypeManager
 // in tapad/gamebuddy-rtc-fe, revision 9de5f1e. This demo uses local state, not RTC/AI.
-const initialBuddies = [
+export const initialBuddies = [
   { id:'gaming-wingman', name:['Wingman','电竞搭子'], description:['Easygoing, playful, on your side.','轻松、有趣，始终站在你这边。'], emoji:'🎮', voice:'zh_female_vv_uranus_bigtts', instructions:'', memories:[] },
   { id:'hardcore-commander', name:['Commander','铁血指挥官'], description:['Calm, direct, focused on your next move.','冷静、直接，专注你的下一步。'], emoji:'⚔️', voice:'zh_male_m191_uranus_bigtts', instructions:'', memories:[] },
 ];
@@ -15,13 +15,13 @@ const seeds = [
  {id:'m2', scope:'shared', text:['Keep things relaxed when a match goes badly.','对局不顺时，希望交流轻松一点。'], status:'saved'},
  {id:'m3', scope:'player', text:['I want to learn more strategy games.','我想多了解一些策略游戏。'], status:'pending'},
 ];
-function loadState() {
+export function loadBuddyState() {
  try { const data=JSON.parse(localStorage.getItem('gamebuddy-buddy-demo-v1')); if(data?.buddies?.length && data.buddies.some(b=>b.id===data.active)) return data; } catch {}
  return {buddies:initialBuddies.map(b=>({...b, memories:seeds.map(m=>({...m}))})),active:'gaming-wingman'};
 }
 export default function BuddyPage({chinese, theme}) {
  const l=chinese?1:0, t=(en,zh)=>chinese?zh:en;
- const [state,setState]=useState(loadState), [page,setPage]=useState('overview'), [picker,setPicker]=useState(false);
+ const [state,setState]=useState(loadBuddyState), [page,setPage]=useState('overview'), [picker,setPicker]=useState(false);
  const [newName,setNewName]=useState(''), [draft,setDraft]=useState(''), [preview,setPreview]=useState(false);
  const [scope,setScope]=useState('all'), [editing,setEditing]=useState(null), [editText,setEditText]=useState('');
  const [notice,setNotice]=useState(''), [playing,setPlaying]=useState(null), [removed,setRemoved]=useState(null);

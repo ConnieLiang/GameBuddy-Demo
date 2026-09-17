@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useId } from 'react';
-import { Check } from 'lucide-react';
+import { Check } from './GBIcon';
 
 export default function SettingsMenu({ label, value, options, onChange, note }) {
   const [open, setOpen] = useState(false);
