@@ -2688,10 +2688,12 @@ button:focus-visible { outline: 2px solid var(--demo-primary); outline-offset: 4
 @media (prefers-reduced-motion:reduce) {.hs-game-feed {transition:none;}}
 
 
-/* Figma 169:367 — initial one-second splash, always dark. */
-.gb-splash {position:absolute;inset:0;z-index:10;overflow:hidden;background:linear-gradient(to top,rgba(126,143,255,.4),#7e8fff),#fff;color-scheme:light;}
-.gb-splash-mark {position:absolute;left:50%;top:49.983%;transform:translate(-50%,-50%);width:21.845cqw;height:20.0665cqw;}
-.gb-splash-mark img {position:absolute;inset:-57.29% -56.91% -66.62%;width:213.82%;height:223.91%;max-width:none;}
+/* Figma 1257:6672 — white splash with Odyssey mark and TapTap attribution. */
+.gb-splash {position:absolute;inset:0;z-index:10;overflow:hidden;background:#fff;color:#000;color-scheme:light;}
+.gb-splash-mark {position:absolute;left:50%;top:calc(50% - 7.078cqw);transform:translate(-50%,-50%);width:21.845cqw;height:20.0665cqw;}
+.gb-splash-mark img {display:block;width:100%;height:100%;}
+.gb-splash-attribution {color:#3f3f3f;position:absolute;top:88.441%;left:50%;transform:translateX(-50%);width:16.99cqw;display:flex;flex-direction:column;align-items:center;gap:1.942cqw;text-align:center;font:400 3.155cqw/4.369cqw Roboto,Arial,sans-serif;letter-spacing:.063cqw;}
+.gb-splash-attribution img {display:block;width:16.142cqw;height:4.368cqw;object-fit:contain;}
 
 .gb-splash-layer {position:absolute;inset:0;z-index:10;}
 
@@ -2742,7 +2744,7 @@ button:focus-visible { outline: 2px solid var(--demo-primary); outline-offset: 4
 @media (max-width:1100px) {.variant-device-position .variant-devices {transform:none;}}
 
 /* Neutral/100 solid light-mode demo backdrop. */
-.theme-light .ambient-field {background:#e8e8e8;}
+.theme-light .ambient-field {background:#f1f1f1;}
 .theme-light .ambient-field .ambient-beam,
 .theme-light .ambient-field .grain {display:none;}
 

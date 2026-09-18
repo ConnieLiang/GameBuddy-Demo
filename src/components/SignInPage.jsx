@@ -1,8 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import './SignInPage.css';
-import OdysseyGrainient from './OdysseyGrainient';
 import { useReducedMotion } from 'framer-motion';
-import designTokens from '../../design.tokens.json';
 
 // Gamer vocabulary across competitive, co-op, card, and sandbox games.
 const discoveryWords = [
@@ -29,36 +27,16 @@ function DiscoveryWord({ chinese }) {
   >{(chinese ? discoveryWordsZh : discoveryWords)[reducedMotion ? 0 : index]}</span></span>;
 }
 
-const loaderColor = designTokens.color.neutral['200'].$value;
-
-export default function SignInPage({ chinese, onContinue }) {
+export default function SignInPage({ chinese, onContinue, entranceReady = true }) {
   const [legal, setLegal] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const continueRef = useRef(onContinue);
-  continueRef.current = onContinue;
-  useEffect(() => {
-    if (!loading) return;
-    const timer = window.setTimeout(() => continueRef.current(), 1000);
-    return () => window.clearTimeout(timer);
-  }, [loading]);
   const t = (en, zh) => chinese ? zh : en;
   const asset = name => `${import.meta.env.BASE_URL}assets/${name}`;
-  if (loading) return <section className="signin-page signin-loading" role="status" aria-label={t('Loading Home', '正在加载首页')} aria-busy="true">
-    <div className="signin-loader-group" aria-hidden="true">
-      <div className="signin-loader-mark"><img src={asset('loading-mark.svg')} alt="" /></div>
-      <div className="signin-loader-track">
-        <div className="signin-loader-fill">
-          <div className="signin-loader-signal" style={{ backgroundColor: loaderColor }} />
-        </div>
-      </div>
-    </div>
-  </section>;
-  return <section className="signin-page signin-odyssey" aria-label={t('Sign in', '登录')}>
-    <OdysseyGrainient/>
+  return <section className={`signin-page signin-odyssey${entranceReady ? " signin-revealed" : " signin-preparing"}`} aria-label={t('Sign in', '登录')}>
+    <div className="signin-scene" aria-hidden="true"><div className="signin-scene-gradient"/><img src={asset('signin-figma-landscape.png')} alt=""/></div>
     <img className="signin-logo" src={asset('gb-logo-light.svg')} alt="TapTap GameBuddy"/>
     <h1 className="signin-headline" aria-label={chinese ? '找到属于你的游戏、攻略与队友' : 'Find your next game, strategy, or teammate'}>{chinese ? '找到属于你的' : 'Find your next'}<DiscoveryWord key={chinese ? 'zh' : 'en'} chinese={chinese}/></h1>
     <div className="signin-main" inert={legal ? true : undefined}>
-      <button className="signin-continue" aria-label={t('Continue with TapTap', 'TapTap 登录')} onClick={() => setLoading(true)}>{!chinese && <span>Continue with</span>}<img src={asset('signin-taptap.svg')} alt="TapTap"/>{chinese && <span>登录</span>}</button>
+      <button className="signin-continue" aria-label={t('Continue with TapTap', 'TapTap 登录')} onClick={onContinue}>{!chinese && <span>Continue with</span>}<img src={asset('signin-taptap.svg')} alt="TapTap"/>{chinese && <span>登录</span>}</button>
     <div className="signin-legal">
       <p>{t('By continuing you agree to our ', '登录即表示您同意我们的')}<button onClick={() => setLegal('terms')}>{t('Terms of Services', '服务条款')}</button>{t(' and ', '和')}<button onClick={() => setLegal('privacy')}>{t('Privacy Policy', '隐私政策')}</button></p>
     </div>

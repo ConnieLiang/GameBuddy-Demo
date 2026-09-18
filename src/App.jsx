@@ -131,11 +131,11 @@ function PhoneMockup({ searchDetailOpen, setSearchDetailOpen, tab, setTab, signe
         <span className="gb-tab-icon">{name === "profile" ? <img className="gb-tab-avatar" src={`${import.meta.env.BASE_URL}assets/profile-dog.png`} alt=""/> : <GBIcon name={name === "home" ? (tab === name ? "home-after" : "home-before") : (tab === name ? "buddy-after" : "buddy-before")} size={28}/>}</span><span>{copy[name]}</span>
       </button>)}</nav></motion.div>}
       <AnimatePresence initial={false}>
-        {splashVisible && <motion.div key="splash" className="gb-splash-layer" exit={{ opacity: 0 }} transition={entryTransition}><SplashScreen /></motion.div>}
+        {splashVisible && <motion.div key="splash" className="gb-splash-layer" exit={{ opacity: 0, scale: reducedMotion ? 1 : 1.025 }} transition={{ duration: reducedMotion ? 0 : 0.85, ease: [0.4, 0, 0.2, 1] }}><SplashScreen /></motion.div>}
       </AnimatePresence>
       <AnimatePresence initial={false}>
-        {!signedIn && !splashVisible && !onboardingOpen && <motion.div key="signin" className="gb-signin-layer" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={signedIn ? homeTransition : entryTransition}>
-          <SignInPage chinese={copy.home === "首页"} onContinue={() => {setTab("home"); setOnboardingOpen(true);}} />
+        {!signedIn && !onboardingOpen && <motion.div key="signin" className="gb-signin-layer" inert={splashVisible} aria-hidden={splashVisible || undefined} initial={{ opacity: 1 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={signedIn ? homeTransition : entryTransition}>
+          <SignInPage entranceReady={!splashVisible} chinese={copy.home === "首页"} onContinue={() => {setTab("home"); setOnboardingOpen(true);}} />
         </motion.div>}
       </AnimatePresence>
       <AnimatePresence initial={false}>{onboardingOpen && <motion.div key="onboarding" className="gb-signin-layer" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={homeTransition}><OnboardingPage chinese={copy.home === "首页"} theme={theme} onComplete={() => {setOnboardingOpen(false);setSignedIn(true);setTab("home");}} /></motion.div>}</AnimatePresence>
