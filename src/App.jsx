@@ -113,7 +113,7 @@ function PhoneMockup({ searchDetailOpen, setSearchDetailOpen, tab, setTab, signe
   const [onboardingOpen, setOnboardingOpen] = useState(false);
   const [splashVisible, setSplashVisible] = useState(true);
   useEffect(() => {
-    const timer = window.setTimeout(() => setSplashVisible(false), 2000);
+    const timer = window.setTimeout(() => setSplashVisible(false), 1000);
     return () => window.clearTimeout(timer);
   }, []);
   return <div className="phone phone-normal"><div className="phone-metal"><div className="phone-screen gb-screen">
