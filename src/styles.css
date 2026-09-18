@@ -2905,3 +2905,30 @@ button:focus-visible { outline: 2px solid var(--demo-primary); outline-offset: 4
 .demo-theme-label {font-size:11px;font-weight:500;}
 
 .gb-tab-icon > .gb-tab-avatar {border-radius:50%;object-fit:cover;}
+
+/* Home, Figma 751:1340. Coordinates use the existing 412px device canvas. */
+.hs-home-v2 .hs-v2-greeting {
+  width:66.505cqw;
+  min-height:32.039cqw;
+  margin:12.226cqw auto 4.854cqw;
+  font:300 8.252cqw/10.68cqw GBSignInRoboto,Roboto,Arial,sans-serif;
+  letter-spacing:-.165cqw;
+}
+.hs-v2-greeting > span {display:block;}
+.hs-home-v2 .hs-search {border-width:.5px;}
+.theme-light .hs-home-v2 .hs-search {background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.08);}
+.hs-home-v2 .hs-rotating-hint {font-size:4.369cqw;letter-spacing:.044cqw;}
+.hs-home-v2 .hs-add {width:7.767cqw;height:7.767cqw;}
+.hs-home-v2 .hs-add > .gb-icon {width:4.854cqw;height:4.854cqw;}
+.theme-dark .hs-home-v2 .hs-add {background:#fff;color:#000;}
+.hs-home-v2 .hs-mic {height:7.767cqw;}
+.hs-my-games {margin-top:3.883cqw;}
+.hs-my-games h2 {margin:0;padding:1.942cqw 0;text-align:center;font:600 3.883cqw/5.825cqw Roboto,Arial,sans-serif;letter-spacing:.019cqw;}
+.hs-my-games .hs-v2-games {justify-content:center;width:100%;max-width:none;margin:0;mask-image:none;gap:1.942cqw;}
+.hs-my-games .hs-v2-games button {width:13.107cqw;padding:.971cqw;border:.5px solid rgba(0,0,0,.04);border-radius:3.883cqw;background:rgba(0,0,0,.04);}
+.hs-my-games .hs-v2-games img {width:100%;height:auto;aspect-ratio:1;border-radius:2.913cqw;}
+.theme-dark .hs-my-games .hs-v2-games button {background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.04);}
+.gb-tabs.gb-tabs-borderless {padding-inline:15.534cqw;}
+.gb-tabs.gb-tabs-borderless button {gap:.971cqw;}
+
+.gb-tabs.gb-tabs-borderless button.selected {color:var(--demo-primary);}

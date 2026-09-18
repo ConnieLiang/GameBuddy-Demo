@@ -365,7 +365,7 @@ export default function HomeSearch({ chinese, theme, nickname = 'Frankie', onOpe
   const art = (name, extension = 'svg') => `${import.meta.env.BASE_URL}assets/${name}.${extension}`;
   return <><motion.section inert={!!activeHistory || showAllTrending || showSearches} animate={{ x: (activeHistory || showSearches || (!v2 && showAllTrending)) && !reducedMotion ? "-20%" : 0 }} transition={detailTransition} className={`hs-home${v2 ? ' hs-home-v2' : !composerOnly ? ' hs-home-v1' : ''}${keyboardOpen || attachmentActive ? ' hs-search-active' : ''}${keyboardOpen || (attachmentActive && attachmentExpanded) ? ' hs-is-typing' : ''}`}>
     {!composerOnly && !v2 && <div className="hs-top"><div className="hs-brand"><img className="gb-logo-lockup" src={art(`gb-logo-${theme || 'dark'}`)} alt="TapTap GameBuddy"/></div><button className="hs-profile" aria-label={chinese ? '个人资料' : 'Your profile'} onClick={() => { dismissKeyboard(); onOpenAccount(); }}><img src={art('profile-dog', 'png')} alt=""/></button></div>}
-    {v2 && <h1 className="hs-v2-greeting">{chinese ? <>Frankie，准备好发现<br />下一款游戏了吗？</> : <>Frankie, ready to find<br />your next game?</>}</h1>}
+    {v2 && <h1 className="hs-v2-greeting"><span>{nickname}{chinese ? '，' : ','}</span><span>{chinese ? '准备好发现下一款游戏了吗？' : 'ready to find your next game?'}</span></h1>}
     <SearchFrame className="hs-search-beam" {...beamProps}>
     <form ref={composer} className="hs-search" onSubmit={submit}>
       {showRotatingHint && (v2 ? <FadingHint key={l} language={l} /> : <SplitTextHint key={l} language={l} />)}
@@ -387,13 +387,13 @@ export default function HomeSearch({ chinese, theme, nickname = 'Frankie', onOpe
     </form>
     </SearchFrame>
     {(notice || listening) && <p className="hs-notice" role="status">{listening ? c.listening : c.voiceHint}</p>}
-    {v2 && <HistoryStrip label={chinese ? '搜索记录' : 'Search history'}>
-      {visibleHistories.map((history, index) => <button key={history.id} type="button" title={history.title[l]} aria-label={chinese ? `打开${history.title[l]}的聊天记录` : `Open chat history: ${history.title[l]}`} onClick={() => {
+    {v2 && <section className="hs-my-games" aria-labelledby="my-games-heading"><h2 id="my-games-heading">{chinese ? '我的游戏' : 'My games'}</h2><HistoryStrip label={chinese ? '我的游戏' : 'My games'}>
+      {visibleHistories.slice(0, 5).map((history, index) => <button key={history.id} type="button" title={history.title[l]} aria-label={chinese ? `打开${history.title[l]}的聊天记录` : `Open chat history: ${history.title[l]}`} onClick={() => {
         dismissKeyboard();
         speech.current?.abort();
         setActiveHistory(history);
-      }}><img src={`${import.meta.env.BASE_URL}assets/${history.image || `home-v2-game-${gameHistory.indexOf(history) + 1}.png`}`} alt="" /></button>)}
-    </HistoryStrip>}
+      }}><img src={`${import.meta.env.BASE_URL}assets/home-figma-game-${gameHistory.indexOf(history) + 1}.png`} alt="" /></button>)}
+    </HistoryStrip></section>}
     {v2 && <section className="hs-v2-trending" aria-label={chinese ? '大家都在搜什么？' : 'Trending Search'}>
       <RotatingTrending items={rotatingTrendingGames} renderItem={(game, index) => (
           <button type="button" className="hs-v2-trending-row" onClick={() => {
