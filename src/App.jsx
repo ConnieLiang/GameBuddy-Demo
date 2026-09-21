@@ -1,5 +1,5 @@
 import SplashScreen from './components/SplashScreen';
-import OnboardingPage from './components/OnboardingPage';
+import InteractiveOnboarding from './components/InteractiveOnboarding';
 import SignInPage from './components/SignInPage';
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, MotionConfig, useReducedMotion } from "framer-motion";
@@ -135,10 +135,10 @@ function PhoneMockup({ searchDetailOpen, setSearchDetailOpen, tab, setTab, signe
       </AnimatePresence>
       <AnimatePresence initial={false}>
         {!signedIn && !onboardingOpen && <motion.div key="signin" className="gb-signin-layer" inert={splashVisible} aria-hidden={splashVisible || undefined} initial={{ opacity: 1 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={signedIn ? homeTransition : entryTransition}>
-          <SignInPage entranceReady={!splashVisible} chinese={copy.home === "首页"} onContinue={() => {setTab("home"); setOnboardingOpen(true);}} />
+          <SignInPage theme={theme} entranceReady={!splashVisible} chinese={copy.home === "首页"} onContinue={() => {setTab("home"); setOnboardingOpen(true);}} />
         </motion.div>}
       </AnimatePresence>
-      <AnimatePresence initial={false}>{onboardingOpen && <motion.div key="onboarding" className="gb-signin-layer" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={homeTransition}><OnboardingPage chinese={copy.home === "首页"} theme={theme} onComplete={() => {setOnboardingOpen(false);setSignedIn(true);setTab("home");}} /></motion.div>}</AnimatePresence>
+      <AnimatePresence initial={false}>{onboardingOpen && <motion.div key="onboarding" className="gb-signin-layer" inert={splashVisible} aria-hidden={splashVisible || undefined} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={homeTransition}><InteractiveOnboarding chinese={copy.home === "首页"} theme={theme} onComplete={() => {setOnboardingOpen(false);setSignedIn(true);setTab("home");}} /></motion.div>}</AnimatePresence>
     </div>
   </div></div></div>;
 }

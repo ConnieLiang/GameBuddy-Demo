@@ -365,7 +365,7 @@ export default function HomeSearch({ chinese, theme, nickname = 'Frankie', onOpe
   const art = (name, extension = 'svg') => `${import.meta.env.BASE_URL}assets/${name}.${extension}`;
   return <><motion.section inert={!!activeHistory || showAllTrending || showSearches} animate={{ x: (activeHistory || showSearches || (!v2 && showAllTrending)) && !reducedMotion ? "-20%" : 0 }} transition={detailTransition} className={`hs-home${v2 ? ' hs-home-v2' : !composerOnly ? ' hs-home-v1' : ''}${keyboardOpen || attachmentActive ? ' hs-search-active' : ''}${keyboardOpen || (attachmentActive && attachmentExpanded) ? ' hs-is-typing' : ''}`}>
     {!composerOnly && !v2 && <div className="hs-top"><div className="hs-brand"><img className="gb-logo-lockup" src={art(`gb-logo-${theme || 'dark'}`)} alt="TapTap GameBuddy"/></div><button className="hs-profile" aria-label={chinese ? '个人资料' : 'Your profile'} onClick={() => { dismissKeyboard(); onOpenAccount(); }}><img src={art('profile-dog', 'png')} alt=""/></button></div>}
-    {v2 && <h1 className="hs-v2-greeting"><span>{nickname}{chinese ? '，' : ','}</span><span>{chinese ? '准备好发现下一款游戏了吗？' : 'ready to find your next game?'}</span></h1>}
+    {v2 && <h1 className="hs-v2-greeting"><span>{nickname}{chinese ? '，' : ','}</span><span>{chinese ? '很开心你来了' : 'welcome in'}</span></h1>}
     <SearchFrame className="hs-search-beam" {...beamProps}>
     <form ref={composer} className="hs-search" onSubmit={submit}>
       {showRotatingHint && (v2 ? <FadingHint key={l} language={l} /> : <SplitTextHint key={l} language={l} />)}
