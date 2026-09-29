@@ -54,7 +54,7 @@
 .ob-page.iq-welcome {background:linear-gradient(to bottom,#a7b5fe99,transparent 48.31%),var(--ob-canvas);}
 .iq-welcome-scroll {position:absolute;inset:0;overflow-y:auto;padding:53.883cqw 11.165cqw 12cqw;}
 .iq-welcome-bird {position:absolute;left:6.553cqw;top:39.805cqw;width:18.932cqw;height:16.019cqw;overflow:hidden;z-index:1;transform-origin:50% 90%;pointer-events:none;}
-.iq-welcome-bird img {position:absolute;width:553.4%;height:436.78%;left:-11.65%;top:-16.09%;max-width:none;}
+.iq-welcome-bird img {display:block;width:100%;height:100%;object-fit:contain;}
 .iq-welcome-message {width:77.67cqw;padding:4.854cqw;background:var(--ob-canvas);border-radius:6.796cqw;transform-origin:bottom left;}
 .iq-welcome-message p {text-align:left;margin:0;color:var(--ob-strong);font:400 4.369cqw/6.311cqw Roboto,Arial,sans-serif;letter-spacing:.044cqw;outline:none;}
 
@@ -111,7 +111,6 @@
 /* Honor of Kings follow-up — Figma 1561:8268. */
 .iq-hok.iq-minimal .iq-transcript {padding-top:30.097cqw;gap:4.854cqw;}
 .iq-hok.iq-minimal .iq-chat-bird {left:9.223cqw;top:17.233cqw;width:18.089cqw;height:16.262cqw;}
-.iq-hok .iq-chat-bird img {width:575.76%;height:426.97%;left:-124.24%;top:-14.61%;}
 .iq-hok .iq-chat-gb {display:flex;flex-direction:column;gap:4.854cqw;}
 .iq-hok .iq-chat-gb p {margin:0;}
 .iq-hok.iq-minimal .iq-hok-preview {width:100%;height:45.055cqw;flex:none;border-radius:2.198cqw;background:var(--ob-surface);}
@@ -130,12 +129,10 @@
 /* AI-search introduction — Figma 1566:8453. */
 .iq-search-game.iq-minimal .iq-transcript {padding:90.049cqw 7.524cqw 12cqw;}
 .iq-search-game.iq-minimal .iq-chat-bird {left:7.524cqw;top:77.184cqw;width:18.204cqw;height:14.806cqw;}
-.iq-search-game .iq-chat-bird img {width:548.08%;height:447.06%;left:-440.38%;top:-20%;}
 
 /* Final Buddy conversation — Figma 1570:8518. */
 .iq-final-buddy.iq-minimal .iq-transcript {padding:50.485cqw 7.524cqw 12cqw;animation:iq-final-enter 300ms ease-out;}
 .iq-final-buddy.iq-minimal .iq-chat-bird {left:5.097cqw;top:36.65cqw;width:26.214cqw;height:16.505cqw;}
-.iq-final-buddy .iq-chat-bird img {width:428.57%;height:452.38%;left:-3.76%;top:-129.76%;}
 .iq-final-buddy .iq-options {gap:4.854cqw;}
 .iq-final-buddy .iq-options > button {padding:3.883cqw;border-radius:4.854cqw;}
 .iq-final-buddy .iq-options .iq-buddy-choice {display:flex;align-items:center;justify-content:space-between;gap:1.942cqw;min-height:26.214cqw;}
@@ -144,10 +141,8 @@
 .iq-buddy-choice small {font:400 3.641cqw/5.34cqw Roboto,Arial,sans-serif;color:var(--ob-muted);margin-top:.971cqw;}
 .iq-buddy-choice:hover,.iq-buddy-choice:focus-visible {box-shadow:inset 0 0 0 2px #7e8fff;}
 .iq-buddy-pose {position:relative;display:block;overflow:hidden;flex:none;}
-.iq-buddy-pose img {position:absolute;max-width:none;}
+.iq-buddy-pose img {display:block;width:100%;height:100%;object-fit:contain;}
 .iq-buddy-pose-wingman {width:16.505cqw;height:11.65cqw;}
-.iq-buddy-pose-wingman img {width:491.38%;height:457.83%;left:-391.38%;top:-134.94%;}
 .iq-buddy-pose-commander {width:14.563cqw;height:12.136cqw;}
-.iq-buddy-pose-commander img {width:518.18%;height:417.58%;left:-116.36%;top:-212.09%;}
 @keyframes iq-final-enter {from {opacity:0;translate:0 8px;} to {opacity:1;translate:0 0;}}
 @media(prefers-reduced-motion:reduce) {.iq-final-buddy.iq-minimal .iq-transcript {animation:none;}}

@@ -1,65 +1,78 @@
 @font-face {font-family:GBSignInRoboto;src:url('../../public/assets/roboto-light.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap;}
-.signin-page {color-scheme:dark;--gb-fg:#fff;--gb-border:#272727;--gb-accent:var(--demo-primary);position:absolute;inset:0;overflow:hidden;background:#000;color:#fff;font-family:Roboto,Arial,sans-serif;}
-
-/* Figma 1234:6474 — scaled to the existing demo screen. */
-/* GB Neutral/0 canvas and Neutral/700 foreground, resolved by demo theme. */
-.signin-page.signin-odyssey {--signin-canvas:#fff;--signin-foreground:#272727;color-scheme:light;background:var(--signin-canvas);color:var(--signin-foreground);}
-.theme-dark .signin-page.signin-odyssey {--signin-canvas:#0b0b0c;--signin-foreground:#e3e3e8;color-scheme:dark;}
-.signin-grainient {position:absolute;inset:10% 0 0;opacity:.6;pointer-events:none;overflow:hidden;background:linear-gradient(165deg,#fff 35%,#d4c4ff 55%,#a7b5fe 72%,#7e8fff 100%);}
-.signin-grainient canvas {display:block;width:100%;height:100%;}
-.signin-logo {position:absolute;left:10.218%;top:11.425%;width:33.981cqw;height:6.554cqw;object-fit:contain;}
-.signin-headline {text-align:left;position:absolute;left:9.709%;right:7.524%;top:16.467%;margin:0;font:300 10.194cqw/11.65cqw GBSignInRoboto,Roboto,Arial,sans-serif;letter-spacing:0;color:var(--signin-foreground);}
-.signin-headline span {display:block;color:#7e8fff;}
-/* 350px button, 230px legal copy, 30px gaps at the 412px reference width. */
-.signin-main {position:absolute;top:68.484%;left:7.524%;width:84.952%;display:flex;flex-direction:column;align-items:center;gap:7.282cqw;}
-.signin-continue {display:flex;align-items:center;justify-content:center;gap:.971cqw;flex-shrink:0;width:100%;height:13.592cqw;border:0;border-radius:9999px;background:#fff;color:#000;font:600 3.883cqw/5.825cqw Roboto,Arial,sans-serif;letter-spacing:.0194cqw;cursor:pointer;transition:transform 180ms ease;}
-.signin-main .signin-continue {box-shadow:0 4px 16px rgba(94,103,209,.08);}
+/* Figma 2133:3812; canvas and content follow GB neutral theme tokens. */
+.signin-page.signin-odyssey {--signin-canvas:#fff;--signin-foreground:#272727;--signin-primary:var(--demo-primary);color-scheme:light;position:absolute;inset:0;overflow:hidden;background:var(--signin-canvas);color:var(--signin-foreground);font-family:Roboto,Arial,sans-serif;}
+.signin-scene {position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+/* The two exported Figma layers share the same crop. */
+.signin-artwork {position:absolute;left:-8.252%;top:-8.179%;width:152.913%;height:168.811%;}
+.signin-background {position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.signin-background-base {opacity:.3;}
+.theme-dark .signin-odyssey {color-scheme:dark;}
+.theme-dark .signin-scene::after {content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(24,24,24,.86),rgba(24,24,24,.78) 58%,rgba(24,24,24,.2));}
+.signin-content {position:absolute;left:50%;top:calc(41.221% + 20px);transform:translate(-50%,-50%);width:84.466%;display:flex;flex-direction:column;align-items:center;gap:9.709cqw;}
+.signin-logo {position:absolute;left:65.934%;top:91.572%;width:26.699cqw;height:5.15cqw;object-fit:contain;filter:none;}
+.signin-headline {width:100%;margin:0;text-align:center;font:300 10.194cqw/11.65cqw GBSignInRoboto,Roboto,Arial,sans-serif;letter-spacing:0;color:var(--signin-foreground);}
+.signin-word-slot {display:block;margin-top:.971cqw;white-space:nowrap;color:var(--signin-primary);}
+.signin-main {width:100%;display:flex;flex-direction:column;align-items:center;gap:7.767cqw;}
+.signin-continue {display:flex;align-items:center;justify-content:center;gap:.971cqw;flex-shrink:0;width:100%;height:13.592cqw;border:0;border-radius:9999px;background:#fff;color:#000;font:600 3.883cqw/5.825cqw Roboto,Arial,sans-serif;letter-spacing:.0194cqw;cursor:pointer;transition:transform 180ms ease;box-shadow:none;}
 .signin-continue img {width:16.99cqw;height:4.854cqw;object-fit:contain;}
 .signin-continue:active {transform:scale(.98);}
-.signin-continue:focus-visible,.signin-legal button:focus-visible {outline:2px solid #5e67d1;outline-offset:4px;}
-.signin-legal {width:55.825cqw;max-width:100%;color:#5d5d5d;text-align:center;font:400 2.913cqw/3.883cqw Roboto,Arial,sans-serif;letter-spacing:.058cqw;}
-.signin-legal p {margin:0;}
-.signin-legal button {padding:0;border:0;background:transparent;color:inherit;font:inherit;text-decoration:underline;text-underline-offset:2px;cursor:pointer;}
+.signin-continue:focus-visible,.signin-legal button:focus-visible,.signin-legal a:focus-visible,.signin-legal input:focus-visible {outline:2px solid #5e67d1;outline-offset:3px;}
+.signin-legal {position:relative;display:flex;align-items:flex-start;gap:1.942cqw;width:70.388cqw;max-width:100%;color:var(--signin-foreground);text-align:left;font:var(--agreement-weight) var(--agreement-size)/var(--agreement-leading) Roboto,Arial,sans-serif;letter-spacing:var(--agreement-tracking);}
+.signin-legal p {margin:0;flex:1;}
+.signin-legal input {appearance:none;flex:none;margin:0;width:4.854cqw;height:4.854cqw;background:url('../../public/assets/signin-unchecked.svg') center/contain no-repeat;cursor:pointer;}
+.signin-legal input:checked {background-image:url('../../public/assets/signin-checked.svg');}
+.signin-legal button,.signin-legal a {padding:0;border:0;background:transparent;color:var(--signin-primary);font:inherit;text-decoration:underline;text-underline-offset:2px;cursor:pointer;}
+#signin-agreement-error {position:absolute;top:100%;left:7.767cqw;font-size:2.67cqw;line-height:3.4cqw;color:#a4262c;}
 .signin-version {padding:.971cqw 1.942cqw;border-radius:9999px;background:rgba(0,0,0,.04);color:#5d5d5d;font:400 2.913cqw/3.883cqw Roboto,Arial,sans-serif;letter-spacing:.058cqw;}
-.signin-legal-panel {position:absolute;inset:0;z-index:2;padding:24cqw 9.709cqw;background:#000;color:#fff;display:flex;flex-direction:column;gap:6cqw;}
+.signin-legal-panel {position:absolute;inset:0;z-index:2;padding:24cqw 9.709cqw;background:var(--signin-canvas);color:var(--signin-foreground);display:flex;flex-direction:column;gap:6cqw;}
 .signin-legal-panel h2 {font-size:6cqw;}
-.signin-legal-panel p {font-size:3.5cqw;color:#858585;}
-
-
-/* Loading retains its dark appearance. */
-.theme-light .signin-page .signin-brand,.theme-light .signin-page .signin-main h1 {color:#fff;}
-.theme-light .signin-page img {filter:none;}
-
+.signin-legal-panel p {font-size:3.5cqw;color:var(--signin-foreground);}
 @media(prefers-reduced-motion:reduce) {.signin-continue {transition:none;}}
-
-.signin-word-slot {display:block;line-height:11.65cqw;margin-top:.971cqw;white-space:nowrap;}
-
 /* Prepare the login surface under the splash to avoid a dark flash. */
 .signin-odyssey > .signin-logo,
-.signin-odyssey > .signin-headline,
+.signin-odyssey > .signin-content,
 .signin-odyssey > .signin-main {
   transition:opacity 700ms cubic-bezier(.22,1,.36,1),translate 850ms cubic-bezier(.22,1,.36,1);
 }
 .signin-preparing > .signin-logo,
-.signin-preparing > .signin-headline,
+.signin-preparing > .signin-content,
 .signin-preparing > .signin-main {opacity:0;translate:0 10px;}
 .signin-revealed > .signin-logo,
-.signin-revealed > .signin-headline,
+.signin-revealed > .signin-content,
 .signin-revealed > .signin-main {opacity:1;translate:0 0;}
 .signin-revealed > .signin-logo {transition-delay:100ms;}
-.signin-revealed > .signin-headline {transition-delay:160ms;}
+.signin-revealed > .signin-content {transition-delay:160ms;}
 .signin-revealed > .signin-main {transition-delay:220ms;}
 @media(prefers-reduced-motion:reduce) {
-  .signin-odyssey > .signin-logo,.signin-odyssey > .signin-headline,.signin-odyssey > .signin-main {transition:none;translate:none;}
+  .signin-odyssey > .signin-logo,.signin-odyssey > .signin-content,.signin-odyssey > .signin-main {transition:none;translate:none;}
 }
 
-.signin-scene {position:absolute;inset:0;overflow:hidden;pointer-events:none;}
-.signin-scene-gradient {position:absolute;left:0;right:0;top:51.69%;bottom:0;background:linear-gradient(to top,rgba(167,181,254,.6),rgba(167,181,254,0));}
- .signin-landscape-crop {position:absolute;bottom:0;left:0;width:100%;height:19.52%;overflow:hidden;}
-.signin-landscape-crop > img {position:absolute;left:-36.165cqw;bottom:-113.592cqw;width:171.117cqw;height:339.806cqw;max-width:none;object-fit:cover;}
 
-/* GB Neutral/500 text and Veil surface for secondary login details. */
-.theme-dark .signin-legal,
-.theme-dark .signin-version {color:#a5a5af;}
-.theme-dark .signin-version {background:rgba(255,255,255,.04);}
+.signin-legal a {white-space:nowrap;text-decoration:none;}
 
+.signin-legal-zh {width:max-content;max-width:100%;align-self:center;align-items:center;justify-content:center;}
+.signin-legal-zh p {flex:0 1 auto;}
+
+.signin-legal-en {width:72.816cqw;max-width:100%;justify-content:center;text-align:center;}
+
+.signin-headline-zh .signin-word-slot {margin-top:2.913cqw;}
+
+.signin-consent-backdrop {position:absolute;inset:0;z-index:5;background:rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;}
+.signin-consent-dialog {width:80.097cqw;padding:4.854cqw;border:.5px solid #e8e8e8;border-radius:6.796cqw;background:var(--signin-canvas);color:var(--signin-foreground);box-shadow:0 2px 8px -2px #00000014;display:flex;flex-direction:column;gap:4.854cqw;}
+.signin-consent-copy {display:flex;flex-direction:column;gap:1.942cqw;}
+.signin-consent-copy h2 {margin:0;text-align:center;font:700 4.854cqw/6.796cqw Roboto,Arial,sans-serif;letter-spacing:.01em;}
+.signin-consent-copy p {margin:0;color:#7d7d7d;font:400 3.641cqw/5.34cqw Roboto,Arial,sans-serif;letter-spacing:.02em;}
+.signin-consent-copy a {color:var(--signin-primary);text-decoration:underline;}
+.signin-consent-actions {display:flex;gap:2.913cqw;}
+.signin-consent-actions button {flex:1;min-width:0;min-height:10.68cqw;padding:2.913cqw;border:.5px solid #d0d0d0;border-radius:9999px;background:transparent;color:var(--signin-foreground);font:600 3.398cqw/4.854cqw Roboto,Arial,sans-serif;cursor:pointer;}
+.signin-consent-actions .signin-consent-agree {background:var(--signin-primary);border-color:transparent;color:#fff;}
+.theme-dark .signin-consent-dialog {border-color:#393939;}
+.theme-dark .signin-consent-copy p {color:#a5a5af;}
+
+.signin-policy-view {position:absolute;inset:0;z-index:10;display:flex;flex-direction:column;background:var(--signin-canvas);color:var(--signin-foreground);}
+.signin-policy-header {flex:none;display:flex;align-items:center;gap:2cqw;padding:7cqw 4cqw 4cqw;border-bottom:1px solid #8883;background:var(--signin-canvas);}
+.signin-policy-header button {flex:none;min-height:10.68cqw;padding:0 2cqw;border:0;background:transparent;color:var(--signin-primary);font:500 3.641cqw/1.4 Roboto,Arial,sans-serif;cursor:pointer;}
+.signin-policy-header div {flex:1;min-width:0;text-align:center;padding-right:8cqw;}
+.signin-policy-header strong {display:block;font-size:3.883cqw;line-height:1.5;}
+.signin-policy-header small {display:block;font-size:2.67cqw;line-height:1.5;opacity:.7;overflow-wrap:anywhere;}
+.signin-policy-view iframe {flex:1;min-height:0;width:100%;border:0;background:#fff;color-scheme:light;}

@@ -1,283 +1,1815 @@
 {
   "$format": "gamebuddy.design-tokens/1.0",
-  "$description": "GameBuddy cross-platform design contract for implementation agents. Token leaves use DTCG-style $type/$value fields; implementation guidance is stored in $extensions.",
+  "$description": "GameBuddy cross-platform design contract for implementation agents. Token leaves use DTCG-style $type/$value fields.",
   "$metadata": {
-    "generatedAt": "2026-09-03",
+    "generatedAt": "2026-09-16",
     "source": {
       "figmaFile": "https://www.figma.com/design/lKN3l5oG6tsXw11wQ104c3/Library?node-id=9-21",
       "fileKey": "lKN3l5oG6tsXw11wQ104c3"
     },
     "productContext": {
-      "summary": "GameBuddy is a quiet AI gaming companion for coaching, finding people to play with, and game-aware AI search.",
-      "coreExperience": "Quiet companionship that does not interrupt and appears only when help is worth showing.",
-      "gameScope": "The system must support multiple games, including Honor of Kings and Teamfight Tactics; do not encode one game's visual language into shared foundations.",
-      "visualPrinciple": "White veil material at rest; localized signal color only when status must be communicated. The full spectrum is reserved for brand moments."
+      "summary": "GameBuddy is a gaming agent centered on search. Players ask game questions using screenshots, gameplay clips, or text to get useful, context-relevant answers.",
+      "coreExperience": "Show GameBuddy what you see, ask what you want to know, and get useful answers through search.",
+      "experiencePrinciple": "Quiet companionship without interruption; help appears when needed.",
+      "gameScope": "Support questions across games. Honor of Kings and Teamfight Tactics coaching are additional capabilities, not the product's defining promise.",
+      "visualPrinciple": "Neutral surfaces, restrained translucent overlays, Odyssey brand identity, and localized Signal colors for status."
     },
-    "implementationStatus": {
-      "tokens": "canonical implementation contract",
-      "androidCode": "migration target",
-      "iosMacos": "planned",
-      "windows": "planned"
-    }
+    "verifiedAt": "2026-09-16"
   },
   "color": {
     "neutral": {
-      "$description": "Opaque achromatic white-to-black ramp (equal RGB channels) for canvas, foreground, fallback surfaces, structure, and accessibility-critical UI.",
-      "0": { "$type": "color", "$value": "#FFFFFF", "$description": "Pure highlight and white foreground" },
-      "50": { "$type": "color", "$value": "#F8F8F8", "$description": "App canvas" },
-      "100": { "$type": "color", "$value": "#F3F3F3", "$description": "Quiet secondary surface" },
-      "200": { "$type": "color", "$value": "#BFBFBF", "$description": "Disabled icon and decorative structure" },
-      "300": { "$type": "color", "$value": "#A2A2A2", "$description": "Placeholder and low-emphasis content" },
-      "400": { "$type": "color", "$value": "#7D7D7D", "$description": "Secondary icon or supporting label" },
-      "500": { "$type": "color", "$value": "#5D5D5D", "$description": "Secondary text" },
-      "600": { "$type": "color", "$value": "#3F3F3F", "$description": "Strong icon and dark boundary" },
-      "700": { "$type": "color", "$value": "#272727", "$description": "Primary text and smoke surface" },
-      "800": { "$type": "color", "$value": "#000000", "$description": "Deep ink and high-contrast HUD base" }
+      "0": {
+        "$type": "color",
+        "$value": "#FFFFFF",
+        "$description": "Primary app canvas / 主要应用画布",
+        "$extensions": {
+          "figmaVariableId": "VariableID:42:1524",
+          "modes": {
+            "light": "#FFFFFF",
+            "dark": "#181818"
+          }
+        }
+      },
+      "50": {
+        "$type": "color",
+        "$value": "#F8F8F8",
+        "$description": "Secondary canvas / 次级画布",
+        "$extensions": {
+          "figmaVariableId": "VariableID:6:20",
+          "modes": {
+            "light": "#F8F8F8",
+            "dark": "#272727"
+          }
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#E8E8E8",
+        "$description": "Secondary surface and container / 次级表面及容器",
+        "$extensions": {
+          "figmaVariableId": "VariableID:6:21",
+          "modes": {
+            "light": "#E8E8E8",
+            "dark": "#373737"
+          }
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#D0D0D0",
+        "$description": "Disabled surface and structural boundary / 禁用表面及结构边界",
+        "$extensions": {
+          "figmaVariableId": "VariableID:6:24",
+          "modes": {
+            "light": "#D0D0D0",
+            "dark": "#4D4D4D"
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#A2A2A2",
+        "$description": "Placeholder and disabled content; check readability on the actual surface / 占位及禁用内容，需检查实际背景上的可读性",
+        "$extensions": {
+          "figmaVariableId": "VariableID:6:25",
+          "modes": {
+            "light": "#A2A2A2",
+            "dark": "#6B6B6B"
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#7D7D7D",
+        "$description": "Tertiary content and supporting icons / 三级内容及辅助图标",
+        "$extensions": {
+          "figmaVariableId": "VariableID:6:26",
+          "modes": {
+            "light": "#7D7D7D",
+            "dark": "#81818C"
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#5D5D5D",
+        "$description": "Secondary text and icons / 次级文本及图标",
+        "$extensions": {
+          "figmaVariableId": "VariableID:6:27",
+          "modes": {
+            "light": "#5D5D5D",
+            "dark": "#A5A5AF"
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#3F3F3F",
+        "$description": "Strong supporting content / 较强的辅助内容",
+        "$extensions": {
+          "figmaVariableId": "VariableID:6:28",
+          "modes": {
+            "light": "#3F3F3F",
+            "dark": "#C6C6CE"
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#272727",
+        "$description": "Primary text and icons / 主要文本及图标",
+        "$extensions": {
+          "figmaVariableId": "VariableID:6:29",
+          "modes": {
+            "light": "#272727",
+            "dark": "#E3E3E8"
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#000000",
+        "$description": "Maximum-contrast foreground / 最高对比度前景",
+        "$extensions": {
+          "figmaVariableId": "VariableID:6:30",
+          "modes": {
+            "light": "#000000",
+            "dark": "#FFFFFF"
+          }
+        }
+      },
+      "$description": "Adaptive neutral emphasis scale: lower steps are surfaces, higher steps are foregrounds. Resolve the active mode before use."
     },
     "veil": {
-      "$description": "White alpha primitives. Strength describes material opacity, not semantic importance. Always validate final composited contrast.",
-      "50": { "$type": "color", "$value": "#FFFFFF0A", "$description": "Barely visible atmosphere", "$extensions": { "alpha": 0.04 } },
-      "100": { "$type": "color", "$value": "#FFFFFF14", "$description": "Subtle border and divider", "$extensions": { "alpha": 0.08 } },
-      "200": { "$type": "color", "$value": "#FFFFFF1F", "$description": "Resting ring or inner boundary", "$extensions": { "alpha": 0.12 } },
-      "300": { "$type": "color", "$value": "#FFFFFF2E", "$description": "Resting HUD material", "$extensions": { "alpha": 0.18 } },
-      "400": { "$type": "color", "$value": "#FFFFFF3D", "$description": "Strong border and divider", "$extensions": { "alpha": 0.24 } },
-      "500": { "$type": "color", "$value": "#FFFFFF52", "$description": "Layer separation", "$extensions": { "alpha": 0.32 } },
-      "600": { "$type": "color", "$value": "#FFFFFF70", "$description": "Medium translucent control", "$extensions": { "alpha": 0.44 } },
-      "700": { "$type": "color", "$value": "#FFFFFF8F", "$description": "Strong translucent structure", "$extensions": { "alpha": 0.56 } },
-      "800": { "$type": "color", "$value": "#FFFFFFAD", "$description": "Legible light veil", "$extensions": { "alpha": 0.68 } },
-      "900": { "$type": "color", "$value": "#FFFFFFE0", "$description": "Primary light HUD surface", "$extensions": { "alpha": 0.88 } }
+      "50": {
+        "$type": "color",
+        "$value": "#0000000A",
+        "$description": "Fine overlay tint / 轻微叠层染色",
+        "$extensions": {
+          "figmaVariableId": "VariableID:6:54",
+          "modes": {
+            "light": "#0000000A",
+            "dark": "#FFFFFF14"
+          },
+          "alphaByMode": {
+            "light": 0.04,
+            "dark": 0.08
+          }
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#00000014",
+        "$description": "Subtle overlay and boundary / 轻微叠层及边界",
+        "$extensions": {
+          "figmaVariableId": "VariableID:6:55",
+          "modes": {
+            "light": "#00000014",
+            "dark": "#FFFFFF14"
+          },
+          "alphaByMode": {
+            "light": 0.08,
+            "dark": 0.08
+          }
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#0000001F",
+        "$description": "Resting overlay and inner boundary / 静止状态叠层及内边界",
+        "$extensions": {
+          "figmaVariableId": "VariableID:6:56",
+          "modes": {
+            "light": "#0000001F",
+            "dark": "#FFFFFF1F"
+          },
+          "alphaByMode": {
+            "light": 0.12,
+            "dark": 0.12
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#00000033",
+        "$description": "Moderate overlay emphasis / 中等叠层强调",
+        "$extensions": {
+          "figmaVariableId": "VariableID:6:57",
+          "modes": {
+            "light": "#00000033",
+            "dark": "#FFFFFF33"
+          },
+          "alphaByMode": {
+            "light": 0.2,
+            "dark": 0.2
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#0000004D",
+        "$description": "Strong overlay emphasis / 较强叠层强调",
+        "$extensions": {
+          "figmaVariableId": "VariableID:6:58",
+          "modes": {
+            "light": "#0000004D",
+            "dark": "#FFFFFF4D"
+          },
+          "alphaByMode": {
+            "light": 0.3,
+            "dark": 0.3
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#00000066",
+        "$description": "Strongest Veil overlay / 最高强度 Veil 叠层",
+        "$extensions": {
+          "figmaVariableId": "VariableID:6:59",
+          "modes": {
+            "light": "#00000066",
+            "dark": "#FFFFFF66"
+          },
+          "alphaByMode": {
+            "light": 0.4,
+            "dark": 0.4
+          }
+        }
+      },
+      "$description": "Theme-adaptive contrast overlays: black in Light, white in Dark. Higher steps increase opacity. Use low steps for subtle tints and boundaries; higher steps for stronger overlays. These are not opaque HUD background colors."
     },
     "signal": {
       "$description": "Localized gameplay and system status colors. Never use signal color as a dominant app surface.",
-      "sky": { "$type": "color", "$value": "#56BCE8", "$description": "Coaching or information" },
-      "mint": { "$type": "color", "$value": "#48F1B8", "$description": "Ready, confirmed, positive" },
-      "amber": { "$type": "color", "$value": "#F0B34A", "$description": "Timing window or caution" },
-      "coral": { "$type": "color", "$value": "#F06470", "$description": "Critical danger" },
-      "iris": { "$type": "color", "$value": "#7B78E6", "$description": "Voice and Buddy activity" },
-      "gray": { "$type": "color", "$value": "#8D93A1", "$description": "Inactive or invalid system conditions" }
+      "sky": {
+        "$type": "color",
+        "$value": "#56BCE8",
+        "$description": "Coaching and information / 辅导提示及信息",
+        "$extensions": {
+          "figmaVariableId": "VariableID:38:1236",
+          "modes": {
+            "light": "#56BCE8",
+            "dark": "#40C3FC"
+          }
+        }
+      },
+      "mint": {
+        "$type": "color",
+        "$value": "#5BDEAA",
+        "$description": "Ready, confirmed, positive / 就绪、确认及正向状态",
+        "$extensions": {
+          "figmaVariableId": "VariableID:38:1237",
+          "modes": {
+            "light": "#5BDEAA",
+            "dark": "#7AE6BC"
+          }
+        }
+      },
+      "amber": {
+        "$type": "color",
+        "$value": "#F0B34A",
+        "$description": "Timing window and caution / 时机提示及注意事项",
+        "$extensions": {
+          "figmaVariableId": "VariableID:38:1238",
+          "modes": {
+            "light": "#F0B34A",
+            "dark": "#F5C46B"
+          }
+        }
+      },
+      "coral": {
+        "$type": "color",
+        "$value": "#F06470",
+        "$description": "Critical danger and destructive actions / 严重危险及破坏性操作",
+        "$extensions": {
+          "figmaVariableId": "VariableID:38:1239",
+          "modes": {
+            "light": "#F06470",
+            "dark": "#F7838D"
+          }
+        }
+      },
+      "iris": {
+        "$type": "color",
+        "$value": "#7B78E6",
+        "$description": "Voice and Buddy activity / 语音及 Buddy 活动",
+        "$extensions": {
+          "figmaVariableId": "VariableID:38:1240",
+          "modes": {
+            "light": "#7B78E6",
+            "dark": "#A29FF2"
+          }
+        }
+      },
+      "gray": {
+        "$type": "color",
+        "$value": "#8D93A1",
+        "$description": "Unavailable, stale, or uncertain / 不可用、信息过期或不确定",
+        "$extensions": {
+          "figmaVariableId": "VariableID:38:1241",
+          "modes": {
+            "light": "#8D93A1",
+            "dark": "#A6ACB8"
+          }
+        }
+      }
     },
     "semantic": {
       "surface": {
-        "canvas": { "$type": "color", "$value": "{color.neutral.50}" },
-        "base": { "$type": "color", "$value": "{color.neutral.0}" },
-        "secondary": { "$type": "color", "$value": "{color.neutral.100}" },
-        "hudResting": { "$type": "color", "$value": "{color.veil.300}" },
-        "hudLight": { "$type": "color", "$value": "{color.veil.900}" },
-        "hudHighContrast": { "$type": "color", "$value": "{color.neutral.800}" }
+        "canvas": {
+          "$type": "color",
+          "$value": "{color.neutral.0}"
+        },
+        "base": {
+          "$type": "color",
+          "$value": "{color.neutral.0}"
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{color.neutral.100}"
+        },
+        "hudResting": {
+          "$type": "color",
+          "$value": "{color.veil.300}"
+        },
+        "hudLight": {
+          "$type": "color",
+          "$value": "#FFFFFFE0",
+          "$description": "Explicitly light HUD surface in either app mode. Pair with fixed dark content."
+        },
+        "hudHighContrast": {
+          "$type": "color",
+          "$value": "#000000",
+          "$description": "Explicit black HUD fallback in both modes; pair with content/onDark."
+        },
+        "hudVeil": {
+          "$type": "color",
+          "$value": "#FFFFFFE0",
+          "$description": "Substantial HUD surface, independent of Veil contrast overlays. Preserves the established Light/Dark surface treatment.",
+          "$extensions": {
+            "modes": {
+              "light": "#FFFFFFE0",
+              "dark": "#000000E0"
+            }
+          }
+        }
       },
       "content": {
-        "primary": { "$type": "color", "$value": "{color.neutral.700}" },
-        "secondary": { "$type": "color", "$value": "{color.neutral.500}" },
-        "placeholder": { "$type": "color", "$value": "{color.neutral.300}" },
-        "disabled": { "$type": "color", "$value": "{color.neutral.200}" },
-        "onDark": { "$type": "color", "$value": "{color.neutral.0}" }
+        "primary": {
+          "$type": "color",
+          "$value": "{color.neutral.700}"
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{color.neutral.500}"
+        },
+        "placeholder": {
+          "$type": "color",
+          "$value": "{color.neutral.300}"
+        },
+        "disabled": {
+          "$type": "color",
+          "$value": "{color.neutral.300}"
+        },
+        "onDark": {
+          "$type": "color",
+          "$value": "#FFFFFF",
+          "$description": "Fixed white content on explicitly dark surfaces."
+        },
+        "onLight": {
+          "$type": "color",
+          "$value": "#272727",
+          "$description": "Fixed dark content on explicitly light surfaces."
+        }
       },
       "status": {
-        "info": { "$type": "color", "$value": "{color.signal.sky}" },
-        "positive": { "$type": "color", "$value": "{color.signal.mint}" },
-        "caution": { "$type": "color", "$value": "{color.signal.amber}" },
-        "critical": { "$type": "color", "$value": "{color.signal.coral}" },
-        "buddyActivity": { "$type": "color", "$value": "{color.signal.iris}" },
-        "inactive": { "$type": "color", "$value": "{color.signal.gray}" }
+        "info": {
+          "$type": "color",
+          "$value": "{color.signal.sky}"
+        },
+        "positive": {
+          "$type": "color",
+          "$value": "{color.signal.mint}"
+        },
+        "caution": {
+          "$type": "color",
+          "$value": "{color.signal.amber}"
+        },
+        "critical": {
+          "$type": "color",
+          "$value": "{color.signal.coral}"
+        },
+        "buddyActivity": {
+          "$type": "color",
+          "$value": "{color.signal.iris}"
+        },
+        "inactive": {
+          "$type": "color",
+          "$value": "{color.signal.gray}"
+        }
       },
       "boundary": {
-        "subtle": { "$type": "color", "$value": "{color.veil.100}" },
-        "resting": { "$type": "color", "$value": "{color.veil.200}" },
-        "strong": { "$type": "color", "$value": "{color.veil.400}" },
-        "dark": { "$type": "color", "$value": "{color.neutral.600}" }
+        "subtle": {
+          "$type": "color",
+          "$value": "#00000014",
+          "$description": "Adaptive boundary: dark on light surfaces, light on dark surfaces.",
+          "$extensions": {
+            "modes": {
+              "light": "#00000014",
+              "dark": "#FFFFFF14"
+            }
+          }
+        },
+        "resting": {
+          "$type": "color",
+          "$value": "#0000001F",
+          "$description": "Adaptive boundary: dark on light surfaces, light on dark surfaces.",
+          "$extensions": {
+            "modes": {
+              "light": "#0000001F",
+              "dark": "#FFFFFF1F"
+            }
+          }
+        },
+        "strong": {
+          "$type": "color",
+          "$value": "#0000003D",
+          "$description": "Adaptive boundary: dark on light surfaces, light on dark surfaces.",
+          "$extensions": {
+            "modes": {
+              "light": "#0000003D",
+              "dark": "#FFFFFF3D"
+            }
+          }
+        },
+        "dark": {
+          "$type": "color",
+          "$value": "#3F3F3F",
+          "$description": "Fixed dark boundary for explicitly light surfaces."
+        }
+      },
+      "brand": {
+        "soft": {
+          "$type": "color",
+          "$value": "{color.odyssey.1}"
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": "{color.odyssey.2}"
+        },
+        "supporting": {
+          "$type": "color",
+          "$value": "{color.odyssey.3}"
+        },
+        "primary": {
+          "$type": "color",
+          "$value": "{color.odyssey.4}"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{color.odyssey.5}"
+        },
+        "onPrimary": {
+          "$type": "color",
+          "$value": "#272727",
+          "$description": "Fixed dark text and icons on Odyssey/4 in both modes."
+        }
       }
+    },
+    "odyssey": {
+      "1": {
+        "$type": "color",
+        "$value": "#F4EDFF",
+        "$description": "Subtle brand-tinted surface / 淡品牌色表面",
+        "$extensions": {
+          "modes": {
+            "light": "#F4EDFF",
+            "dark": "#211E30"
+          }
+        }
+      },
+      "2": {
+        "$type": "color",
+        "$value": "#D4C4FF",
+        "$description": "Selected or highlighted surface / 选中或突出显示的表面",
+        "$extensions": {
+          "modes": {
+            "light": "#D4C4FF",
+            "dark": "#34304D"
+          }
+        }
+      },
+      "3": {
+        "$type": "color",
+        "$value": "#A7B5FE",
+        "$description": "Supporting brand accents / 辅助品牌点缀",
+        "$extensions": {
+          "modes": {
+            "light": "#A7B5FE",
+            "dark": "#A7B5FE"
+          }
+        }
+      },
+      "4": {
+        "$type": "color",
+        "$value": "#7E8FFF",
+        "$description": "Signature brand color and key action fills / 品牌标识色及关键操作填充",
+        "$extensions": {
+          "modes": {
+            "light": "#7E8FFF",
+            "dark": "#7E8FFF"
+          }
+        }
+      },
+      "5": {
+        "$type": "color",
+        "$value": "#5E67D1",
+        "$description": "Brand text and icons on base surfaces / 基础表面上的品牌文字及图标",
+        "$extensions": {
+          "modes": {
+            "light": "#5E67D1",
+            "dark": "#697BF3"
+          }
+        }
+      },
+      "$description": "GameBuddy brand palette. These UI mode pairs preserve roles rather than a continuous dark-mode ramp. Use original Light values for theme-independent brand artwork."
     }
   },
   "brand": {
     "spectrumStroke": {
       "$type": "gradient",
       "$value": [
-        { "color": "#56BCE84D", "position": 0 },
-        { "color": "#48F1B84D", "position": 0.4278846085 },
-        { "color": "#F0B34A4D", "position": 0.75 },
-        { "color": "#F064704D", "position": 0.875 },
-        { "color": "#7B78E64D", "position": 1 }
+        {
+          "color": "#56BCE84D",
+          "position": 0
+        },
+        {
+          "color": "#48F1B84D",
+          "position": 0.4278846085
+        },
+        {
+          "color": "#F0B34A4D",
+          "position": 0.75
+        },
+        {
+          "color": "#F064704D",
+          "position": 0.875
+        },
+        {
+          "color": "#7B78E64D",
+          "position": 1
+        }
       ],
-      "$description": "Signature app-icon gradient. Reserve the full spectrum for launch, onboarding, and editorial brand moments—not gameplay status."
+      "$description": "Gradient stroke extracted from the Figma app icon. Reserve the full spectrum for launch, onboarding, and editorial brand moments—not gameplay status."
     },
     "assetInventory": {
-      "appIconVariants": ["Release", "Beta", "Alpha"],
-      "logoLockups": ["symbol-over-wordmark", "symbol-left-of-wordmark"],
-      "colorModes": ["full-color-on-light", "full-color-on-dark", "monochrome-on-light", "monochrome-on-dark"],
+      "appIconVariants": [
+        "Release",
+        "Beta",
+        "Alpha"
+      ],
+      "logoLockups": [
+        "symbol-over-wordmark",
+        "symbol-left-of-wordmark"
+      ],
+      "colorModes": [
+        "full-color-on-light",
+        "full-color-on-dark",
+        "monochrome-on-light",
+        "monochrome-on-dark"
+      ],
       "rule": "Brand assets are managed separately from interface icons. Do not recreate the pixel wordmark with a UI font."
     }
   },
   "spacing": {
+    "0": {
+      "$value": 0,
+      "$description": "No spacing",
+      "$extensions": {
+        "source": "figma-documentation"
+      }
+    },
+    "2": {
+      "$value": 2,
+      "$description": "Optical correction only",
+      "$extensions": {
+        "source": "figma-documentation"
+      }
+    },
+    "4": {
+      "$value": 4,
+      "$description": "Tight internal spacing",
+      "$extensions": {
+        "figmaVariableId": "VariableID:6:77"
+      }
+    },
+    "8": {
+      "$value": 8,
+      "$description": "Related elements",
+      "$extensions": {
+        "figmaVariableId": "VariableID:6:78"
+      }
+    },
+    "12": {
+      "$value": 12,
+      "$description": "Compact component padding",
+      "$extensions": {
+        "figmaVariableId": "VariableID:6:79"
+      }
+    },
+    "16": {
+      "$value": 16,
+      "$description": "Default component or mobile page padding",
+      "$extensions": {
+        "figmaVariableId": "VariableID:6:80"
+      }
+    },
+    "20": {
+      "$value": 20,
+      "$description": "Comfortable content padding",
+      "$extensions": {
+        "figmaVariableId": "VariableID:6:81"
+      }
+    },
+    "24": {
+      "$value": 24,
+      "$description": "Section separation",
+      "$extensions": {
+        "figmaVariableId": "VariableID:6:82"
+      }
+    },
+    "32": {
+      "$value": 32,
+      "$description": "Large section separation",
+      "$extensions": {
+        "figmaVariableId": "VariableID:6:83"
+      }
+    },
+    "40": {
+      "$value": 40,
+      "$description": "Page-level grouping",
+      "$extensions": {
+        "figmaVariableId": "VariableID:6:84"
+      }
+    },
+    "48": {
+      "$value": 48,
+      "$description": "Major layout separation",
+      "$extensions": {
+        "figmaVariableId": "VariableID:6:85"
+      }
+    },
+    "64": {
+      "$value": 64,
+      "$description": "Editorial or onboarding layout",
+      "$extensions": {
+        "source": "figma-documentation"
+      }
+    },
     "$type": "dimension",
-    "$description": "Nominal platform-independent spacing values. Use dp on Android, pt on Apple platforms, and epx on Windows.",
-    "0": { "$value": 0, "$description": "No spacing" },
-    "2": { "$value": 2, "$description": "Optical correction only" },
-    "4": { "$value": 4, "$description": "Tight internal spacing" },
-    "8": { "$value": 8, "$description": "Related elements" },
-    "12": { "$value": 12, "$description": "Compact component padding" },
-    "16": { "$value": 16, "$description": "Default component or mobile page padding" },
-    "20": { "$value": 20, "$description": "Comfortable content padding" },
-    "24": { "$value": 24, "$description": "Section separation" },
-    "32": { "$value": 32, "$description": "Large section separation" },
-    "40": { "$value": 40, "$description": "Page-level grouping" },
-    "48": { "$value": 48, "$description": "Major layout separation" },
-    "64": { "$value": 64, "$description": "Editorial or onboarding layout" }
+    "$description": "Nominal platform-independent spacing values. Use dp on Android, pt on Apple platforms, and epx on Windows."
   },
   "radius": {
     "$type": "dimension",
-    "$description": "Canonical radius scale. Values are nominal dp/pt/epx.",
-    "none": { "$value": 0, "$description": "Dividers and edge-aligned structures" },
-    "xs": { "$value": 4, "$description": "Tiny indicators or compact tags" },
-    "sm": { "$value": 8, "$description": "Tooltips and small controls" },
-    "md": { "$value": 12, "$description": "Buttons, inputs, and menus" },
-    "lg": { "$value": 16, "$description": "Cards and standard panels" },
-    "xl": { "$value": 24, "$description": "Modals, sheets, and prominent HUD panels" },
-    "full": { "$value": 999, "$description": "Pills, avatars, status dots, and floating controls" }
+    "$description": "Canonical documented radius scale. Values are nominal dp/pt/epx.",
+    "none": {
+      "$value": 0,
+      "$description": "Dividers and edge-aligned structures",
+      "$extensions": {
+        "source": "figma-documentation"
+      }
+    },
+    "xs": {
+      "$value": 4,
+      "$description": "Tiny indicators or compact tags",
+      "$extensions": {
+        "figmaVariableId": "VariableID:6:87"
+      }
+    },
+    "sm": {
+      "$value": 8,
+      "$description": "Tooltips and small controls",
+      "$extensions": {
+        "figmaVariableId": "VariableID:6:88"
+      }
+    },
+    "md": {
+      "$value": 12,
+      "$description": "Buttons, inputs, and menus",
+      "$extensions": {
+        "figmaVariableId": "VariableID:6:89"
+      }
+    },
+    "lg": {
+      "$value": 16,
+      "$description": "Cards and standard panels",
+      "$extensions": {
+        "figmaVariableId": "VariableID:6:90"
+      }
+    },
+    "xl": {
+      "$value": 24,
+      "$description": "Modals, sheets, and prominent HUD panels",
+      "$extensions": {
+        "source": "figma-documentation"
+      }
+    },
+    "xxl": {
+      "$value": 28,
+      "$description": "Large containers with pronounced rounded corners / 大型容器的显著圆角"
+    },
+    "full": {
+      "$value": 999,
+      "$description": "Pills, avatars, status dots, and floating controls",
+      "$extensions": {
+        "source": "figma-documentation",
+        "publishedVariableId": "VariableID:6:92",
+        "publishedVariableValue": 9999
+      }
+    }
   },
   "border": {
     "width": {
-      "default": { "$type": "dimension", "$value": 0.5, "$description": "Standard borders and dividers. Product standard; preserve as a device-pixel-aware hairline in code." },
-      "emphasis": { "$type": "dimension", "$value": 1, "$description": "Focus, selection, or critical emphasis" }
+      "hairline": {
+        "$type": "dimension",
+        "$value": 0.5,
+        "$description": "Fine dividers and subtle boundaries"
+      },
+      "default": {
+        "$type": "dimension",
+        "$value": 1,
+        "$description": "Standard borders and dividers"
+      },
+      "emphasis": {
+        "$type": "dimension",
+        "$value": 2,
+        "$description": "Focus, selection, or critical emphasis"
+      }
     }
   },
   "typography": {
     "fontFamily": {
-      "$description": "Select family by platform and script; semantic type metrics remain shared.",
-      "latin": { "$type": "fontFamily", "$value": { "android": "Roboto", "apple": "SF Pro", "windows": "Segoe UI Variable" }, "$description": "English and other supported Latin text" },
-      "zhHans": { "$type": "fontFamily", "$value": { "android": "Noto Sans SC", "apple": "PingFang SC", "windows": "Microsoft YaHei UI" }, "$description": "Simplified Chinese" },
-      "zhHantTw": { "$type": "fontFamily", "$value": { "android": "Noto Sans TC", "apple": "PingFang TC", "windows": "Microsoft JhengHei UI" }, "$description": "Traditional Chinese — Taiwan" },
-      "zhHantHk": { "$type": "fontFamily", "$value": { "android": "Noto Sans HK", "apple": "PingFang HK", "windows": "Microsoft JhengHei UI" }, "$description": "Traditional Chinese — Hong Kong" },
-      "ja": { "$type": "fontFamily", "$value": { "android": "Noto Sans JP", "apple": "Hiragino Sans", "windows": "Yu Gothic UI" }, "$description": "Japanese" },
-      "ko": { "$type": "fontFamily", "$value": { "android": "Noto Sans KR", "apple": "Apple SD Gothic Neo", "windows": "Malgun Gothic" }, "$description": "Korean" },
-      "systemFallback": { "$type": "fontFamily", "$value": { "android": "Roboto", "apple": "SF Pro", "windows": "Segoe UI Variable" }, "$description": "Base UI family; let the OS manage unsupported-glyph fallback" }
-    },
-    "weight": {
-      "regular": { "$type": "fontWeight", "$value": 400 },
-      "medium": { "$type": "fontWeight", "$value": 500 },
-      "semibold": { "$type": "fontWeight", "$value": 600 },
-      "bold": { "$type": "fontWeight", "$value": 700 }
-    },
-    "app": {
-      "$description": "Canonical app type scale. Numeric sizes map to px in design tools, sp on Android, pt on Apple platforms, and epx on Windows.",
-      "display": {
-        "lg": { "$type": "typography", "$value": { "fontSize": 40, "lineHeight": 48, "fontWeight": 600, "letterSpacing": 0 }, "$description": "Hero statement or onboarding moment; use sparingly" },
-        "md": { "$type": "typography", "$value": { "fontSize": 32, "lineHeight": 40, "fontWeight": 600, "letterSpacing": 0 }, "$description": "Large page emphasis" }
+      "$description": "Android uses the device system UI font and OS language/glyph fallback for every script. Apple and Windows retain their platform/script mappings. Semantic type metrics remain shared.",
+      "latin": {
+        "$type": "fontFamily",
+        "$value": {
+          "android": "system-default",
+          "apple": "SF Pro",
+          "windows": "Segoe UI Variable"
+        },
+        "$description": "English and other supported Latin text"
       },
-      "heading": {
-        "lg": { "$type": "typography", "$value": { "fontSize": 28, "lineHeight": 36, "fontWeight": 600, "letterSpacing": 0 }, "$description": "Major page heading" },
-        "md": { "$type": "typography", "$value": { "fontSize": 24, "lineHeight": 32, "fontWeight": 600, "letterSpacing": 0 }, "$description": "Section or modal heading" },
-        "sm": { "$type": "typography", "$value": { "fontSize": 20, "lineHeight": 28, "fontWeight": 600, "letterSpacing": 0 }, "$description": "Compact page heading" }
+      "zhHans": {
+        "$type": "fontFamily",
+        "$value": {
+          "android": "system-default",
+          "apple": "PingFang SC",
+          "windows": "Microsoft YaHei UI"
+        },
+        "$description": "Simplified Chinese"
       },
-      "title": {
-        "lg": { "$type": "typography", "$value": { "fontSize": 18, "lineHeight": 26, "fontWeight": 600, "letterSpacing": 0 }, "$description": "Card or panel title" },
-        "md": { "$type": "typography", "$value": { "fontSize": 16, "lineHeight": 24, "fontWeight": 600, "letterSpacing": 0 }, "$description": "List and section title" },
-        "sm": { "$type": "typography", "$value": { "fontSize": 14, "lineHeight": 20, "fontWeight": 600, "letterSpacing": 0 }, "$description": "Compact component title" }
+      "zhHantTw": {
+        "$type": "fontFamily",
+        "$value": {
+          "android": "system-default",
+          "apple": "PingFang TC",
+          "windows": "Microsoft JhengHei UI"
+        },
+        "$description": "Traditional Chinese — Taiwan"
       },
-      "body": {
-        "lg": { "$type": "typography", "$value": { "fontSize": 16, "lineHeight": 26, "fontWeight": 400, "letterSpacing": 0 }, "$description": "Prominent body and reading copy" },
-        "md": { "$type": "typography", "$value": { "fontSize": 14, "lineHeight": 22, "fontWeight": 400, "letterSpacing": 0 }, "$description": "Default app body" },
-        "sm": { "$type": "typography", "$value": { "fontSize": 12, "lineHeight": 18, "fontWeight": 400, "letterSpacing": 0 }, "$description": "Supporting copy" }
+      "zhHantHk": {
+        "$type": "fontFamily",
+        "$value": {
+          "android": "system-default",
+          "apple": "PingFang HK",
+          "windows": "Microsoft JhengHei UI"
+        },
+        "$description": "Traditional Chinese — Hong Kong"
       },
-      "label": {
-        "lg": { "$type": "typography", "$value": { "fontSize": 14, "lineHeight": 20, "fontWeight": 500, "letterSpacing": 0 }, "$description": "Button, tab, or strong label" },
-        "md": { "$type": "typography", "$value": { "fontSize": 12, "lineHeight": 16, "fontWeight": 500, "letterSpacing": 0 }, "$description": "Chip or compact control label" },
-        "sm": { "$type": "typography", "$value": { "fontSize": 11, "lineHeight": 16, "fontWeight": 500, "letterSpacing": 0 }, "$description": "Nonessential metadata only; never essential gameplay information" }
+      "ja": {
+        "$type": "fontFamily",
+        "$value": {
+          "android": "system-default",
+          "apple": "Hiragino Sans",
+          "windows": "Yu Gothic UI"
+        },
+        "$description": "Japanese"
+      },
+      "ko": {
+        "$type": "fontFamily",
+        "$value": {
+          "android": "system-default",
+          "apple": "Apple SD Gothic Neo",
+          "windows": "Malgun Gothic"
+        },
+        "$description": "Korean"
+      },
+      "systemFallback": {
+        "$type": "fontFamily",
+        "$value": {
+          "android": "system-default",
+          "apple": "SF Pro",
+          "windows": "Segoe UI Variable"
+        },
+        "$description": "Base UI family; let the OS manage unsupported-glyph fallback"
+      },
+      "$extensions": {
+        "androidPolicy": {
+          "selector": "system-default",
+          "meaning": "Use the platform default UI font selector, not a literal font family named system-default.",
+          "fallback": "Let Android resolve glyphs and locale-appropriate fonts for Chinese, Latin and other scripts, including OEM-provided system fonts.",
+          "restriction": "Do not force or bundle Roboto/Noto for ordinary Android UI. This policy overrides font-family names in legacy component snapshots.",
+          "metrics": "Keep semantic font sizes, line heights, requested weights and tracking rules. Allow content to wrap or grow when system font metrics differ; respect system text scaling."
+        }
       }
     },
-    "special": {
-      "$description": "Special-purpose roles for brand, HUD, and numeric content.",
-      "brandDisplay": { "$type": "typography", "$value": { "fontSize": 36, "lineHeight": 44, "fontWeight": 700, "letterSpacing": -1.5 }, "$description": "Brand/editorial display only; not a normal UI heading" },
-      "hudCritical": { "$type": "typography", "$value": { "fontSize": 16, "lineHeight": 20, "fontWeight": 700, "letterSpacing": 0 }, "$description": "Rare critical HUD alert" },
-      "hudTip": { "$type": "typography", "$value": { "fontSize": 14, "lineHeight": 18, "fontWeight": 500, "letterSpacing": 0 }, "$description": "Short coaching tip" },
-      "hudMetadata": { "$type": "typography", "$value": { "fontSize": 12, "lineHeight": 16, "fontWeight": 400, "letterSpacing": 0.1 }, "$description": "Nonessential HUD metadata" },
-      "numericStat": { "$type": "typography", "$value": { "fontSize": 24, "lineHeight": 28, "fontWeight": 600, "letterSpacing": -0.5, "fontFeatureSettings": "tnum" }, "$description": "Aligned result or profile statistic" },
-      "cooldownTimer": { "$type": "typography", "$value": { "fontSize": 20, "lineHeight": 24, "fontWeight": 700, "letterSpacing": -0.3, "fontFeatureSettings": "tnum" }, "$description": "Live cooldown or timer" }
+    "weight": {
+      "light": {
+        "$type": "fontWeight",
+        "$value": 300
+      },
+      "regular": {
+        "$type": "fontWeight",
+        "$value": 400
+      },
+      "medium": {
+        "$type": "fontWeight",
+        "$value": 500
+      },
+      "semibold": {
+        "$type": "fontWeight",
+        "$value": 600
+      },
+      "bold": {
+        "$type": "fontWeight",
+        "$value": 700
+      },
+      "extraBold": {
+        "$type": "fontWeight",
+        "$value": 800
+      },
+      "black": {
+        "$type": "fontWeight",
+        "$value": 900
+      }
+    },
+    "app": {
+      "$description": "Shared semantic type scale. Sizes map to px in Figma, sp on Android, pt on Apple platforms, and epx on Windows. Apply the platform- and script-appropriate font family above.",
+      "display": {
+        "lg": {
+          "$type": "typography",
+          "$value": {
+            "fontSize": 40,
+            "lineHeight": 48,
+            "fontWeight": 700,
+            "letterSpacing": {
+              "value": 1,
+              "unit": "percent"
+            }
+          },
+          "$description": "Hero statement or onboarding moment; use sparingly"
+        },
+        "lg-lite": {
+          "$type": "typography",
+          "$value": {
+            "fontSize": 42,
+            "lineHeight": 48,
+            "fontWeight": 300,
+            "letterSpacing": {
+              "value": 0,
+              "unit": "percent"
+            }
+          },
+          "$description": "Light-weight large display text / 轻字重大号展示文字"
+        },
+        "md": {
+          "$type": "typography",
+          "$value": {
+            "fontSize": 32,
+            "lineHeight": 40,
+            "fontWeight": 600,
+            "letterSpacing": {
+              "value": 1,
+              "unit": "percent"
+            }
+          },
+          "$description": "Large page emphasis"
+        },
+        "md-lite": {
+          "$type": "typography",
+          "$value": {
+            "fontSize": 34,
+            "lineHeight": 44,
+            "fontWeight": 300,
+            "letterSpacing": {
+              "value": -2,
+              "unit": "percent"
+            }
+          },
+          "$description": "Light-weight medium display text / 轻字重中号展示文字"
+        }
+      },
+      "heading": {
+        "lg": {
+          "$type": "typography",
+          "$value": {
+            "fontSize": 28,
+            "lineHeight": 36,
+            "fontWeight": 700,
+            "letterSpacing": {
+              "value": 1,
+              "unit": "percent"
+            }
+          },
+          "$description": "Major page heading"
+        },
+        "md": {
+          "$type": "typography",
+          "$value": {
+            "fontSize": 24,
+            "lineHeight": 32,
+            "fontWeight": 700,
+            "letterSpacing": {
+              "value": 1,
+              "unit": "percent"
+            }
+          },
+          "$description": "Section or modal heading"
+        },
+        "sm": {
+          "$type": "typography",
+          "$value": {
+            "fontSize": 20,
+            "lineHeight": 28,
+            "fontWeight": 700,
+            "letterSpacing": {
+              "value": 1,
+              "unit": "percent"
+            }
+          },
+          "$description": "Compact page heading"
+        }
+      },
+      "title": {
+        "lg": {
+          "$type": "typography",
+          "$value": {
+            "fontSize": 18,
+            "lineHeight": 26,
+            "fontWeight": 600,
+            "letterSpacing": {
+              "value": 0.5,
+              "unit": "percent"
+            }
+          },
+          "$description": "Card or panel title"
+        },
+        "md": {
+          "$type": "typography",
+          "$value": {
+            "fontSize": 16,
+            "lineHeight": 24,
+            "fontWeight": 500,
+            "letterSpacing": {
+              "value": 0.5,
+              "unit": "percent"
+            }
+          },
+          "$description": "List and section title"
+        },
+        "sm": {
+          "$type": "typography",
+          "$value": {
+            "fontSize": 14,
+            "lineHeight": 20,
+            "fontWeight": 600,
+            "letterSpacing": {
+              "value": 0.5,
+              "unit": "percent"
+            }
+          },
+          "$description": "Compact component title"
+        }
+      },
+      "body": {
+        "xl": {
+          "$type": "typography",
+          "$value": {
+            "fontSize": 18,
+            "lineHeight": 26,
+            "fontWeight": 400,
+            "letterSpacing": {
+              "value": 1,
+              "unit": "percent"
+            }
+          },
+          "$description": "Large reading copy or prominent body"
+        },
+        "lg": {
+          "$type": "typography",
+          "$value": {
+            "fontSize": 16,
+            "lineHeight": 26,
+            "fontWeight": 400,
+            "letterSpacing": {
+              "value": 2,
+              "unit": "percent"
+            }
+          },
+          "$description": "Prominent body and reading copy"
+        },
+        "md": {
+          "$type": "typography",
+          "$value": {
+            "fontSize": 15,
+            "lineHeight": 22,
+            "fontWeight": 400,
+            "letterSpacing": {
+              "value": 2,
+              "unit": "percent"
+            }
+          },
+          "$description": "Default app body"
+        },
+        "sm": {
+          "$type": "typography",
+          "$value": {
+            "fontSize": 13,
+            "lineHeight": 18,
+            "fontWeight": 400,
+            "letterSpacing": {
+              "value": 2,
+              "unit": "percent"
+            }
+          },
+          "$description": "Supporting copy"
+        }
+      },
+      "label": {
+        "lg": {
+          "$type": "typography",
+          "$value": {
+            "fontSize": 14,
+            "lineHeight": 20,
+            "fontWeight": 400,
+            "letterSpacing": {
+              "value": 2,
+              "unit": "percent"
+            }
+          },
+          "$description": "Button, tab, or strong label"
+        },
+        "md": {
+          "$type": "typography",
+          "$value": {
+            "fontSize": 12,
+            "lineHeight": 16,
+            "fontWeight": 400,
+            "letterSpacing": {
+              "value": 2,
+              "unit": "percent"
+            }
+          },
+          "$description": "Chip or compact control label"
+        },
+        "sm": {
+          "$type": "typography",
+          "$value": {
+            "fontSize": 11,
+            "lineHeight": 16,
+            "fontWeight": 400,
+            "letterSpacing": {
+              "value": 2,
+              "unit": "percent"
+            }
+          },
+          "$description": "Nonessential metadata only; never essential gameplay information"
+        }
+      }
+    }
+  },
+  "component": {
+    "$description": "Component-scoped tokens published in Figma. Use these only for the named component family; use foundation and semantic tokens elsewhere.",
+    "codeButton": {
+      "color": {
+        "background": {
+          "$type": "color",
+          "$value": "#080808"
+        },
+        "surface": {
+          "$type": "color",
+          "$value": "#111111"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "#F2F2F2"
+        },
+        "muted": {
+          "$type": "color",
+          "$value": "#B9B9B9"
+        },
+        "onCta": {
+          "$type": "color",
+          "$value": "#050505"
+        },
+        "stroke": {
+          "$type": "color",
+          "$value": "#FFFFFF24"
+        },
+        "strokeStrong": {
+          "$type": "color",
+          "$value": "#FFFFFF2E"
+        },
+        "strokeActive": {
+          "$type": "color",
+          "$value": "#FFFFFF7A"
+        },
+        "glassFill": {
+          "$type": "color",
+          "$value": "#FFFFFF12"
+        },
+        "glassFillActive": {
+          "$type": "color",
+          "$value": "#FFFFFF26"
+        },
+        "textDim": {
+          "$type": "color",
+          "$value": "#FFFFFF94"
+        },
+        "textFaint": {
+          "$type": "color",
+          "$value": "#FFFFFF7A"
+        },
+        "danger": {
+          "$type": "color",
+          "$value": "#FF4D5A"
+        },
+        "dangerLow": {
+          "$type": "color",
+          "$value": "#FF4D5A0F"
+        },
+        "dangerSubtle": {
+          "$type": "color",
+          "$value": "#FF4D5A24"
+        },
+        "dangerEmphasis": {
+          "$type": "color",
+          "$value": "#FF4D5A3D"
+        },
+        "dangerStrong": {
+          "$type": "color",
+          "$value": "#FF4D5AC7"
+        },
+        "white": {
+          "$type": "color",
+          "$value": "#FFFFFF"
+        },
+        "whiteLow": {
+          "$type": "color",
+          "$value": "#FFFFFF80"
+        },
+        "whiteMuted": {
+          "$type": "color",
+          "$value": "#FFFFFF61"
+        },
+        "black": {
+          "$type": "color",
+          "$value": "#000000"
+        },
+        "blackMuted": {
+          "$type": "color",
+          "$value": "#00000061"
+        },
+        "mutedLow": {
+          "$type": "color",
+          "$value": "#B9B9B959"
+        },
+        "surfaceMedium": {
+          "$type": "color",
+          "$value": "#1111119E"
+        },
+        "surfaceStrong": {
+          "$type": "color",
+          "$value": "#111111DB"
+        },
+        "surfaceOpaque": {
+          "$type": "color",
+          "$value": "#111111E6"
+        },
+        "micInk": {
+          "$type": "color",
+          "$value": "#0B0F14"
+        },
+        "micInkOpaque": {
+          "$type": "color",
+          "$value": "#0B0F14F5"
+        },
+        "micOccupied": {
+          "$type": "color",
+          "$value": "#343434"
+        },
+        "micOccupiedOpaque": {
+          "$type": "color",
+          "$value": "#343434FA"
+        },
+        "micOrange": {
+          "$type": "color",
+          "$value": "#FFB020"
+        },
+        "micOrangeMuted": {
+          "$type": "color",
+          "$value": "#FFB020A6"
+        }
+      },
+      "typography": {
+        "cta": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "Roboto",
+            "fontStyle": "Black Italic",
+            "fontSize": 22,
+            "lineHeight": "auto",
+            "fontWeight": 900,
+            "letterSpacing": {
+              "value": 14,
+              "unit": "percent"
+            }
+          }
+        },
+        "cardLabel": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "Roboto",
+            "fontStyle": "ExtraBold",
+            "fontSize": 16,
+            "lineHeight": "auto",
+            "fontWeight": 800,
+            "letterSpacing": {
+              "value": 3,
+              "unit": "percent"
+            }
+          }
+        },
+        "panelTime": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "Roboto",
+            "fontStyle": "SemiBold",
+            "fontSize": 12,
+            "lineHeight": "auto",
+            "fontWeight": 600,
+            "letterSpacing": {
+              "value": 8,
+              "unit": "percent"
+            }
+          }
+        },
+        "small": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "Roboto",
+            "fontStyle": "Bold",
+            "fontSize": 12,
+            "lineHeight": "auto",
+            "fontWeight": 700,
+            "letterSpacing": {
+              "value": 12,
+              "unit": "percent"
+            }
+          }
+        },
+        "save": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "Roboto",
+            "fontStyle": "Black",
+            "fontSize": 14,
+            "lineHeight": "auto",
+            "fontWeight": 900,
+            "letterSpacing": {
+              "value": 2,
+              "unit": "percent"
+            }
+          }
+        },
+        "send": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "Roboto",
+            "fontStyle": "Black Italic",
+            "fontSize": 15,
+            "lineHeight": "auto",
+            "fontWeight": 900,
+            "letterSpacing": {
+              "value": 8,
+              "unit": "percent"
+            }
+          }
+        },
+        "guide": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "Roboto",
+            "fontStyle": "Black",
+            "fontSize": 18,
+            "lineHeight": 24,
+            "fontWeight": 900,
+            "letterSpacing": {
+              "value": 14,
+              "unit": "percent"
+            }
+          }
+        },
+        "hudAction": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "Roboto",
+            "fontStyle": "Bold",
+            "fontSize": 13,
+            "lineHeight": 24,
+            "fontWeight": 700,
+            "letterSpacing": {
+              "value": 0.15,
+              "unit": "px"
+            }
+          }
+        },
+        "step": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "Roboto",
+            "fontStyle": "Bold",
+            "fontSize": 18,
+            "lineHeight": 24,
+            "fontWeight": 700,
+            "letterSpacing": {
+              "value": 0.15,
+              "unit": "px"
+            }
+          }
+        },
+        "bp": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "Roboto",
+            "fontStyle": "Bold",
+            "fontSize": 11,
+            "lineHeight": 24,
+            "fontWeight": 700,
+            "letterSpacing": {
+              "value": 0.15,
+              "unit": "px"
+            }
+          }
+        },
+        "occupied": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "Roboto",
+            "fontStyle": "Medium",
+            "fontSize": 9,
+            "lineHeight": 24,
+            "fontWeight": 500,
+            "letterSpacing": {
+              "value": 0.15,
+              "unit": "px"
+            }
+          }
+        }
+      },
+      "$extensions": {
+        "status": "legacy",
+        "replacement": "See components.json; do not use these older component tokens for new designs."
+      }
+    },
+    "snackbar": {
+      "color": {
+        "personaContainer": {
+          "$type": "color",
+          "$value": "#E6E0E9"
+        },
+        "personaText": {
+          "$type": "color",
+          "$value": "#322F35"
+        },
+        "chatContainer": {
+          "$type": "color",
+          "$value": "#EAF1F4"
+        },
+        "chatText": {
+          "$type": "color",
+          "$value": "#101820"
+        },
+        "documentCard": {
+          "$type": "color",
+          "$value": "#F1F1F1"
+        }
+      },
+      "radius": {
+        "zero": {
+          "$type": "dimension",
+          "$value": 0
+        },
+        "document": {
+          "$type": "dimension",
+          "$value": 80
+        }
+      },
+      "typography": {
+        "bodyMedium": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "Roboto",
+            "fontStyle": "Regular",
+            "fontSize": 14,
+            "lineHeight": 21,
+            "fontWeight": 400,
+            "letterSpacing": {
+              "value": 0.25,
+              "unit": "px"
+            }
+          }
+        }
+      },
+      "$extensions": {
+        "status": "legacy",
+        "replacement": "See components.json; do not use these older component tokens for new designs."
+      }
+    },
+    "button": {
+      "radius": {
+        "$type": "dimension",
+        "$value": "{radius.full}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{border.width.hairline}"
+      },
+      "label": {
+        "$type": "typography",
+        "$value": "{typography.app.title.sm}"
+      },
+      "largeLabel": {
+        "$type": "typography",
+        "$value": {
+          "fontSize": 16,
+          "lineHeight": 24,
+          "fontWeight": 600,
+          "letterSpacing": {
+            "value": 0.5,
+            "unit": "percent"
+          }
+        },
+        "$description": "Observed button-specific 16/24 Semibold; explicit exception to title/md Medium."
+      },
+      "primaryFill": {
+        "$type": "color",
+        "$value": "{color.odyssey.4}"
+      },
+      "primaryContent": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "secondaryFill": {
+        "$type": "color",
+        "$value": "{color.veil.50}"
+      },
+      "secondaryContent": {
+        "$type": "color",
+        "$value": "{color.odyssey.4}"
+      },
+      "outline": {
+        "$type": "color",
+        "$value": "{color.neutral.200}"
+      },
+      "content": {
+        "$type": "color",
+        "$value": "{color.neutral.800}"
+      }
+    },
+    "notification": {
+      "radius": {
+        "$type": "dimension",
+        "$value": "{radius.md}"
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{effect.elevation.medium}"
+      },
+      "fill": {
+        "$type": "color",
+        "$value": "{color.neutral.800}"
+      },
+      "title": {
+        "$type": "typography",
+        "$value": "{typography.app.title.sm}"
+      },
+      "body": {
+        "$type": "typography",
+        "$value": "{typography.app.body.sm}"
+      },
+      "content": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "supportingContent": {
+        "$type": "color",
+        "$value": "{color.neutral.300}"
+      },
+      "action": {
+        "$type": "color",
+        "$value": "{color.odyssey.4}"
+      }
+    },
+    "dialog": {
+      "radius": {
+        "$type": "dimension",
+        "$value": "{radius.xxl}"
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{spacing.20}"
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{spacing.20}"
+      },
+      "actionGap": {
+        "$type": "dimension",
+        "$value": "{spacing.12}"
+      },
+      "titleBodyGap": {
+        "$type": "dimension",
+        "$value": "{spacing.8}"
+      },
+      "title": {
+        "$type": "typography",
+        "$value": "{typography.app.heading.md}"
+      },
+      "body": {
+        "$type": "typography",
+        "$value": "{typography.app.body.lg}"
+      },
+      "fill": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "titleColor": {
+        "$type": "color",
+        "$value": "{color.neutral.800}"
+      },
+      "bodyColor": {
+        "$type": "color",
+        "$value": "{color.neutral.400}"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{color.neutral.100}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{border.width.hairline}"
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{effect.elevation.low}"
+      },
+      "inputFill": {
+        "$type": "color",
+        "$value": "{color.veil.50}"
+      },
+      "inputRadius": {
+        "$type": "dimension",
+        "$value": "{radius.md}"
+      }
     }
   },
   "icon": {
-    "style": { "$type": "string", "$value": "rounded", "$description": "System-wide interface icon geometry. Android uses Material Symbols Rounded across app screens, menus, dialogs, and HUD/overlays; custom interface icons use rounded caps, joins, and corners." },
-    "materialSymbols": {
-      "family": { "$type": "string", "$value": "Material Symbols Rounded" },
-      "weight": { "$type": "number", "$value": 400 },
-      "grade": { "$type": "number", "$value": 0 },
-      "opticalSize": { "$type": "number", "$value": 24, "$description": "Default optical size; select a matching optical asset for other supported rendered sizes." },
-      "fill": {
-        "default": { "$type": "number", "$value": 0 },
-        "active": { "$type": "number", "$value": 1, "$description": "Use a filled pair when it improves selected or active-state recognition. Both states remain Rounded." }
+    "size": {
+      "xs": {
+        "$type": "dimension",
+        "$value": 16,
+        "$description": "Desktop menu, table, or nonessential metadata"
+      },
+      "sm": {
+        "$type": "dimension",
+        "$value": 20,
+        "$description": "Compact control or inline icon"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": 24,
+        "$description": "Default app action and navigation"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": 28,
+        "$description": "Prominent app action or medium-large control"
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": 32,
+        "$description": "HUD emphasis or large control"
+      },
+      "xxl": {
+        "$type": "dimension",
+        "$value": 40,
+        "$description": "Empty state or presentation use only"
       }
     },
-    "size": {
-      "xs": { "$type": "dimension", "$value": 16, "$description": "Desktop menu, table, or nonessential metadata" },
-      "sm": { "$type": "dimension", "$value": 20, "$description": "Compact control or inline icon" },
-      "md": { "$type": "dimension", "$value": 24, "$description": "Default app action and navigation" },
-      "lg": { "$type": "dimension", "$value": 32, "$description": "HUD emphasis or large control" },
-      "xl": { "$type": "dimension", "$value": 40, "$description": "Empty state or presentation use only" }
-    },
     "interactionTarget": {
-      "androidTouch": { "$type": "dimension", "$value": 48, "$description": "48 × 48 dp" },
-      "iosIpadTouch": { "$type": "dimension", "$value": 44, "$description": "44 × 44 pt" },
-      "macosDefault": { "$type": "dimension", "$value": 28, "$description": "28 × 28 pt" },
-      "windowsTouch": { "$type": "dimension", "$value": 40, "$description": "40 × 40 epx minimum" }
+      "androidTouch": {
+        "$type": "dimension",
+        "$value": 48,
+        "$description": "48 × 48 dp"
+      },
+      "iosIpadTouch": {
+        "$type": "dimension",
+        "$value": 44,
+        "$description": "44 × 44 pt"
+      },
+      "macosDefault": {
+        "$type": "dimension",
+        "$value": 28,
+        "$description": "28 × 28 pt"
+      },
+      "windowsTouch": {
+        "$type": "dimension",
+        "$value": 40,
+        "$description": "40 × 40 epx minimum"
+      }
     },
     "platformStrategy": {
-      "android": { "nativeLibrary": "Material Symbols Rounded", "customOutput": "VectorDrawable XML" },
-      "apple": { "nativeLibrary": "SF Symbols", "customOutput": "Custom SF Symbol or vector asset" },
-      "windows": { "nativeLibrary": "Segoe Fluent Icons", "customOutput": "SVG or WinUI PathIcon" },
-      "sharedSource": { "nativeLibrary": null, "customOutput": "Optimized SVG master" }
+      "sharedSource": {
+        "library": "GameBuddy Icons",
+        "figmaUrl": "https://www.figma.com/design/lKN3l5oG6tsXw11wQ104c3/Library?node-id=947-3589",
+        "masterFrame": 24,
+        "rule": "Use GB icon artwork across application UI on all platforms. Export vector paths; do not substitute a system icon library or glyph font."
+      },
+      "android": {
+        "customOutput": "VectorDrawable XML or Compose ImageVector derived from GB artwork"
+      },
+      "apple": {
+        "customOutput": "Vector assets derived from GB artwork"
+      },
+      "windows": {
+        "customOutput": "SVG or WinUI vector paths derived from GB artwork"
+      }
     },
     "customGeometry": {
       "masterGrid": 24,
-      "liveArea": 20,
-      "defaultPadding": 2,
-      "defaultStroke": 2,
-      "corners": "rounded",
-      "cap": "round",
-      "join": "round",
-      "perspective": "flat-front-facing",
-      "defaultRendering": "single-color-current-color",
-      "source": "GameBuddy iconography guidance"
+      "rule": "Preserve each GB icon's authored paths, optical bounds, fills and strokes. Do not force all icons to a uniform stroke or redraw from their names.",
+      "defaultRendering": "Tintable vector, except explicitly multicolor artwork.",
+      "source": "GB Icons"
     }
   },
   "effect": {
     "blur": {
       "backdrop": {
-        "sm": { "$type": "dimension", "$value": 8, "$description": "Compact controls" },
-        "md": { "$type": "dimension", "$value": 16, "$description": "Cards and HUD panels" },
-        "lg": { "$type": "dimension", "$value": 24, "$description": "Dialogs and floating panels" }
+        "sm": {
+          "$type": "dimension",
+          "$value": 8,
+          "$description": "Compact controls"
+        },
+        "md": {
+          "$type": "dimension",
+          "$value": 16,
+          "$description": "Cards and HUD panels"
+        },
+        "lg": {
+          "$type": "dimension",
+          "$value": 32,
+          "$description": "Dialogs and floating panels"
+        }
       },
-      "diffusion": { "$type": "dimension", "$value": 32, "$description": "Decorative chroma only" }
+      "diffusion": {
+        "$type": "dimension",
+        "$value": 32,
+        "$description": "Decorative chroma only"
+      }
     },
     "elevation": {
-      "low": { "$type": "shadow", "$value": { "offsetX": 0, "offsetY": 2, "blur": 8, "spread": -2, "color": "#000000", "opacity": 0.08 }, "$description": "Cards and resting HUD surfaces" },
-      "medium": { "$type": "shadow", "$value": { "offsetX": 0, "offsetY": 8, "blur": 24, "spread": -8, "color": "#000000", "opacity": 0.12 }, "$description": "Menus, floating panels, and dialogs" },
-      "high": { "$type": "shadow", "$value": { "offsetX": 0, "offsetY": 16, "blur": 40, "spread": -12, "color": "#000000", "opacity": 0.16 }, "$description": "Modals and prominent temporary overlays" }
+      "low": {
+        "$type": "shadow",
+        "$value": {
+          "offsetX": 0,
+          "offsetY": 2,
+          "blur": 8,
+          "spread": -2,
+          "color": "#000000",
+          "opacity": 0.08
+        },
+        "$description": "Cards and resting HUD surfaces"
+      },
+      "medium": {
+        "$type": "shadow",
+        "$value": {
+          "offsetX": 0,
+          "offsetY": 8,
+          "blur": 20,
+          "spread": -8,
+          "color": "#000000",
+          "opacity": 0.16
+        },
+        "$description": "Menus, floating panels, and dialogs"
+      },
+      "high": {
+        "$type": "shadow",
+        "$value": {
+          "offsetX": 0,
+          "offsetY": 16,
+          "blur": 40,
+          "spread": -12,
+          "color": "#000000",
+          "opacity": 0.4
+        },
+        "$description": "Modals and prominent temporary overlays"
+      }
     }
   },
   "motion": {
-    "$extensions": { "status": "provisional" },
+    "$extensions": {
+      "status": "provisional",
+      "source": "prior design-system working context; absent from Figma"
+    },
     "duration": {
       "$description": "Values are milliseconds.",
-      "instant": { "$type": "duration", "$value": 0 },
-      "quick": { "$type": "duration", "$value": 100 },
-      "short": { "$type": "duration", "$value": 160 },
-      "medium": { "$type": "duration", "$value": 240 },
-      "long": { "$type": "duration", "$value": 400 }
+      "instant": {
+        "$type": "duration",
+        "$value": 0
+      },
+      "quick": {
+        "$type": "duration",
+        "$value": 100
+      },
+      "short": {
+        "$type": "duration",
+        "$value": 160
+      },
+      "medium": {
+        "$type": "duration",
+        "$value": 240
+      },
+      "long": {
+        "$type": "duration",
+        "$value": 400
+      }
     },
     "distance": {
       "$description": "Nominal platform-independent travel distances; map to dp, pt, or epx.",
-      "none": { "$type": "dimension", "$value": 0 },
-      "xs": { "$type": "dimension", "$value": 4 },
-      "sm": { "$type": "dimension", "$value": 8 },
-      "md": { "$type": "dimension", "$value": 16 }
+      "none": {
+        "$type": "dimension",
+        "$value": 0
+      },
+      "xs": {
+        "$type": "dimension",
+        "$value": 4
+      },
+      "sm": {
+        "$type": "dimension",
+        "$value": 8
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": 16
+      }
     }
   },
   "$extensions": {
     "gamebuddy": {
+      "colorModes": {
+        "default": "light",
+        "supported": [
+          "light",
+          "dark"
+        ],
+        "resolution": "For each token, select $extensions.modes[activeMode] when present; otherwise use $value. Resolve any {path} alias recursively in the same active mode. $value retains the Light default for existing consumers. This modes extension is specific to the GameBuddy token format.",
+        "alpha": "Eight-digit hex uses #RRGGBBAA. Embedded alpha is already included; do not multiply it by the informational alpha extension again.",
+        "surfaceContext": "Choose foreground treatment for the actual surface. Explicitly light HUD panels use light-surface content even in a dark app.",
+        "componentColors": "Component colors without mode overrides remain fixed; do not automatically invert them."
+      },
+      "brandRules": [
+        "Odyssey identifies GameBuddy; use Signal for gameplay and system states.",
+        "Odyssey/4 is #7E8FFF in both modes and uses fixed dark foreground content.",
+        "Use the original Odyssey palette for logos and brand artwork; UI mode pairs apply to interface roles."
+      ],
       "platformUnits": {
-        "design": { "layout": "px", "type": "px" },
-        "android": { "layout": "dp", "type": "sp" },
-        "apple": { "layout": "pt", "type": "pt" },
-        "windows": { "layout": "epx", "type": "epx" }
+        "figma": {
+          "layout": "px",
+          "type": "px"
+        },
+        "android": {
+          "layout": "dp",
+          "type": "sp"
+        },
+        "apple": {
+          "layout": "pt",
+          "type": "pt"
+        },
+        "windows": {
+          "layout": "epx",
+          "type": "epx"
+        }
       },
       "materialRules": [
         "Veil opacity describes material strength, not urgency.",
@@ -294,40 +1826,38 @@
         "The full spectrum is brand decoration, never a gameplay status display."
       ],
       "typographyRules": [
-        "Choose font family by script and platform while preserving one semantic scale.",
-        "Chinese and mixed-language UI use zero tracking by default.",
+        "On Android, use the device system UI font and OS language/glyph fallback for all scripts; do not require Roboto or bundled Noto fonts. On Apple and Windows, use the configured platform/script mappings. Preserve one semantic type scale.",
+        "Use the published tracking values for Latin text; override tracking to zero for Chinese and mixed-language UI unless language testing approves additional spacing.",
         "Use sentence case for English UI copy.",
         "Use tabular figures for changing or vertically aligned metrics.",
         "Never use text below 12 platform-scaled units for essential information.",
         "Do not use the pixel wordmark as a UI typeface."
       ],
       "iconRules": [
-        "Rounded is the system-wide interface icon style, not a microphone-only or GameAssist-only choice.",
-        "Use Material Symbols Rounded throughout Android. Fill is independent of style; do not switch to the Outlined or Sharp family for inactive states.",
-        "Figma and Android must use the same glyph, Rounded family, weight, grade, optical size, and fill settings.",
-        "Share semantic IDs and metadata across platforms; use native libraries for familiar OS actions.",
-        "Draw product-specific icons as optimized shared vectors and adapt them optically per platform.",
-        "Keep visual icon size separate from interaction-target size.",
-        "Do not bake shadows, gradients, opacity, or semantic colors into interface icons.",
-        "Brand assets and game-owned assets are not interface icons."
+        "Use GB Icons for application-owned UI across platforms.",
+        "Keep icon IDs stable and preserve the supplied vector geometry.",
+        "Tint icons by semantic role and actual background; keep visual size separate from hit target.",
+        "Export vectors rather than rendering layer names or private-use font glyphs.",
+        "OS-owned dialogs, permissions and share sheets retain OS-controlled visuals."
       ],
       "motionRules": [
         "Use one transition to attract attention, then become still.",
         "Do not use continuous pulsing, glowing, or looping decoration during gameplay.",
         "Meaning must remain clear with motion disabled.",
         "Reduced motion removes travel and scale; preserve state changes with opacity or immediate replacement.",
-        "Use platform-native easing unless a component specifies otherwise."
+        "Prefer platform-native easing until canonical easing tokens are added to Figma."
       ],
       "implementationDefaults": {
         "screenTitle": "{typography.app.heading.sm}",
         "sectionTitle": "{typography.app.title.md}",
         "body": "{typography.app.body.md}",
-        "buttonLabel": "{typography.app.label.lg}",
+        "buttonLabel": "{typography.app.title.sm}",
         "icon": "{icon.size.md}",
         "mobilePagePadding": "{spacing.16}",
         "cardRadius": "{radius.lg}",
         "borderWidth": "{border.width.default}"
-      }
+      },
+      "componentContract": "Read components.json for current component variants and behavior. Component-specific tokens override broad usage suggestions for that component. Legacy groups are retained for migration only."
     }
   }
 }

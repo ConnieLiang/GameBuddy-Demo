@@ -4,7 +4,7 @@ import OnboardingAssistPreview from './OnboardingAssistPreview';
 
 export default function HonorOfKingsOnboarding({ chinese }) {
   const t = (en, zh) => chinese ? zh : en;
-  return <OnboardingChatLayout chinese={chinese} className="iq-hok" birdAsset="onboarding-gatsby-poses.png">
+  return <OnboardingChatLayout chinese={chinese} className="iq-hok" birdAsset="illustrations/gatsby-cheerful.png">
       <TypingChatBubble><p>{t(
         'Honor of Kings?! We’ve got you covered. From laning to teamfights, I’ll help you read your opponents and back you up!',
         '王者荣耀?! 这款游戏我们已经全面支持，从对线到团战，帮你看懂对手，助你一臂之力！'

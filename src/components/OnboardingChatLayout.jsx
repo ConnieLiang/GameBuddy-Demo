@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { ChatMotionProvider } from './OnboardingChatMotion';
 import { motion, useReducedMotion } from 'framer-motion';
 
-export default function OnboardingChatLayout({ chinese, children, className = '', birdAsset = 'onboarding-chat-bird.png' }) {
+export default function OnboardingChatLayout({ chinese, children, className = '', birdAsset = 'illustrations/gatsby-friendly.png' }) {
   const transcript = useRef(null);
   const reduce = useReducedMotion();
   useEffect(() => { transcript.current?.focus({ preventScroll: true }); }, []);
