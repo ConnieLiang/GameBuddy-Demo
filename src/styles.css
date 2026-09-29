@@ -2923,7 +2923,7 @@ button:focus-visible { outline: 2px solid var(--demo-primary); outline-offset: 4
 .theme-dark .hs-home-v2 .hs-add {background:#fff;color:#000;}
 .hs-home-v2 .hs-mic {height:7.767cqw;}
 .hs-my-games {margin-top:3.883cqw;}
-.hs-my-games h2 {margin:0;padding:1.942cqw 0;text-align:center;font:600 3.883cqw/5.825cqw Roboto,Arial,sans-serif;letter-spacing:.019cqw;}
+.hs-my-games h2 {margin:0;padding:1.942cqw 0;text-align:center;font:600 4.369cqw/6.311cqw Roboto,Arial,sans-serif;letter-spacing:.022cqw;}
 .hs-my-games .hs-v2-games {justify-content:center;width:100%;max-width:none;margin:0;mask-image:none;gap:1.942cqw;}
 .hs-my-games .hs-v2-games button {width:13.107cqw;padding:.971cqw;border:.5px solid rgba(0,0,0,.04);border-radius:3.883cqw;background:rgba(0,0,0,.04);}
 .hs-my-games .hs-v2-games img {width:100%;height:auto;aspect-ratio:1;border-radius:2.913cqw;}
@@ -2933,3 +2933,61 @@ button:focus-visible { outline: 2px solid var(--demo-primary); outline-offset: 4
 
 .gb-tabs.gb-tabs-borderless button.selected {color:var(--demo-primary);}
 
+
+/* Home V3 — Figma 1705:10037, dimensions relative to the 412px screen. */
+.gb-content.gb-content-v3:not(.gb-search-detail-content) {bottom:25.243cqw;}
+.hs-home-v3 {padding-top:2.032cqw;padding-bottom:6cqw;--v3-row:var(--hs-surface);}
+.theme-light .hs-home-v3 {--v3-row:#f8f8f8;}
+.hs-home-v3 .hs-top {height:8.738cqw;}
+.hs-home-v3 .hs-brand {width:35.437cqw;}
+.hs-home-v3 .gb-logo-lockup {width:31.553cqw;height:8.605cqw;object-fit:contain;}
+.theme-dark .hs-home-v3 .gb-logo-lockup {filter:none;}
+.hs-home-v3 .hs-profile,.hs-home-v3 .hs-profile img {width:8.738cqw;height:8.738cqw;border-radius:50%;}
+.hs-home-v3 .hs-search {height:39.806cqw;min-height:39.806cqw;padding:3.883cqw;border:.5px solid var(--gb-border);background:var(--gb-canvas,#000);}
+.hs-home-v3 .hs-search textarea {font:400 4.369cqw/6.311cqw Roboto,Arial,sans-serif;}
+.hs-home-v3 .hs-search textarea::placeholder {color:#7d7d7d;}
+.hs-home-v3 .hs-search-actions {align-items:flex-end;}
+.hs-v3-mode {display:flex;gap:.971cqw;align-items:center;color:var(--hs-muted);font:600 3.398cqw/4.854cqw Roboto,Arial,sans-serif;}
+.hs-home-v3 .hs-mic {width:9.709cqw;height:9.709cqw;padding:1.456cqw;border-radius:50%;background:color-mix(in srgb,var(--gb-fg) 4%,transparent);color:var(--gb-fg);}
+.hs-v3-games,.hs-v3-trending {margin-top:5.825cqw;}
+.hs-home-v3 h2 {margin:0;padding:1.942cqw 0;color:var(--gb-fg);font:600 4.369cqw/6.311cqw Roboto,Arial,sans-serif;letter-spacing:.022cqw;}
+.hs-v3-game-strip {display:flex;gap:1.942cqw;overflow-x:auto;width:calc(100% + 3.883cqw);padding-right:3.883cqw;scrollbar-width:none;}
+.hs-v3-game-strip::-webkit-scrollbar {display:none;}
+.hs-v3-game-strip button {min-width:36.408cqw;display:flex;align-items:center;gap:.971cqw;flex:none;border:0;border-radius:2.913cqw;padding:1.942cqw;color:#fff;text-align:left;}
+.hs-v3-game-strip img {width:11.165cqw;height:11.165cqw;border-radius:1.942cqw;object-fit:cover;}
+.hs-v3-game-strip button > span {display:flex;flex-direction:column;min-width:16.019cqw;width:max-content;}
+.hs-v3-game-strip strong {white-space:nowrap;font:600 3.398cqw/4.854cqw Roboto,Arial,sans-serif;}
+.hs-v3-game-strip small {font:400 2.913cqw/3.883cqw Roboto,Arial,sans-serif;}
+.hs-v3-trending header {display:flex;align-items:center;justify-content:space-between;}
+.hs-v3-trending header button {display:flex;align-items:center;gap:.971cqw;border:0;background:none;padding:1.942cqw 0;color:var(--demo-primary);font:600 3.398cqw/4.854cqw Roboto,Arial,sans-serif;}
+.hs-v3-trending > div {display:flex;flex-direction:column;gap:2.913cqw;}
+.hs-v3-trending .hs-v3-scroll-list > button {width:100%;min-height:11.165cqw;padding:2.913cqw;border:0;border-radius:2.913cqw;background:var(--v3-row);color:var(--gb-fg);text-align:left;font:400 3.641cqw/5.34cqw Roboto,Arial,sans-serif;letter-spacing:.073cqw;}
+ .gb-tabs.gb-tabs-v3 {height:25.243cqw;padding:3.883cqw 15.534cqw 9.709cqw;border:0;gap:0;background:var(--hs-surface);}
+.gb-tabs.gb-tabs-v3 button {flex:none;padding:0;gap:.971cqw;background:transparent;font:400 2.913cqw/3.883cqw Roboto,Arial,sans-serif;}
+.theme-light .gb-tabs.gb-tabs-v3 {background:#f8f8f8;}
+.gb-tabs.gb-tabs-v3 button.selected {color:var(--demo-primary);}
+.hs-home.hs-home-v3 .hs-top {margin-bottom:5.825cqw;}
+.app-shell .hs-home-v3 .hs-brand img.gb-logo-lockup {width:35.437cqw;height:7.087cqw;}
+
+.hs-v3-trending header button .gb-icon {color:var(--hs-muted);}
+.gb-tabs-v3 .gb-tab-icon > .hs-v3-search-icon {width:6.796cqw;height:6.796cqw;}
+.gb-tabs-v3 button:not(.selected) .hs-v3-search-icon {filter:grayscale(1);opacity:.7;}
+
+.gb-entry-v3::before {content:"";position:absolute;inset:0 0 auto;height:108.495cqw;background:linear-gradient(to bottom,rgba(167,181,254,.6),rgba(167,181,254,0));pointer-events:none;}
+.theme-light .hs-home-v3 .hs-search {background:#fff;border-color:rgba(0,0,0,.12);}
+
+/* V3 slow scroll: all questions in a scrollable list with a fading lower edge. */
+.hs-v3-trending {position:relative;}
+.hs-v3-trending .hs-v3-scroll-window {display:block;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;mask-image:linear-gradient(to bottom,transparent,#000 14cqw,#000 calc(100% - 14cqw),transparent);padding-bottom:14cqw;scroll-padding-bottom:14cqw;}
+.hs-v3-scroll-list {position:relative;display:flex;flex-direction:column;gap:2.913cqw;}
+.hs-v3-trending .hs-v3-scroll-list > button {height:11.165cqw;flex:none;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+
+.hs-home.hs-home-v3 {height:100%;display:flex;flex-direction:column;padding-bottom:0;}
+.hs-home-v3 > * {flex-shrink:0;}
+.hs-home-v3 .hs-v3-trending {display:flex;flex-direction:column;flex:1;min-height:30cqw;}
+.hs-v3-scroll-window::-webkit-scrollbar {display:none;}
+.hs-v3-scroll-list {padding:0 .5cqw 2.913cqw;}
+.hs-v3-scroll-list > button:focus-visible {outline:2px solid var(--demo-primary);outline-offset:-2px;}
+
+/* Dark appearance uses a quieter Odyssey glow over the dark canvas. */
+.theme-dark .gb-entry-v3::before {height:145.631cqw;background:linear-gradient(to bottom,color-mix(in srgb,var(--demo-primary) 44%,transparent),color-mix(in srgb,var(--demo-primary) 20%,transparent) 48%,transparent);}

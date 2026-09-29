@@ -7,11 +7,11 @@
 .ob-art{position:absolute;overflow:hidden;pointer-events:none}
 .ob-art img{position:absolute;max-width:none}
 .ob-art-search{left:-15.777cqw;top:5.125%;width:76.214cqw;height:33.252cqw}
-.ob-art-search img{width:225.55%;height:344.78%;left:-73.57%;top:-157.24%}
+.ob-art-search img{inset:0;width:100%;height:100%;object-fit:contain}
 .ob-art-assist{left:26.699cqw;top:74.591%;width:117.476cqw;height:87.864cqw}
-.ob-art-assist img{inset:0;width:100%;height:100%;object-fit:cover}
+.ob-art-assist img{inset:0;width:100%;height:100%;object-fit:contain}
 .ob-art-buddy{left:50%;top:12.214%;transform:translateX(-50%);width:64.078cqw;height:28.155cqw}
-.ob-art-buddy img{width:218.49%;height:331.39%;left:-71.98%;top:-146.93%}
+.ob-art-buddy img{inset:0;width:100%;height:100%;object-fit:contain}
 .ob-nav{position:absolute;z-index:2;top:3%;left:5.825cqw;right:5.825cqw;display:flex;align-items:center;justify-content:space-between}
 .ob-nav button{border:0;background:var(--ob-nav-surface);color:var(--ob-text);min-height:11.65cqw;border-radius:999px;cursor:pointer;font:600 3.398cqw/4.854cqw Roboto,Arial,sans-serif;letter-spacing:.005em}
 .ob-back{width:11.65cqw;display:grid;place-items:center;padding:0}.ob-back:disabled{visibility:hidden}.ob-skip{padding:0 3.883cqw}

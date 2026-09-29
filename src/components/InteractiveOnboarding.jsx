@@ -100,7 +100,7 @@ export default function InteractiveOnboarding({ chinese, onComplete }) {
   });
   if (game === null) return <section className="ob-page iq-welcome" lang={chinese ? 'zh-CN' : 'en'} aria-label={t('Meet GameBuddy', '认识 GameBuddy')}>
     <div className="iq-welcome-scroll">
-      <motion.div className="iq-welcome-bird" aria-hidden="true" {...pop(.1)}><img src={`${import.meta.env.BASE_URL}assets/onboarding-chat-bird.png`} alt=""/></motion.div>
+      <motion.div className="iq-welcome-bird" aria-hidden="true" {...pop(.1)}><img src={`${import.meta.env.BASE_URL}assets/illustrations/gatsby-friendly.png`} alt=""/></motion.div>
       <motion.div className="iq-welcome-message" {...pop(.3)}><p className="iq-typing-message" ref={title} tabIndex={-1} aria-label={welcomeMessage}><span className="iq-typing-reserve" aria-hidden="true">{welcomeMessage}</span><span className="iq-typing-visible" aria-hidden="true">{welcomeMessage.slice(0, visibleCount)}</span></p></motion.div>
       {welcomeComplete && choicesReadyFor === welcomeMessage && <div className="iq-welcome-choices" role="group" aria-label={t('Games you play', '你在玩的游戏')}>
         {gameChoices.map((choice,i) => <motion.button key={choice[0]} {...pop(i * .09)} onClick={() => setGame(i)}>{choice[2] && <img src={`${import.meta.env.BASE_URL}assets/onboarding-game-${choice[2]}.jpg`} alt=""/>}<span>{choice[l]}</span></motion.button>)}
@@ -111,6 +111,7 @@ export default function InteractiveOnboarding({ chinese, onComplete }) {
   if (game !== 0 && !searchIntroDone) return <SearchGameOnboarding chinese={chinese} gameName={game === 4 ? null : gameChoices[game][l]} onContinue={() => { setSearchIntroDone(true); setStep(2); }}/>;
   if (step === 2) return <FinalBuddyChat chinese={chinese} onComplete={() => finish(false)}/>;
   const scenes = ['assist', 'search', 'buddy'];
+  const illustrations = ['proud', 'curious', 'friendly'];
   const intros = [
     t(game === 4 ? "Always up for discovering something new! Let me show you how we can figure things out together." : `${gameChoices[game][0]}—got it! Let me show you how we can figure things out together.`, game === 4 ? '探索新游戏，我也很乐意！先看看咱们可以怎么一起想办法。' : `${gameChoices[game][1]}，收到！先看看咱们可以怎么一起想办法。`),
     t("Builds, boss fights, or your next favorite game—I’m here for all those ‘wait, how?’ moments.", '配装、打 Boss，或是找下一款好游戏，那些“这到底怎么玩”的时刻，都可以来找我。'),
@@ -123,7 +124,7 @@ export default function InteractiveOnboarding({ chinese, onComplete }) {
   return <OnboardingChatLayout key={step} chinese={chinese}>
       {reply(step < 2 ? `${intros[step]} ${prompt}` : intros[step], 'intro')}
       <div className={`iq-chat-media iq-media-${scenes[step]}`} aria-label={t('GameBuddy preview','GameBuddy 预览')}>
-        <div className={`ob-art ob-art-${scenes[step]}`} aria-hidden="true"><img src={`${import.meta.env.BASE_URL}assets/onboarding-${scenes[step]}.png`} alt=""/></div>
+        <div className={`ob-art ob-art-${scenes[step]}`} aria-hidden="true"><img src={`${import.meta.env.BASE_URL}assets/illustrations/gatsby-${illustrations[step]}.png`} alt=""/></div>
         {step === 0 && <OnboardingAssistPreview chinese={chinese}/>}
       </div>
       {step < 2 ? <>

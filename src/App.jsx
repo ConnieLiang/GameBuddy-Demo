@@ -42,10 +42,10 @@ function App() {
         <h2>{copy.title.map(line => <span className="title-line" key={line}>{line}</span>)}</h2>
         <p>{copy.body}</p>
         {signedIn && tab === "home" && !searchDetailOpen && <div className="home-layout-picker" role="group" aria-label={lang === 'zh' ? '首页布局' : 'Home layout'}>
-          {['v1', 'v2'].map(version => <button key={version} type="button" aria-pressed={homeLayout === version} onClick={() => setHomeLayout(version)}>{version.toUpperCase()}</button>)}
+          {['v1', 'v2', 'v3'].map(version => <button key={version} type="button" aria-pressed={homeLayout === version} onClick={() => setHomeLayout(version)}>{version.toUpperCase()}</button>)}
         </div>}
       </motion.div>}</AnimatePresence>
-      <motion.div layout="position" transition={{ layout: focusTransition }} className="variant-device-position"><div className="variant-devices"><PhoneMockup searchDetailOpen={searchDetailOpen} setSearchDetailOpen={setSearchDetailOpen} tab={tab} setTab={setTab} signedIn={signedIn} setSignedIn={setSignedIn} homeLayout={homeLayout === "v1" ? "v2" : "v1"} copy={copy} theme={theme} appearance={appearance} setAppearance={setTheme} language={lang} setLanguage={setLang} /></div></motion.div>
+      <motion.div layout="position" transition={{ layout: focusTransition }} className="variant-device-position"><div className="variant-devices"><PhoneMockup searchDetailOpen={searchDetailOpen} setSearchDetailOpen={setSearchDetailOpen} tab={tab} setTab={setTab} signedIn={signedIn} setSignedIn={setSignedIn} homeLayout={{ v1: "v3", v2: "v1", v3: "v2" }[homeLayout]} copy={copy} theme={theme} appearance={appearance} setAppearance={setTheme} language={lang} setLanguage={setLang} /></div></motion.div>
     </section></main>
   </div></MotionConfig>;
 }
@@ -118,17 +118,17 @@ function PhoneMockup({ searchDetailOpen, setSearchDetailOpen, tab, setTab, signe
   }, []);
   return <div className="phone phone-normal"><div className="phone-metal"><div className="phone-screen gb-screen">
     <div className="gb-home" data-node-id="169:378" aria-label={copy.home}>
-      {signedIn && !onboardingOpen && <motion.div className={`gb-entry-layer${searchDetailOpen ? " gb-showing-search-detail" : ""}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={homeTransition}><div className="gb-status" aria-label="5:13 PM">
+      {signedIn && !onboardingOpen && <motion.div className={`gb-entry-layer${homeLayout === "v3" && tab === "home" && !searchDetailOpen ? " gb-entry-v3" : ""}${searchDetailOpen ? " gb-showing-search-detail" : ""}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={homeTransition}><div className="gb-status" aria-label="5:13 PM">
         <img className="gb-time gb-status-asset" src={asset("time")} width="67.882" height="22.627" alt="" />
         <div className="gb-status-right">{["wifi", "signal", "battery"].map(name => <img className="gb-status-asset" key={name} src={asset(name)} width="22.627" height="22.627" alt="" />)}</div>
       </div>
-      <div className={`gb-content${searchDetailOpen ? " gb-search-detail-content" : ""}`}>
+      <div className={`gb-content${homeLayout === "v3" ? " gb-content-v3" : ""}${searchDetailOpen ? " gb-search-detail-content" : ""}`}>
         {tab === "home" && <HomeSearch onSearchDetailChange={setSearchDetailOpen} layout={homeLayout} chinese={copy.home === "首页"} theme={theme} onOpenAccount={() => setTab("profile")} />}
         {tab === "buddy" && <BuddyPage chinese={copy.home === "首页"} theme={theme} />}
         {tab === "profile" && <AccountPage onShowGuide={() => setOnboardingOpen(true)} appearance={appearance} setAppearance={setAppearance} language={language} setLanguage={setLanguage} onSignOut={() => { setSignedIn(false); setTab("home"); }} chinese={copy.home === "首页"} />}
       </div>
-      <nav inert={searchDetailOpen} aria-hidden={searchDetailOpen || undefined} className={`gb-tabs${searchDetailOpen ? " gb-tabs-hidden" : ""}${homeLayout === "v2" && tab === "home" ? " gb-tabs-borderless" : ""}`} aria-label={copy.preview}>{["home", "buddy", "profile"].map(name => <button key={name} type="button" aria-current={(tab === name) ? "page" : undefined} className={(tab === name) ? "selected" : ""} onClick={() => setTab(name)}>
-        <span className="gb-tab-icon">{name === "profile" ? <img className="gb-tab-avatar" src={`${import.meta.env.BASE_URL}assets/profile-dog.png`} alt=""/> : <GBIcon name={name === "home" ? (tab === name ? "home-after" : "home-before") : (tab === name ? "buddy-after" : "buddy-before")} size={28}/>}</span><span>{copy[name]}</span>
+      <nav inert={searchDetailOpen} aria-hidden={searchDetailOpen || undefined} className={`gb-tabs${homeLayout === "v3" ? " gb-tabs-v3" : ""}${searchDetailOpen ? " gb-tabs-hidden" : ""}${homeLayout === "v2" && tab === "home" ? " gb-tabs-borderless" : ""}`} aria-label={copy.preview}>{["home", "buddy", "profile"].map(name => <button key={name} type="button" aria-current={(tab === name) ? "page" : undefined} className={(tab === name) ? "selected" : ""} onClick={() => setTab(name)}>
+        <span className="gb-tab-icon">{name === "profile" ? <img className="gb-tab-avatar" src={`${import.meta.env.BASE_URL}assets/${homeLayout === "v3" ? "home-v3-profile.png" : "profile-dog.png"}`} alt=""/> : homeLayout === "v3" && name === "home" ? <img className="hs-v3-search-icon" src={asset("home-v3-search-plain")} alt=""/> : <GBIcon name={name === "home" ? (homeLayout === "v3" ? "search" : tab === name ? "home-after" : "home-before") : (tab === name ? "buddy-after" : "buddy-before")} size={28}/>}</span><span>{homeLayout === "v3" && name === "home" ? (language === "zh" ? "搜索" : "Search") : copy[name]}</span>
       </button>)}</nav></motion.div>}
       <AnimatePresence initial={false}>
         {splashVisible && <motion.div key="splash" className="gb-splash-layer" exit={{ opacity: 0, scale: reducedMotion ? 1 : 1.025 }} transition={{ duration: reducedMotion ? 0 : 0.85, ease: [0.4, 0, 0.2, 1] }}><SplashScreen /></motion.div>}

@@ -15,7 +15,7 @@ export default function SearchGameOnboarding({ chinese, gameName, onContinue }) 
   const message = chinese
     ? `${gameName ? gameName + '？这款我也喜欢！' : '想聊哪款游戏都可以！'}想找游戏资讯、攻略，或是遇到了什么问题，都可以发消息、截图或游戏片段给我。我会尽力帮你找到答案！`
     : `${gameName ? gameName + '? I love this game too!' : 'Whatever you’re playing, let’s talk games!'} Looking for news, tips, or a little help? Send me a message, screenshot, or gameplay clip, and I’ll do my best to find the answers!`;
-  return <OnboardingChatLayout chinese={chinese} className="iq-search-game" birdAsset="onboarding-gatsby-heart-poses.png">
+  return <OnboardingChatLayout chinese={chinese} className="iq-search-game" birdAsset="illustrations/gatsby-loving.png">
     <TypingChatBubble onTypingComplete={advanceAfterTyping}>{message}</TypingChatBubble>
   </OnboardingChatLayout>;
 }
